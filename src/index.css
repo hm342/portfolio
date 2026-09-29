@@ -1,0 +1,6 @@
+/* Global Design System Entry */
+@import './styles/variables.css';
+@import './styles/typography.css';
+@import './styles/animations.css';
+@import './styles/base.css';
+@import './styles/components.css';
