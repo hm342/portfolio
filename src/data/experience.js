@@ -1,36 +1,53 @@
 export const experienceData = [
   {
-    id: "canstart-technologies",
-    role: "Junior Software Developer",
+    id: "application-developer",
+    role: "Application Developer",
     company: "Canstart Technologies",
-    period: "Professional Experience",
+    period: "6 Months",
     type: "Full-Time / Engineering",
     location: "India",
     summary:
-      "Contributing to full-stack web application development, client platform maintenance, and database-driven business solutions.",
+      "Engineering production-grade web and mobile applications, focusing on scalable UI component architecture, reactive state management, and reliable backend service integration.",
     responsibilities: [
-      "Developing and maintaining dynamic web applications and platform features using PHP, modern JavaScript, and relational databases.",
-      "Collaborating with cross-functional team members to translate functional business requirements into clean, performant software solutions.",
-      "Implementing responsive user interfaces, ensuring cross-browser compatibility, and optimizing page load speeds.",
-      "Debugging production issues, participating in code reviews, and refining data storage schemas for business operations."
+      "Architecting and shipping responsive web and mobile application features using React, modern JavaScript, and RESTful service integrations.",
+      "Designing modular UI systems and tactile interaction states, ensuring fluid ergonomics and cross-device performance.",
+      "Collaborating closely with product stakeholders to scope feature requirements, optimize data pipelines, and improve application reliability.",
+      "Leading bug resolution, conducting code reviews, and maintaining production-ready software release cycles."
     ],
-    technologies: ["PHP", "JavaScript", "MySQL", "React", "WordPress", "Git"]
+    technologies: ["React", "React Native", "JavaScript (ES6+)", "RESTful APIs", "PHP", "Git"]
   },
   {
-    id: "web-dev-internship",
-    role: "Web Development Intern",
-    company: "Software Development Internship",
-    period: "Internship Experience",
-    type: "Internship / Practical Training",
+    id: "junior-software-developer",
+    role: "Junior Software Developer",
+    company: "Canstart Technologies",
+    period: "1 Year",
+    type: "Full-Time / Engineering",
     location: "India",
     summary:
-      "Hands-on web engineering focused on foundational frontend architecture, backend integration, and responsive design systems.",
+      "Contributed to full-stack web application development, client platform maintenance, relational database management, and dynamic feature implementation.",
     responsibilities: [
-      "Built clean, semantic UI modules adhering to modern CSS standards and responsive design guidelines.",
-      "Integrated RESTful endpoints and handled asynchronous data states across web pages.",
-      "Participated in agile development sprints, version control practices, and technical documentation.",
-      "Gained practical experience with database querying, form validations, and user session management."
+      "Developed and maintained dynamic web applications and platform features using PHP, JavaScript, and relational databases.",
+      "Engineered responsive user interfaces adhering to strict cross-browser standards and performance guidelines.",
+      "Translated business requirements into clean, testable, and maintainable software components.",
+      "Diagnosed and resolved production issues, refined database schemas in MySQL, and executed Git version control workflows."
     ],
-    technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "GitHub"]
+    technologies: ["PHP", "JavaScript", "MySQL", "HTML5", "CSS3", "WordPress", "Git"]
+  },
+  {
+    id: "sde-trainee",
+    role: "SDE Trainee",
+    company: "Canstart Technologies",
+    period: "6 Months",
+    type: "Engineering Trainee",
+    location: "India",
+    summary:
+      "Completed rigorous foundational software engineering training, mastering full-stack web fundamentals, algorithmic problem decomposition, and collaborative coding standards.",
+    responsibilities: [
+      "Engaged in intensive hands-on development covering core programming concepts, data structures, and object-oriented principles.",
+      "Built clean, semantic UI modules adhering to modern responsive design systems and web accessibility best practices.",
+      "Integrated API endpoints, handled asynchronous data requests, and implemented robust client-side validations.",
+      "Participated in daily agile standups, peer code reviews, and structured version control workflows on GitHub."
+    ],
+    technologies: ["JavaScript", "PHP", "MySQL", "HTML5", "CSS3", "Git", "GitHub"]
   }
 ];
