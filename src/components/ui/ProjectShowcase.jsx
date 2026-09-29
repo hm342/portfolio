@@ -78,7 +78,7 @@ export const ProjectShowcase = ({ project, _index, isReversed = false }) => {
             <h3
               className="heading-sub"
               style={{
-                fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
+                fontSize: 'clamp(1.35rem, 2.2vw, 1.85rem)',
                 marginBottom: '16px',
                 color: 'var(--text-primary)'
               }}
@@ -144,19 +144,43 @@ export const ProjectShowcase = ({ project, _index, isReversed = false }) => {
           </Reveal>
 
           {/* Action Trigger */}
-          <Reveal delay={0.35}>
-            <div style={{ display: 'inline-flex' }}>
-              <div
-                onMouseEnter={() => setCursor('hover')}
-                onMouseLeave={resetCursor}
-                className="btn-luxury-secondary"
-                style={{ padding: '10px 20px', cursor: 'default' }}
-              >
-                <span>{project.linkText}</span>
-                <ArrowUpRight size={14} style={{ color: 'var(--gold-primary)' }} />
+          {project.linkText && (
+            <Reveal delay={0.35}>
+              <div style={{ display: 'inline-flex' }}>
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseEnter={() => setCursor('hover')}
+                    onMouseLeave={resetCursor}
+                    className="btn-luxury-secondary"
+                    style={{
+                      padding: '10px 20px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      textDecoration: 'none',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <span>{project.linkText}</span>
+                    <ArrowUpRight size={14} style={{ color: 'var(--gold-primary)' }} />
+                  </a>
+                ) : (
+                  <div
+                    onMouseEnter={() => setCursor('hover')}
+                    onMouseLeave={resetCursor}
+                    className="btn-luxury-secondary"
+                    style={{ padding: '10px 20px', cursor: 'default' }}
+                  >
+                    <span>{project.linkText}</span>
+                    <ArrowUpRight size={14} style={{ color: 'var(--gold-primary)' }} />
+                  </div>
+                )}
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          )}
         </div>
 
         {/* Visual Mockup Presentation Area */}
@@ -168,15 +192,21 @@ export const ProjectShowcase = ({ project, _index, isReversed = false }) => {
         >
           <Reveal delay={0.2} yOffset={30}>
             <div
-              onMouseEnter={() => setCursor('project', 'EXPLORE')}
+              onMouseEnter={() => setCursor('project', project.link ? 'VISIT' : 'EXPLORE')}
               onMouseLeave={resetCursor}
+              onClick={() => {
+                if (project.link) {
+                  window.open(project.link, '_blank', 'noopener,noreferrer');
+                }
+              }}
               style={{
                 borderRadius: 'var(--radius-sm)',
                 overflow: 'hidden',
                 border: '1px solid var(--gold-border-subtle)',
                 background: 'linear-gradient(180deg, #13141a 0%, #0c0d11 100%)',
                 boxShadow: '0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(212, 175, 55, 0.05)',
-                transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+                transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                cursor: project.link ? 'pointer' : 'default'
               }}
               className="project-mockup-frame"
             >
@@ -208,7 +238,7 @@ export const ProjectShowcase = ({ project, _index, isReversed = false }) => {
                     color: 'var(--gold-light)'
                   }}
                 >
-                  {project.id === 'simplifyte' ? 'simplifyte.app // mobile_runtime' : `${project.id}.systems // production`}
+                  {project.displayUrl ? project.displayUrl : (project.id === 'simplifyte' ? 'simplifyte.app // mobile_runtime' : `${project.id}.systems // production`)}
                 </div>
 
                 <div
@@ -253,10 +283,10 @@ export const ProjectShowcase = ({ project, _index, isReversed = false }) => {
                         </div>
                         <div>
                           <div style={{ fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)", fontSize: '0.8125rem', fontWeight: 600 }}>M.A. Engineering Industries</div>
-                          <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>Precision Manufacturing & Industrial Products</div>
+                          <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>Precision Manufacturing & Industrial Products • maeind.com</div>
                         </div>
                       </div>
-                      <div style={{ fontSize: '0.6875rem', color: 'var(--gold-light)', fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)" }}>CATALOG_STATUS: LIVE</div>
+                      <div style={{ fontSize: '0.6875rem', color: 'var(--gold-light)', fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)" }}>LIVE_SITE ↗</div>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
@@ -285,10 +315,10 @@ export const ProjectShowcase = ({ project, _index, isReversed = false }) => {
                         </div>
                         <div>
                           <div style={{ fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)", fontSize: '0.8125rem', fontWeight: 600 }}>Universal Exports</div>
-                          <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>International Export & Logistics Platform</div>
+                          <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>International Export & Logistics Platform • universalexportsbvn.in</div>
                         </div>
                       </div>
-                      <div style={{ fontSize: '0.6875rem', color: 'var(--gold-light)', fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)" }}>PORTAL: ACTIVE</div>
+                      <div style={{ fontSize: '0.6875rem', color: 'var(--gold-light)', fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)" }}>LIVE_SITE ↗</div>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>

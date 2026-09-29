@@ -22,17 +22,17 @@
 /* Fluid Typography Scales */
 .display-hero {
   font-family: var(--font-editorial);
-  font-size: clamp(2.75rem, 7vw, 6.25rem);
-  line-height: 1.02;
+  font-size: clamp(1.85rem, 3.4vw, 3rem);
+  line-height: 1.18;
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
 }
 
 .heading-section {
   font-family: var(--font-editorial);
-  font-size: clamp(2rem, 4.5vw, 3.75rem);
-  line-height: 1.1;
+  font-size: clamp(1.85rem, 3.4vw, 3rem);
+  line-height: 1.18;
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-primary);

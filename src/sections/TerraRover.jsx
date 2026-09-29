@@ -102,7 +102,7 @@ export const TerraRover = () => {
               <h3
                 className="heading-sub"
                 style={{
-                  fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)',
+                  fontSize: 'clamp(1.25rem, 2vw, 1.75rem)',
                   marginBottom: '16px',
                   color: 'var(--text-primary)'
                 }}

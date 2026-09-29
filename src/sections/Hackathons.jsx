@@ -172,7 +172,7 @@ export const Hackathons = () => {
                   <h3
                     className="heading-sub"
                     style={{
-                      fontSize: 'clamp(1.75rem, 2.5vw, 2.25rem)',
+                      fontSize: 'clamp(1.35rem, 2.2vw, 1.85rem)',
                       color: 'var(--text-primary)',
                       marginBottom: '8px'
                     }}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '../common/Icons';
 import { personalInfo } from '../../data/personal';
 import { navigationLinks } from '../../data/navigation';
 import { useScrollProgress } from '../../hooks/useScrollProgress';
@@ -40,9 +41,6 @@ export const Navbar = ({ activeSection }) => {
     scrollToSection(id);
     setMobileMenuOpen(false);
   };
-
-  const navItems = navigationLinks.filter(item => item.id !== 'hero');
-
   return (
     <>
       <header
@@ -124,55 +122,58 @@ export const Navbar = ({ activeSection }) => {
             </div>
           </button>
 
-          {/* Desktop Navigation Links */}
-          <nav
+          {/* Desktop Right Actions (No section names) */}
+          <div
             style={{
               display: 'none',
               alignItems: 'center',
-              gap: 'clamp(14px, 1.6vw, 24px)'
+              gap: '16px'
             }}
             className="desktop-nav-bar"
-            aria-label="Main Navigation"
+            aria-label="Header Actions"
           >
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => handleNavClick(item.id)}
-                  onMouseEnter={() => setCursor('hover')}
-                  onMouseLeave={resetCursor}
-                  style={{
-                    position: 'relative',
-                    padding: '6px 4px',
-                    fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
-                    fontSize: '0.84375rem',
-                    fontWeight: isActive ? 600 : 400,
-                    color: isActive ? 'var(--gold-light)' : 'var(--text-secondary)',
-                    letterSpacing: '0.01em',
-                    transition: 'color 0.25s ease'
-                  }}
-                >
-                  {item.shortLabel}
-                  {isActive && (
-                    <motion.div
-                      layoutId="navUnderline"
-                      style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: '1px',
-                        backgroundColor: 'var(--gold-primary)',
-                        boxShadow: '0 0 8px var(--gold-glow)'
-                      }}
-                      transition={{ duration: 0.35, ease: LUXURY_EASE }}
-                    />
-                  )}
-                </button>
-              );
-            })}
+            {/* Live Availability Status Indicator */}
+            <div
+              className="status-indicator"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 14px',
+                fontSize: '0.71875rem'
+              }}
+            >
+              <span className="status-dot" />
+              <span>Available for Roles</span>
+            </div>
+
+            {/* GitHub & LinkedIn Profile Shortcuts */}
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <a
+                href={personalInfo.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setCursor('hover')}
+                onMouseLeave={resetCursor}
+                className="btn-luxury-secondary"
+                style={{ padding: '8px 10px' }}
+                aria-label="GitHub Profile"
+              >
+                <GithubIcon size={14} />
+              </a>
+              <a
+                href={personalInfo.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setCursor('hover')}
+                onMouseLeave={resetCursor}
+                className="btn-luxury-secondary"
+                style={{ padding: '8px 10px' }}
+                aria-label="LinkedIn Profile"
+              >
+                <LinkedinIcon size={14} />
+              </a>
+            </div>
 
             {/* Quick Contact CTA */}
             <button
@@ -180,17 +181,16 @@ export const Navbar = ({ activeSection }) => {
               onClick={() => handleNavClick('contact')}
               onMouseEnter={() => setCursor('hover')}
               onMouseLeave={resetCursor}
-              className="btn-luxury-secondary"
+              className="btn-luxury-primary"
               style={{
                 padding: '8px 18px',
-                fontSize: '0.78125rem',
-                marginLeft: '8px'
+                fontSize: '0.78125rem'
               }}
             >
               <span>Get in Touch</span>
-              <ArrowUpRight size={14} style={{ color: 'var(--gold-primary)' }} />
+              <ArrowUpRight size={14} />
             </button>
-          </nav>
+          </div>
 
           {/* Mobile Hamburger Button */}
           <button

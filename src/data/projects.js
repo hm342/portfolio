@@ -19,7 +19,9 @@ export const selectedProjects = [
       "Optimized cross-browser performance"
     ],
     accentColor: "#d4af37",
-    linkText: "Explore Architecture",
+    linkText: "Visit Site",
+    link: "https://maeind.com",
+    displayUrl: "maeind.com // live_site",
     mockupType: "desktop",
     previewAspect: "Industrial Engineering Website"
   },
@@ -43,7 +45,9 @@ export const selectedProjects = [
       "High-contrast editorial typography"
     ],
     accentColor: "#e5c158",
-    linkText: "View Case Study",
+    linkText: "Visit Site",
+    link: "https://www.universalexportsbvn.in/",
+    displayUrl: "universalexportsbvn.in // live_site",
     mockupType: "desktop",
     previewAspect: "Trade & Export Platform"
   },
@@ -67,7 +71,7 @@ export const selectedProjects = [
       "Lightweight local caching"
     ],
     accentColor: "#c5a059",
-    linkText: "Review Product",
+    displayUrl: "simplifyte.app // mobile_runtime",
     mockupType: "mobile",
     previewAspect: "Mobile Application Interface"
   }

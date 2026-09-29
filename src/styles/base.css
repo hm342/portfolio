@@ -104,3 +104,18 @@ ul, ol {
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, var(--gold-border-subtle) 30%, var(--gold-border) 50%, var(--gold-border-subtle) 70%, transparent 100%);
 }
+
+/* Fixed Left Navigation Rail Clearance for desktop and tablet */
+@media (min-width: 1024px) {
+  main#main-content,
+  footer {
+    padding-left: clamp(140px, 12vw, 190px);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  main#main-content,
+  footer {
+    padding-left: 100px;
+  }
+}
