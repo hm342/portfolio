@@ -21,7 +21,7 @@ export const useActiveSection = (sectionIds, options = {}) => {
     const handleIntersect = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          setActiveSection((prev) => (prev !== entry.target.id ? entry.target.id : prev));
         }
       });
     };

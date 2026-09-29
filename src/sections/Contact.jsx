@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Copy, Check, ArrowUpRight, MessageSquare, Send } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../components/common/Icons';
+import { Copy, Check, ArrowUpRight, Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from '../components/common/Icons';
 import { personalInfo } from '../data/personal';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { Reveal } from '../components/common/Reveal';
@@ -11,24 +10,17 @@ import { copyToClipboard } from '../utils/helpers';
 export const Contact = () => {
   const { setCursor, resetCursor } = useCursor();
   const [copied, setCopied] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const emailAddress = personalInfo.socials.email;
+  const emailMailto = personalInfo.socials.emailMailto || `mailto:${emailAddress}?subject=Portfolio%20Inquiry`;
+  const whatsappUrl = personalInfo.socials.whatsapp;
 
   const handleCopyEmail = async () => {
-    const success = await copyToClipboard(personalInfo.socials.email);
+    const success = await copyToClipboard(emailAddress);
     if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2400);
     }
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' });
-      setFormSubmitted(false);
-    }, 4000);
   };
 
   return (
@@ -59,347 +51,348 @@ export const Contact = () => {
           subtitle="Available for software engineering roles, full-stack product development, and technical collaboration."
         />
 
-        {/* Contact Composition Grid */}
+        {/* Two Direct Contact Methods: Email & WhatsApp */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: 'clamp(40px, 6vw, 72px)',
-            alignItems: 'start'
+            gap: 'clamp(24px, 3.5vw, 40px)',
+            marginBottom: '48px'
           }}
-          className="contact-grid"
+          className="contact-cards-grid"
         >
-          {/* Left Column: Direct Inquiries & Channels */}
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <Reveal delay={0.1}>
-              <div
-                style={{
-                  fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                  fontSize: '0.6875rem',
-                  color: 'var(--gold-primary)',
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  marginBottom: '16px'
-                }}
-              >
-                // Communication Channels
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.15}>
-              <h3
-                className="heading-sub"
-                style={{
-                  fontSize: 'clamp(1.25rem, 2vw, 1.75rem)',
-                  marginBottom: '20px',
-                  color: 'var(--text-primary)'
-                }}
-              >
-                Start an engineering dialogue.
-              </h3>
-            </Reveal>
-
-            <Reveal delay={0.2}>
-              <p className="body-lead" style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
-                Whether you have an ambitious platform to build, an engineering position to fill, or want to discuss agricultural robotics and autonomous AI systems, my inbox is open.
-              </p>
-            </Reveal>
-
-            {/* Email Direct Copy Box */}
-            <Reveal delay={0.25}>
-              <div
-                className="editorial-card"
-                style={{
-                  padding: '20px 24px',
-                  background: 'rgba(18, 19, 26, 0.8)',
-                  borderColor: 'var(--gold-border-subtle)',
-                  marginBottom: '32px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '16px'
-                }}
-              >
-                <div>
-                  <div style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: '0.6875rem', color: 'var(--gold-light)' }}>
-                    DIRECT EMAIL ADDRESS
-                  </div>
-                  <a
-                    href={`mailto:${personalInfo.socials.email}`}
-                    style={{
-                      fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)",
-                      fontSize: '1.125rem',
-                      fontWeight: 600,
-                      color: 'var(--text-primary)',
-                      marginTop: '4px',
-                      display: 'block'
-                    }}
-                  >
-                    {personalInfo.socials.email}
-                  </a>
-                </div>
-
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    onMouseEnter={() => setCursor('hover')}
-                    onMouseLeave={resetCursor}
-                    className="btn-luxury-secondary"
-                    style={{ padding: '8px 14px', fontSize: '0.75rem' }}
-                    aria-label="Copy email address"
-                  >
-                    {copied ? (
-                      <>
-                        <Check size={14} style={{ color: 'var(--gold-primary)' }} />
-                        <span>Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy size={14} />
-                        <span>Copy</span>
-                      </>
-                    )}
-                  </button>
-
-                  <a
-                    href={`mailto:${personalInfo.socials.email}`}
-                    onMouseEnter={() => setCursor('hover')}
-                    onMouseLeave={resetCursor}
-                    className="btn-luxury-primary"
-                    style={{ padding: '8px 14px', fontSize: '0.75rem' }}
-                  >
-                    <span>Write</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Social Network Links */}
-            <Reveal delay={0.3}>
-              <div>
-                <div style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: '0.6875rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-                  // Professional Profiles
-                </div>
-
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  <a
-                    href={personalInfo.socials.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onMouseEnter={() => setCursor('hover')}
-                    onMouseLeave={resetCursor}
-                    className="btn-luxury-secondary"
-                    style={{ padding: '10px 18px', fontSize: '0.8125rem' }}
-                  >
-                    <GithubIcon size={16} />
-                    <span>GitHub Profile</span>
-                    <ArrowUpRight size={13} style={{ color: 'var(--gold-primary)' }} />
-                  </a>
-
-                  <a
-                    href={personalInfo.socials.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onMouseEnter={() => setCursor('hover')}
-                    onMouseLeave={resetCursor}
-                    className="btn-luxury-secondary"
-                    style={{ padding: '10px 18px', fontSize: '0.8125rem' }}
-                  >
-                    <LinkedinIcon size={16} />
-                    <span>LinkedIn Network</span>
-                    <ArrowUpRight size={13} style={{ color: 'var(--gold-primary)' }} />
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Right Column: Direct Message Terminal */}
-          <Reveal delay={0.2} yOffset={30}>
+          {/* Channel 1: Email Direct */}
+          <Reveal delay={0.15}>
             <div
-              className="editorial-card"
+              className="editorial-card contact-channel-card"
               style={{
-                background: 'rgba(16, 17, 24, 0.9)',
-                borderColor: 'var(--border-subtle)',
-                padding: 'clamp(28px, 4vw, 40px)'
+                height: '100%',
+                padding: 'clamp(28px, 4vw, 40px)',
+                background: 'linear-gradient(180deg, rgba(18, 19, 27, 0.95) 0%, rgba(13, 14, 20, 0.95) 100%)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 'var(--radius-sm)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                position: 'relative',
+                overflow: 'hidden'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid var(--border-hairline)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <MessageSquare size={16} color="var(--gold-primary)" />
-                  <span style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: '0.75rem', color: 'var(--gold-light)' }}>
-                    INIT_DISPATCH // MESSAGE_TERMINAL
-                  </span>
+              <div>
+                {/* Channel Header */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div
+                      style={{
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: 'var(--radius-xs)',
+                        background: 'rgba(212, 175, 55, 0.12)',
+                        border: '1px solid var(--gold-border)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--gold-primary)'
+                      }}
+                    >
+                      <Mail size={18} />
+                    </div>
+                    <div>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                          fontSize: '0.6875rem',
+                          color: 'var(--gold-light)',
+                          letterSpacing: '0.1em',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        // CHANNEL_01
+                      </span>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>PRIMARY INBOX</div>
+                    </div>
+                  </div>
+                  <div className="status-dot" title="Active channel" />
                 </div>
-                <div className="status-dot" />
-              </div>
 
-              {formSubmitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                {/* Channel Heading */}
+                <h3
+                  className="heading-sub"
                   style={{
-                    padding: '32px 20px',
-                    textAlign: 'center',
-                    background: 'rgba(212, 175, 55, 0.05)',
-                    border: '1px solid var(--gold-border-subtle)',
-                    borderRadius: 'var(--radius-xs)'
+                    fontSize: 'clamp(1.25rem, 2vw, 1.55rem)',
+                    color: 'var(--text-primary)',
+                    marginBottom: '12px'
                   }}
                 >
-                  <Check size={32} color="var(--gold-primary)" style={{ marginInline: 'auto', marginBottom: '12px' }} />
-                  <h4 style={{ fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)", fontSize: '1.125rem', color: 'var(--text-primary)', marginBottom: '8px' }}>
-                    Message Dispatched Successfully
-                  </h4>
-                  <p style={{ fontSize: '0.84375rem', color: 'var(--text-muted)' }}>
-                    Thank you for reaching out. Harshit will review your dispatch and reply promptly.
-                  </p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-                  <div>
-                    <label
-                      htmlFor="name"
-                      style={{
-                        display: 'block',
-                        fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                        fontSize: '0.6875rem',
-                        color: 'var(--gold-light)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        marginBottom: '8px'
-                      }}
-                    >
-                      Your Name / Organization
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Alex Morgan / Tech Team"
-                      style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        background: 'rgba(10, 10, 13, 0.7)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: 'var(--radius-xs)',
-                        color: 'var(--text-primary)',
-                        fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
-                        fontSize: '0.875rem',
-                        outline: 'none',
-                        transition: 'border-color 0.25s ease'
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = 'var(--gold-border)')}
-                      onBlur={(e) => (e.target.style.borderColor = 'var(--border-subtle)')}
-                    />
-                  </div>
+                  Email Communication
+                </h3>
 
-                  <div>
-                    <label
-                      htmlFor="email"
-                      style={{
-                        display: 'block',
-                        fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                        fontSize: '0.6875rem',
-                        color: 'var(--gold-light)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        marginBottom: '8px'
-                      }}
-                    >
-                      Email Address
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="name@company.com"
-                      style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        background: 'rgba(10, 10, 13, 0.7)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: 'var(--radius-xs)',
-                        color: 'var(--text-primary)',
-                        fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
-                        fontSize: '0.875rem',
-                        outline: 'none',
-                        transition: 'border-color 0.25s ease'
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = 'var(--gold-border)')}
-                      onBlur={(e) => (e.target.style.borderColor = 'var(--border-subtle)')}
-                    />
-                  </div>
+                <p className="body-regular" style={{ color: 'var(--text-secondary)', marginBottom: '28px', lineHeight: 1.6 }}>
+                  Direct communication for software engineering positions, architecture discussions, and project inquiries.
+                </p>
 
-                  <div>
-                    <label
-                      htmlFor="message"
-                      style={{
-                        display: 'block',
-                        fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                        fontSize: '0.6875rem',
-                        color: 'var(--gold-light)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        marginBottom: '8px'
-                      }}
-                    >
-                      Project Details / Inquiry
-                    </label>
-                    <textarea
-                      id="message"
-                      rows="4"
-                      required
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Describe the software engineering challenge, role, or technical requirements..."
-                      style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        background: 'rgba(10, 10, 13, 0.7)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: 'var(--radius-xs)',
-                        color: 'var(--text-primary)',
-                        fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
-                        fontSize: '0.875rem',
-                        outline: 'none',
-                        resize: 'vertical',
-                        transition: 'border-color 0.25s ease'
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = 'var(--gold-border)')}
-                      onBlur={(e) => (e.target.style.borderColor = 'var(--border-subtle)')}
-                    />
+                {/* Email Address Pill */}
+                <div
+                  style={{
+                    padding: '14px 18px',
+                    background: 'rgba(10, 10, 14, 0.75)',
+                    border: '1px solid var(--border-hairline)',
+                    borderRadius: 'var(--radius-xs)',
+                    marginBottom: '28px'
+                  }}
+                >
+                  <div style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: '0.625rem', color: 'var(--gold-primary)', letterSpacing: '0.08em', marginBottom: '4px' }}>
+                    EMAIL ADDRESS
                   </div>
-
-                  <button
-                    type="submit"
-                    onMouseEnter={() => setCursor('hover')}
-                    onMouseLeave={resetCursor}
-                    className="btn-luxury-primary"
-                    style={{ width: '100%', marginTop: '6px' }}
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)",
+                      fontSize: '1.0625rem',
+                      fontWeight: 600,
+                      color: 'var(--text-primary)',
+                      wordBreak: 'break-all'
+                    }}
                   >
-                    <span>Send Message Dispatch</span>
-                    <Send size={15} />
-                  </button>
-                </form>
-              )}
+                    {emailAddress}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <a
+                  href={emailMailto}
+                  onMouseEnter={() => setCursor('hover')}
+                  onMouseLeave={resetCursor}
+                  className="btn-luxury-primary"
+                  style={{ padding: '12px 22px', fontSize: '0.8125rem', flex: '1 1 auto', justifyContent: 'center' }}
+                >
+                  <span>Send Email</span>
+                  <ArrowUpRight size={15} />
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  onMouseEnter={() => setCursor('hover')}
+                  onMouseLeave={resetCursor}
+                  className="btn-luxury-secondary"
+                  style={{ padding: '12px 18px', fontSize: '0.8125rem' }}
+                  aria-label="Copy email address"
+                >
+                  {copied ? (
+                    <>
+                      <Check size={15} style={{ color: 'var(--gold-primary)' }} />
+                      <span style={{ color: 'var(--gold-primary)' }}>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={15} />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Channel 2: WhatsApp Direct */}
+          <Reveal delay={0.25}>
+            <div
+              className="editorial-card contact-channel-card"
+              style={{
+                height: '100%',
+                padding: 'clamp(28px, 4vw, 40px)',
+                background: 'linear-gradient(180deg, rgba(18, 19, 27, 0.95) 0%, rgba(13, 14, 20, 0.95) 100%)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 'var(--radius-sm)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+            >
+              <div>
+                {/* Channel Header */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div
+                      style={{
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: 'var(--radius-xs)',
+                        background: 'rgba(37, 211, 102, 0.12)',
+                        border: '1px solid rgba(37, 211, 102, 0.4)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#25D366'
+                      }}
+                    >
+                      <WhatsappIcon size={20} />
+                    </div>
+                    <div>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                          fontSize: '0.6875rem',
+                          color: '#25D366',
+                          letterSpacing: '0.1em',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        // CHANNEL_02
+                      </span>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>INSTANT MESSAGING</div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      background: '#25D366',
+                      boxShadow: '0 0 10px #25D366'
+                    }}
+                    title="Active chat"
+                  />
+                </div>
+
+                {/* Channel Heading */}
+                <h3
+                  className="heading-sub"
+                  style={{
+                    fontSize: 'clamp(1.25rem, 2vw, 1.55rem)',
+                    color: 'var(--text-primary)',
+                    marginBottom: '12px'
+                  }}
+                >
+                  Direct WhatsApp Chat
+                </h3>
+
+                <p className="body-regular" style={{ color: 'var(--text-secondary)', marginBottom: '28px', lineHeight: 1.6 }}>
+                  Direct mobile chat for quick technical conversations, immediate responses, and agile project discussions.
+                </p>
+
+                {/* Pre-filled Message Display Pill */}
+                <div
+                  style={{
+                    padding: '14px 18px',
+                    background: 'rgba(10, 10, 14, 0.75)',
+                    border: '1px solid var(--border-hairline)',
+                    borderRadius: 'var(--radius-xs)',
+                    marginBottom: '28px'
+                  }}
+                >
+                  <div style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: '0.625rem', color: '#25D366', letterSpacing: '0.08em', marginBottom: '4px' }}>
+                    DIRECT CHAT TEMPLATE
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
+                      fontSize: '0.875rem',
+                      color: 'var(--text-primary)',
+                      fontStyle: 'italic',
+                      lineHeight: 1.5
+                    }}
+                  >
+                    “Hello Harshit, I found your portfolio and would like to discuss a project.”
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <div>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setCursor('hover')}
+                  onMouseLeave={resetCursor}
+                  className="btn-luxury-primary"
+                  style={{
+                    padding: '12px 24px',
+                    fontSize: '0.8125rem',
+                    width: '100%',
+                    justifyContent: 'center',
+                    background: 'linear-gradient(135deg, #25D366 0%, #1ea952 100%)',
+                    borderColor: '#25D366',
+                    color: '#0a0d0a'
+                  }}
+                >
+                  <WhatsappIcon size={17} />
+                  <span style={{ fontWeight: 600 }}>Chat on WhatsApp</span>
+                  <ArrowUpRight size={15} />
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>
 
+        {/* Secondary Professional Networks Strip */}
+        <Reveal delay={0.3}>
+          <div
+            style={{
+              padding: '20px 28px',
+              background: 'rgba(14, 15, 20, 0.6)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-sm)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '16px'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div className="status-dot" />
+              <span style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
+                {personalInfo.status}
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <a
+                href={personalInfo.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setCursor('hover')}
+                onMouseLeave={resetCursor}
+                className="btn-luxury-secondary"
+                style={{ padding: '8px 16px', fontSize: '0.78125rem' }}
+              >
+                <GithubIcon size={15} />
+                <span>GitHub</span>
+                <ArrowUpRight size={12} style={{ color: 'var(--gold-primary)' }} />
+              </a>
+
+              <a
+                href={personalInfo.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setCursor('hover')}
+                onMouseLeave={resetCursor}
+                className="btn-luxury-secondary"
+                style={{ padding: '8px 16px', fontSize: '0.78125rem' }}
+              >
+                <LinkedinIcon size={15} />
+                <span>LinkedIn</span>
+                <ArrowUpRight size={12} style={{ color: 'var(--gold-primary)' }} />
+              </a>
+            </div>
+          </div>
+        </Reveal>
+
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .contact-grid {
-            grid-template-columns: 1fr !important;
-          }
+        .contact-channel-card:hover {
+          border-color: var(--gold-border) !important;
+          transform: translateY(-4px);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.08);
         }
       `}</style>
     </section>

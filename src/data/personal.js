@@ -32,9 +32,11 @@ export const personalInfo = {
     ]
   },
   socials: {
-    github: "https://github.com/harshitmishra",
-    linkedin: "https://linkedin.com/in/harshitmishra",
-    email: "harshit.mishra.dev@gmail.com"
+    github: "https://github.com/hm342",
+    linkedin: "https://www.linkedin.com/in/harshit-mishra-46a46527b/",
+    email: "hm9011822@gmail.com",
+    emailMailto: "mailto:hm9011822@gmail.com?subject=Portfolio%20Inquiry",
+    whatsapp: "https://wa.me/9173815758?text=Hello%20Harshit%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
   },
   meta: {
     year: "2026",

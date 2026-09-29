@@ -131,7 +131,7 @@ export const useSectionProgress = (sectionIds) => {
 
       setWeights(newWeights);
       setLineProgress(rawScrollFraction);
-      setActiveSectionId(focusedId);
+      setActiveSectionId((prev) => (prev !== focusedId ? focusedId : prev));
 
       isTicking = false;
     };
