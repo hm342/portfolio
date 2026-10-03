@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Terminal, Sparkles } from 'lucide-react';
 import { navigationLinks } from '../../data/navigation';
 import { useScrollProgress } from '../../hooks/useScrollProgress';
 import { scrollToSection } from '../../utils/helpers';
@@ -8,7 +8,6 @@ export const Navbar = ({ activeSection }) => {
   const { isScrolled } = useScrollProgress();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && mobileMenuOpen) {
@@ -19,7 +18,6 @@ export const Navbar = ({ activeSection }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, [mobileMenuOpen]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -40,30 +38,39 @@ export const Navbar = ({ activeSection }) => {
     <>
       <header
         style={{
-          position: 'sticky',
-          top: 0,
+          position: 'fixed',
+          top: '16px',
           left: 0,
           width: '100%',
-          zIndex: 50,
-          backgroundColor: isScrolled ? 'rgba(247, 243, 236, 0.95)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(8px)' : 'none',
-          WebkitBackdropFilter: isScrolled ? 'blur(8px)' : 'none',
-          borderBottom: isScrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
-          transition: 'border-color var(--transition-fast), background-color var(--transition-fast), backdrop-filter var(--transition-fast)',
-          height: '68px',
+          zIndex: 100,
+          pointerEvents: 'none',
           display: 'flex',
-          alignItems: 'center'
+          justifyContent: 'center',
+          paddingInline: '16px'
         }}
       >
         <div
-          className="container"
           style={{
+            pointerEvents: 'auto',
+            width: '100%',
+            maxWidth: '1160px',
+            height: '62px',
+            backgroundColor: isScrolled ? 'rgba(10, 14, 24, 0.82)' : 'rgba(14, 18, 28, 0.65)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            borderRadius: 'var(--radius-full)',
+            boxShadow: isScrolled
+              ? '0 16px 40px -4px rgba(0, 0, 0, 0.8), 0 0 24px -6px rgba(0, 242, 254, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.15)'
+              : '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            paddingInline: 'clamp(16px, 3vw, 28px)'
           }}
         >
-          {/* Left: HARSHIT MISHRA */}
+          {/* Logo / Brand */}
           <button
             type="button"
             onClick={() => {
@@ -75,166 +82,179 @@ export const Navbar = ({ activeSection }) => {
               fontWeight: 800,
               fontSize: '0.9375rem',
               letterSpacing: '-0.02em',
-              color: 'var(--text-primary)',
-              textTransform: 'uppercase',
+              color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
+              gap: '10px',
+              cursor: 'pointer'
             }}
             aria-label="Harshit Mishra - Scroll to top"
           >
-            <span>Harshit Mishra</span>
-            <span className="status-dot-copper" style={{ width: '5px', height: '5px' }} />
+            <div
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '10px',
+                background: 'linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)',
+                border: '1px solid rgba(0, 242, 254, 0.4)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#00F2FE'
+              }}
+            >
+              <Terminal size={16} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+              <span style={{ lineHeight: 1.1 }}>HARSHIT MISHRA</span>
+              <span style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+                DEV // 3D_PORTFOLIO
+              </span>
+            </div>
           </button>
 
-          {/* Desktop Right Group: Navigation Links + "Let's talk →" CTA */}
-          <div
+          {/* Desktop Navigation Links */}
+          <nav
             style={{
               display: 'none',
               alignItems: 'center',
-              gap: '24px'
+              gap: '4px',
+              backgroundColor: 'rgba(255, 255, 255, 0.03)',
+              padding: '4px 6px',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid rgba(255, 255, 255, 0.06)'
             }}
-            className="desktop-nav-group"
+            className="desktop-nav-menu"
           >
-            <nav
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '24px'
-              }}
-              aria-label="Main Navigation"
-            >
-              {navigationLinks.map((item) => {
-                const isActive = activeSection === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => handleNavClick(item.id)}
-                    style={{
-                      fontFamily: 'var(--font-heading)',
-                      fontSize: '0.84375rem',
-                      fontWeight: isActive ? 700 : 500,
-                      color: isActive ? 'var(--accent-copper)' : 'var(--text-secondary)',
-                      transition: 'color var(--transition-fast)',
-                      padding: '4px 2px',
-                      position: 'relative',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '5px'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) e.currentTarget.style.color = 'var(--text-primary)';
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
-                    }}
-                  >
-                    {isActive && (
-                      <span
-                        style={{
-                          width: '4px',
-                          height: '4px',
-                          borderRadius: '50%',
-                          backgroundColor: 'var(--accent-copper)'
-                        }}
-                      />
-                    )}
-                    <span>{item.label}</span>
-                  </button>
-                );
-              })}
-            </nav>
+            {navigationLinks.map((item) => {
+              const isActive = activeSection === item.id;
 
-            {/* Small Editorial CTA: "Let's talk →" */}
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleNavClick(item.id)}
+                  style={{
+                    position: 'relative',
+                    padding: '7px 15px',
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: '0.8125rem',
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? '#00F2FE' : 'var(--text-secondary)',
+                    backgroundColor: isActive ? 'rgba(0, 242, 254, 0.12)' : 'transparent',
+                    borderRadius: 'var(--radius-full)',
+                    border: `1px solid ${isActive ? 'rgba(0, 242, 254, 0.35)' : 'transparent'}`,
+                    transition: 'all var(--transition-fast)',
+                    cursor: 'pointer'
+                  }}
+                  className="nav-link-btn"
+                >
+                  {item.label}
+                  {isActive && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: '2px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '4px',
+                        height: '4px',
+                        borderRadius: '50%',
+                        backgroundColor: '#00F2FE',
+                        boxShadow: '0 0 6px #00F2FE'
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Right Action: Status Beacon & CTA */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                display: 'none',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 14px',
+                borderRadius: 'var(--radius-full)',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+                fontSize: '0.75rem',
+                fontFamily: 'var(--font-mono)',
+                color: '#34D399'
+              }}
+              className="status-pill"
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: '#10B981',
+                  boxShadow: '0 0 8px #10B981'
+                }}
+              />
+              AVAILABLE
+            </div>
+
             <button
               type="button"
               onClick={() => handleNavClick('contact')}
+              className="btn-copper"
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '6px 14px',
-                backgroundColor: 'transparent',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: 'var(--radius-full)',
-                fontFamily: 'var(--font-heading)',
-                fontSize: '0.8125rem',
-                fontWeight: 600,
-                color: 'var(--text-primary)',
-                transition: 'all var(--transition-fast)',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--accent-copper)';
-                e.currentTarget.style.color = 'var(--accent-copper)';
-                e.currentTarget.style.backgroundColor = 'var(--accent-tint)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border-subtle)';
-                e.currentTarget.style.color = 'var(--text-primary)';
-                e.currentTarget.style.backgroundColor = 'transparent';
+                padding: '8px 18px',
+                fontSize: '0.8125rem'
               }}
             >
-              <span>Let's talk</span>
-              <span style={{ fontSize: '0.875rem' }}>→</span>
+              <span>Contact</span>
+              <ArrowUpRight size={14} className="btn-arrow" />
+            </button>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: '#FFFFFF',
+                cursor: 'pointer'
+              }}
+              className="mobile-toggle-btn"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
-
-          {/* Mobile Hamburger Button */}
-          <button
-            type="button"
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40px',
-              height: '40px',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-sm)',
-              backgroundColor: 'var(--bg-surface)',
-              color: 'var(--text-primary)'
-            }}
-          >
-            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Drawer in Frosted Black Glass */}
       {mobileMenuOpen && (
         <div
           style={{
             position: 'fixed',
-            top: '68px',
-            left: 0,
-            width: '100%',
-            height: 'calc(100vh - 68px)',
-            backgroundColor: 'var(--bg-primary)',
-            zIndex: 49,
-            padding: '24px',
+            inset: 0,
+            zIndex: 90,
+            backgroundColor: 'rgba(3, 4, 7, 0.95)',
+            backdropFilter: 'blur(28px)',
+            WebkitBackdropFilter: 'blur(28px)',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between',
-            borderTop: '1px solid var(--border-subtle)'
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '24px'
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.6875rem',
-                color: 'var(--accent-copper)',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                marginBottom: '8px'
-              }}
-            >
-              // NAVIGATION
-            </span>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'center', width: '100%', maxWidth: '320px' }}>
             {navigationLinks.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -243,57 +263,40 @@ export const Navbar = ({ activeSection }) => {
                   type="button"
                   onClick={() => handleNavClick(item.id)}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '14px 16px',
-                    borderRadius: 'var(--radius-sm)',
-                    backgroundColor: isActive ? 'var(--accent-tint)' : 'var(--bg-surface)',
-                    border: `1px solid ${isActive ? 'var(--accent-border)' : 'var(--border-subtle)'}`,
-                    color: isActive ? 'var(--accent-copper)' : 'var(--text-primary)',
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '1rem',
-                    fontWeight: isActive ? 700 : 600,
-                    textAlign: 'left',
-                    transition: 'all var(--transition-fast)'
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    padding: '12px 20px',
+                    borderRadius: 'var(--radius-md)',
+                    color: isActive ? '#00F2FE' : '#F8FAFC',
+                    backgroundColor: isActive ? 'rgba(0, 242, 254, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+                    border: `1px solid ${isActive ? 'rgba(0, 242, 254, 0.4)' : 'rgba(255, 255, 255, 0.08)'}`,
+                    cursor: 'pointer'
                   }}
                 >
-                  <span>{item.label}</span>
-                  {isActive && (
-                    <span className="status-dot-copper" style={{ width: '6px', height: '6px' }} />
-                  )}
+                  {item.label}
                 </button>
               );
             })}
-          </div>
-
-          <div
-            style={{
-              paddingTop: '20px',
-              borderTop: '1px solid var(--border-subtle)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '6px'
-            }}
-          >
-            <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
-              Harshit Mishra · Software Developer
-            </span>
-            <span style={{ fontSize: '0.8125rem', color: 'var(--accent-copper)', fontFamily: 'var(--font-mono)' }}>
-              hm9011822@gmail.com
-            </span>
-          </div>
+          </nav>
         </div>
       )}
 
       <style>{`
-        @media (min-width: 768px) {
-          .desktop-nav-group {
+        @media (min-width: 820px) {
+          .desktop-nav-menu {
             display: flex !important;
           }
-          .mobile-menu-btn {
+          .status-pill {
+            display: inline-flex !important;
+          }
+          .mobile-toggle-btn {
             display: none !important;
           }
+        }
+        .nav-link-btn:hover {
+          color: #00F2FE !important;
+          background-color: rgba(0, 242, 254, 0.08) !important;
         }
       `}</style>
     </>

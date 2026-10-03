@@ -10,6 +10,7 @@ import { Experience } from './sections/Experience';
 import { Skills } from './sections/Skills';
 import { Contact } from './sections/Contact';
 
+import { StarfieldParticles } from './components/3d/StarfieldParticles';
 import { navigationLinks } from './data/navigation';
 import { useActiveSection } from './hooks/useActiveSection';
 
@@ -20,24 +21,30 @@ export default function App() {
 
   return (
     <div className="portfolio-app-root">
-      {/* Sticky Minimal Navigation */}
+      {/* 3D Cosmic Background Particle System */}
+      <StarfieldParticles />
+
+      {/* Floating Black Glass HUD Navigation */}
       <Navbar activeSection={activeSection} />
 
-      {/* Main Content Sections with Light → Dark → Light → Dark Visual Rhythm */}
+      {/* Main Content Sections in Black Glass Aesthetics */}
       <main id="main-content" role="main">
         <Hero />
         <div className="section-divider" />
         <About />
         <div className="section-divider" />
         <WhatIBuild />
+        <div className="section-divider" />
         <SelectedWork />
+        <div className="section-divider" />
         <Experience />
         <div className="section-divider" />
         <Skills />
+        <div className="section-divider" />
         <Contact />
       </main>
 
-      {/* Minimal Footer */}
+      {/* Obsidian Black Glass Footer */}
       <Footer />
     </div>
   );

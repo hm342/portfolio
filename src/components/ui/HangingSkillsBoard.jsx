@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { hangingSkillsData, skillCategoriesMeta } from '../../data/hangingSkills';
+import { Sparkles, Move, Zap } from 'lucide-react';
 
 export const HangingSkillsBoard = () => {
   const containerRef = useRef(null);
@@ -17,28 +18,45 @@ export const HangingSkillsBoard = () => {
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
     : false;
 
+  // Category Color Map for Cyber Neon Aesthetics
+  const getCategoryColor = (categoryId) => {
+    switch (categoryId) {
+      case 'ai':
+        return '#C084FC'; // Cosmic Purple
+      case 'backend':
+        return '#00F2FE'; // Cyber Cyan
+      case 'frontend':
+        return '#38BDF8'; // Sky Blue
+      case 'mobile':
+        return '#34D399'; // Emerald Neon
+      case 'tools':
+        return '#818CF8'; // Indigo
+      case 'database':
+        return '#F59E0B'; // Amber
+      default:
+        return '#00F2FE';
+    }
+  };
+
   // Compute anchor positions and rope lengths based on container dimensions
   const computeAnchors = useCallback((width, isMobile) => {
     const total = hangingSkillsData.length;
 
     if (isMobile) {
-      // Mobile: 6 staggered tiers of 4 capsules each
       const tiers = 6;
       const perTier = Math.ceil(total / tiers);
-      const tierYOffsets = [24, 155, 290, 425, 560, 695];
+      const tierYOffsets = [28, 160, 295, 430, 565, 700];
 
       return hangingSkillsData.map((item, idx) => {
         const tier = Math.min(tiers - 1, Math.floor(idx / perTier));
         const indexInTier = idx % perTier;
         const tierItems = Math.min(perTier, total - tier * perTier);
 
-        // Distribute horizontally in this tier
         const padding = 34;
         const usableWidth = Math.max(250, width - padding * 2);
         const anchorX = padding + (indexInTier / Math.max(1, tierItems - 1)) * usableWidth;
         const anchorY = tierYOffsets[tier];
 
-        // Slightly shorter rope for mobile
         const length = Math.max(48, Math.min(85, item.desktopLength * 0.36));
 
         return {
@@ -56,10 +74,9 @@ export const HangingSkillsBoard = () => {
       const isTablet = width < 900;
 
       if (isTablet) {
-        // Tablet: 3 staggered tiers of 8 capsules each
         const tiers = 3;
         const perTier = 8;
-        const tierYOffsets = [24, 195, 365];
+        const tierYOffsets = [28, 200, 370];
 
         return hangingSkillsData.map((item, idx) => {
           const tier = Math.min(tiers - 1, Math.floor(idx / perTier));
@@ -86,18 +103,13 @@ export const HangingSkillsBoard = () => {
         });
       }
 
-      // Desktop: Single top architectural mounting rail area
-      const padding = 46;
+      // Desktop: Architectural beam across the top
+      const padding = 48;
       const usableWidth = Math.max(860, width - padding * 2);
 
       return hangingSkillsData.map((item, idx) => {
-        // Horizontal distribution across the top
         const anchorX = padding + (idx / (total - 1)) * usableWidth;
-
-        // Subtle 3-point alternating anchor depth on the mounting rail
-        const anchorY = 18 + (idx % 3) * 6;
-
-        // Controlled staggered length
+        const anchorY = 22 + (idx % 3) * 6;
         const length = item.desktopLength;
 
         return {
@@ -129,11 +141,11 @@ export const HangingSkillsBoard = () => {
     const deg = (angle * 180) / Math.PI;
 
     // Apply transform to capsule
-    const scale = item.isHovered || item.isDragging ? 1.05 : 1;
+    const scale = item.isHovered || item.isDragging ? 1.08 : 1;
     capsuleEl.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, 0) rotate(${deg}deg) scale(${scale})`;
 
     // Subtle curved organic rope via quadratic bezier
-    const bend = item.velocity * -18;
+    const bend = item.velocity * -20;
     const cx = (item.anchorX + x) / 2 + bend;
     const cy = (item.anchorY + y) / 2;
 
@@ -145,9 +157,9 @@ export const HangingSkillsBoard = () => {
     function runPhysics() {
       if (prefersReducedMotion) return;
 
-      const gravity = 1400; // gravity constant in px/s^2
+      const gravity = 1450; // gravity constant in px/s^2
       const dt = 1 / 60; // 60 FPS fixed step
-      const damping = 0.986; // friction damping
+      const damping = 0.985; // friction damping
       let hasMotion = false;
 
       physicsDataRef.current.forEach((item) => {
@@ -157,12 +169,10 @@ export const HangingSkillsBoard = () => {
           return;
         }
 
-        // Pendulum angular acceleration: alpha = -(g / L) * sin(theta)
         const alpha = -(gravity / item.length) * Math.sin(item.angle);
         item.velocity = (item.velocity + alpha * dt) * damping;
         item.angle += item.velocity * dt;
 
-        // Check if still moving
         if (Math.abs(item.angle) > 0.0015 || Math.abs(item.velocity) > 0.0015) {
           hasMotion = true;
         } else {
@@ -183,7 +193,6 @@ export const HangingSkillsBoard = () => {
     [prefersReducedMotion, updateDOM]
   );
 
-  // Start physics loop if not already running
   const wakePhysics = useCallback(() => {
     if (prefersReducedMotion) return;
     if (!isRunningRef.current) {
@@ -192,7 +201,6 @@ export const HangingSkillsBoard = () => {
     }
   }, [prefersReducedMotion, stepPhysics]);
 
-  // Give a capsule a physical impulse
   const nudgeCapsule = useCallback((id, impulse = 0.18) => {
     const item = physicsDataRef.current.find((p) => p.id === id);
     if (item && !item.isDragging) {
@@ -201,18 +209,15 @@ export const HangingSkillsBoard = () => {
     }
   }, [wakePhysics]);
 
-  // Nudge all capsules (entrance / button effect)
   const nudgeAll = useCallback(() => {
     physicsDataRef.current.forEach((item, i) => {
-      // Staggered alternating impulse
       setTimeout(() => {
-        item.velocity = (i % 2 === 0 ? 0.22 : -0.22);
+        item.velocity = i % 2 === 0 ? 0.24 : -0.24;
         wakePhysics();
       }, i * 35);
     });
   }, [wakePhysics]);
 
-  // Resize Observer to keep anchors responsive
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -222,16 +227,14 @@ export const HangingSkillsBoard = () => {
         const width = entry.contentRect.width;
         const isMobile = width < 560;
         const isTablet = width >= 560 && width < 900;
-        const height = isMobile ? 820 : isTablet ? 560 : 520;
+        const height = isMobile ? 840 : isTablet ? 580 : 540;
 
         setDimensions({ width, height, isMobile, isTablet });
 
-        // Recompute anchors
         const newPhysics = computeAnchors(width, isMobile);
         physicsDataRef.current = newPhysics;
         setLayoutItems(newPhysics);
 
-        // Update positions immediately
         newPhysics.forEach((item) => updateDOM(item));
         wakePhysics();
       }
@@ -240,12 +243,9 @@ export const HangingSkillsBoard = () => {
     const observer = new ResizeObserver(handleResize);
     observer.observe(el);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [computeAnchors, updateDOM, wakePhysics]);
 
-  // Staggered Entrance Animation when entering viewport
   useEffect(() => {
     const el = containerRef.current;
     if (!el || prefersReducedMotion) return;
@@ -256,9 +256,7 @@ export const HangingSkillsBoard = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasTriggered) {
             hasTriggered = true;
-            setTimeout(() => {
-              nudgeAll();
-            }, 300);
+            setTimeout(() => nudgeAll(), 300);
           }
         });
       },
@@ -266,20 +264,15 @@ export const HangingSkillsBoard = () => {
     );
 
     observer.observe(el);
-
     return () => observer.disconnect();
   }, [nudgeAll, prefersReducedMotion]);
 
-  // Clean up animation frame on unmount
   useEffect(() => {
     return () => {
-      if (animFrameIdRef.current) {
-        cancelAnimationFrame(animFrameIdRef.current);
-      }
+      if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
     };
   }, []);
 
-  // Pointer interaction handlers
   const handlePointerDown = useCallback((e, itemId) => {
     const item = physicsDataRef.current.find((p) => p.id === itemId);
     if (!item || !containerRef.current) return;
@@ -314,16 +307,14 @@ export const HangingSkillsBoard = () => {
     const ptrY = e.clientY - rect.top;
     const now = performance.now();
 
-    // Vector from anchor to pointer
     const dx = ptrX - item.anchorX;
-    const dy = Math.max(25, ptrY - item.anchorY); // Keep capsule below anchor
-    const maxAngle = 1.05; // ~60 degrees max angle constraint
+    const dy = Math.max(25, ptrY - item.anchorY);
+    const maxAngle = 1.05;
 
     const targetAngle = Math.max(-maxAngle, Math.min(maxAngle, Math.atan2(dx, dy)));
     const dt = Math.max(0.001, (now - activeDragRef.current.lastTime) / 1000);
     const dTheta = targetAngle - item.angle;
 
-    // Track pointer velocity for fling release
     const instVelocity = Math.max(-6, Math.min(6, dTheta / dt));
     activeDragRef.current.recentVelocities.push(instVelocity);
     if (activeDragRef.current.recentVelocities.length > 4) {
@@ -347,7 +338,6 @@ export const HangingSkillsBoard = () => {
         e.currentTarget.releasePointerCapture(e.pointerId);
       } catch {}
 
-      // Calculate release fling velocity from recent history
       let releaseVelocity = 0;
       if (activeDragRef.current && activeDragRef.current.recentVelocities.length > 0) {
         const vels = activeDragRef.current.recentVelocities;
@@ -367,7 +357,7 @@ export const HangingSkillsBoard = () => {
     if (item) {
       item.isHovered = true;
       updateDOM(item);
-      nudgeCapsule(itemId, 0.08);
+      nudgeCapsule(itemId, 0.09);
     }
   }, [nudgeCapsule, updateDOM]);
 
@@ -379,35 +369,38 @@ export const HangingSkillsBoard = () => {
     }
   }, [updateDOM]);
 
-  // Keyboard navigation interaction
   const handleKeyDown = useCallback((e, itemId) => {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      nudgeCapsule(itemId, -0.25);
+      nudgeCapsule(itemId, -0.28);
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
-      nudgeCapsule(itemId, 0.25);
+      nudgeCapsule(itemId, 0.28);
     } else if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      nudgeCapsule(itemId, 0.2);
+      nudgeCapsule(itemId, 0.22);
     }
   }, [nudgeCapsule]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      
-      {/* Installation Control Bar: Category Tabs & Physics Action */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      {/* Category Tabs & Interactive Controls in Black Glass */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '12px'
+          gap: '14px',
+          padding: '12px 18px',
+          background: 'rgba(14, 18, 28, 0.65)',
+          backdropFilter: 'blur(16px)',
+          borderRadius: 'var(--radius-lg)',
+          border: '1px solid rgba(255, 255, 255, 0.08)'
         }}
       >
         {/* Category Pills */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           {skillCategoriesMeta.map((cat) => {
             const isActive = selectedCategory === cat.id;
 
@@ -417,23 +410,23 @@ export const HangingSkillsBoard = () => {
                 type="button"
                 onClick={() => {
                   setSelectedCategory(cat.id);
-                  // Highlight nudge matching capsules
                   physicsDataRef.current.forEach((p, idx) => {
                     const match = cat.id === 'all' || p.categoryId === cat.id || p.category.toLowerCase() === cat.id;
                     if (match) {
-                      setTimeout(() => nudgeCapsule(p.id, (idx % 2 === 0 ? 0.16 : -0.16)), idx * 25);
+                      setTimeout(() => nudgeCapsule(p.id, idx % 2 === 0 ? 0.18 : -0.18), idx * 25);
                     }
                   });
                 }}
                 style={{
-                  padding: '6px 12px',
+                  padding: '7px 14px',
                   borderRadius: 'var(--radius-full)',
                   fontFamily: 'var(--font-heading)',
                   fontSize: '0.8125rem',
                   fontWeight: isActive ? 700 : 500,
-                  backgroundColor: isActive ? 'var(--accent-copper)' : 'var(--bg-surface)',
-                  color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
-                  border: `1px solid ${isActive ? 'var(--accent-copper)' : 'var(--border-subtle)'}`,
+                  backgroundColor: isActive ? 'rgba(0, 242, 254, 0.18)' : 'rgba(255, 255, 255, 0.04)',
+                  color: isActive ? '#00F2FE' : 'var(--text-secondary)',
+                  border: `1px solid ${isActive ? 'rgba(0, 242, 254, 0.6)' : 'rgba(255, 255, 255, 0.08)'}`,
+                  boxShadow: isActive ? '0 0 16px -2px rgba(0, 242, 254, 0.35)' : 'none',
                   transition: 'all var(--transition-fast)',
                   cursor: 'pointer'
                 }}
@@ -442,8 +435,8 @@ export const HangingSkillsBoard = () => {
                 <span
                   style={{
                     fontSize: '0.6875rem',
-                    marginLeft: '4px',
-                    opacity: isActive ? 0.9 : 0.6,
+                    marginLeft: '5px',
+                    opacity: isActive ? 1 : 0.6,
                     fontFamily: 'var(--font-mono)'
                   }}
                 >
@@ -454,65 +447,99 @@ export const HangingSkillsBoard = () => {
           })}
         </div>
 
-        {/* Nudge / Interactive Hint */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Action Button & Telemetry */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <span
             style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.6875rem',
-              color: 'var(--accent-sand)',
+              fontSize: '0.75rem',
+              color: 'var(--accent-cyan)',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px'
             }}
           >
-            <span className="status-dot-copper" style={{ width: '5px', height: '5px' }} />
-            DRAG TO SWING
+            <span className="status-beacon" />
+            DRAG_TO_SWING
           </span>
 
           <button
             type="button"
             onClick={nudgeAll}
-            className="btn-secondary-warm"
-            style={{ padding: '6px 12px', fontSize: '0.75rem', borderRadius: 'var(--radius-full)' }}
-            title="Gently swing all capsules"
+            className="btn-charcoal"
+            style={{
+              padding: '7px 16px',
+              fontSize: '0.78125rem',
+              borderColor: 'rgba(0, 242, 254, 0.3)',
+              background: 'rgba(0, 242, 254, 0.08)'
+            }}
+            title="Swing all capsules"
             aria-label="Swing all capsules"
           >
-            Swing All
+            <Sparkles size={13} style={{ color: '#00F2FE' }} />
+            <span>Swing All</span>
           </button>
         </div>
       </div>
 
-      {/* Main Hanging Skills Canvas Container */}
+      {/* Main Hanging Board Container in Obsidian Black Glass */}
       <div
         ref={containerRef}
-        className="card-warm"
         style={{
           position: 'relative',
           width: '100%',
           height: `${dimensions.height}px`,
-          backgroundColor: '#FAF7F2',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-lg)',
-          boxShadow: '0 8px 30px rgba(36, 33, 30, 0.04), 0 1px 3px rgba(36, 33, 30, 0.02)',
+          backgroundColor: 'rgba(10, 14, 22, 0.75)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: 'var(--radius-xl)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
           overflow: 'hidden',
           userSelect: 'none',
           WebkitUserSelect: 'none',
           touchAction: 'pan-y'
         }}
-        aria-label="Interactive hanging skills display"
+        aria-label="Interactive black glass hanging skills display"
         role="region"
       >
-        {/* Top Architectural Mounting Rail / Beam */}
+        {/* Subtle Cyber Grid in Background */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage:
+              'linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+            pointerEvents: 'none',
+            zIndex: 1
+          }}
+        />
+
+        {/* Ambient Top Light Beam */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: '15%',
+            right: '15%',
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.8), rgba(168, 85, 247, 0.8), transparent)',
+            boxShadow: '0 0 20px rgba(0, 242, 254, 0.5)',
+            zIndex: 15
+          }}
+        />
+
+        {/* Architectural Brushed Titanium Top Beam */}
         <div
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
-            height: '10px',
-            background: 'linear-gradient(180deg, #E8DFD3 0%, #DED6CC 100%)',
-            borderBottom: '1px solid var(--border-subtle)',
+            height: '12px',
+            background: 'linear-gradient(180deg, #1E293B 0%, #0F172A 100%)',
+            borderBottom: '1px solid rgba(0, 242, 254, 0.25)',
             zIndex: 10
           }}
         />
@@ -520,23 +547,23 @@ export const HangingSkillsBoard = () => {
         {/* Mobile Tier Rails */}
         {dimensions.isMobile && (
           <>
-            <div style={{ position: 'absolute', top: '155px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
-            <div style={{ position: 'absolute', top: '290px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
-            <div style={{ position: 'absolute', top: '425px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
-            <div style={{ position: 'absolute', top: '560px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
-            <div style={{ position: 'absolute', top: '695px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', top: '160px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '295px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '430px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '565px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '700px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
           </>
         )}
 
         {/* Tablet Tier Rails */}
         {dimensions.isTablet && (
           <>
-            <div style={{ position: 'absolute', top: '195px', left: '20px', right: '20px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
-            <div style={{ position: 'absolute', top: '365px', left: '20px', right: '20px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', top: '200px', left: '20px', right: '20px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '370px', left: '20px', right: '20px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
           </>
         )}
 
-        {/* SVG Layer for Ropes and Anchor Pegs */}
+        {/* SVG Layer for Fiber-Optic Neon Ropes & Glowing Pegs */}
         <svg
           style={{
             position: 'absolute',
@@ -548,29 +575,42 @@ export const HangingSkillsBoard = () => {
             zIndex: 5
           }}
         >
+          <defs>
+            <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
           {layoutItems.map((item) => {
             const isMatch = selectedCategory === 'all' || item.categoryId === selectedCategory || item.category.toLowerCase() === selectedCategory;
+            const categoryColor = getCategoryColor(item.categoryId);
 
             return (
-              <g key={`svg-${item.id}`} opacity={isMatch ? 1 : 0.28} style={{ transition: 'opacity var(--transition-normal)' }}>
-                {/* Organic Rope Path */}
+              <g key={`svg-${item.id}`} opacity={isMatch ? 1 : 0.18} style={{ transition: 'opacity var(--transition-normal)' }}>
+                {/* Glowing Laser Rope Path */}
                 <path
                   id={`rope-${item.id}`}
                   d=""
                   fill="none"
-                  stroke="#C2B7A8"
-                  strokeWidth="1.5"
+                  stroke={categoryColor}
+                  strokeWidth="1.7"
+                  strokeOpacity="0.75"
                   strokeLinecap="round"
+                  filter="url(#neon-glow)"
                 />
 
-                {/* Metallic Anchor Peg / Rivet */}
+                {/* Glowing Metallic Rivet Anchor */}
                 <circle
                   cx={item.anchorX}
                   cy={item.anchorY}
-                  r="3.5"
-                  fill="var(--accent-copper)"
-                  stroke="#FAF7F2"
-                  strokeWidth="1"
+                  r="4"
+                  fill={categoryColor}
+                  stroke="#040812"
+                  strokeWidth="1.5"
                   id={`anchor-${item.id}`}
                 />
               </g>
@@ -578,9 +618,10 @@ export const HangingSkillsBoard = () => {
           })}
         </svg>
 
-        {/* Hanging Capsules Layer */}
+        {/* Hanging Obsidian Glass Capsules */}
         {layoutItems.map((item) => {
           const isMatch = selectedCategory === 'all' || item.categoryId === selectedCategory || item.category.toLowerCase() === selectedCategory;
+          const categoryColor = getCategoryColor(item.categoryId);
 
           return (
             <div
@@ -603,8 +644,8 @@ export const HangingSkillsBoard = () => {
                 zIndex: 20,
                 cursor: 'grab',
                 touchAction: 'none',
-                opacity: isMatch ? 1 : 0.35,
-                transition: 'opacity var(--transition-normal), border-color var(--transition-fast), box-shadow var(--transition-fast)'
+                opacity: isMatch ? 1 : 0.25,
+                transition: 'opacity var(--transition-normal)'
               }}
               className="hanging-skill-capsule"
             >
@@ -613,48 +654,41 @@ export const HangingSkillsBoard = () => {
                   position: 'relative',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  padding: dimensions.isMobile ? '5px 10px' : dimensions.isTablet ? '6px 12px' : '6px 14px',
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid var(--border-subtle)',
+                  gap: '8px',
+                  padding: dimensions.isMobile ? '6px 12px' : dimensions.isTablet ? '7px 14px' : '7px 16px',
+                  backgroundColor: 'rgba(18, 24, 38, 0.85)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(255, 255, 255, 0.14)',
                   borderRadius: 'var(--radius-full)',
-                  boxShadow: '0 4px 12px rgba(36, 33, 30, 0.05), 0 1px 2px rgba(36, 33, 30, 0.03)',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
                   whiteSpace: 'nowrap'
                 }}
               >
-                {/* Physical Top Metallic Eyelet Ring for Rope Attachment */}
+                {/* Physical Top Metallic Eyelet Ring for Cable Attachment */}
                 <div
                   style={{
                     position: 'absolute',
-                    top: '-4px',
+                    top: '-5px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    width: '6px',
-                    height: '6px',
+                    width: '7px',
+                    height: '7px',
                     borderRadius: '50%',
-                    backgroundColor: '#DED6CC',
-                    border: '1.5px solid var(--accent-copper)'
+                    backgroundColor: '#0F172A',
+                    border: `1.5px solid ${categoryColor}`,
+                    boxShadow: `0 0 6px ${categoryColor}`
                   }}
                 />
 
-                {/* Category Indicator Dot */}
+                {/* Glowing Category Indicator Dot */}
                 <span
                   style={{
-                    width: '6px',
-                    height: '6px',
+                    width: '7px',
+                    height: '7px',
                     borderRadius: '50%',
-                    backgroundColor:
-                      item.categoryId === 'ai'
-                        ? '#8A67B2'
-                        : item.categoryId === 'backend'
-                        ? 'var(--accent-copper)'
-                        : item.categoryId === 'frontend'
-                        ? 'var(--accent-sand)'
-                        : item.categoryId === 'mobile'
-                        ? '#6B9E82'
-                        : item.categoryId === 'tools'
-                        ? '#5E8299'
-                        : '#A68A78',
+                    backgroundColor: categoryColor,
+                    boxShadow: `0 0 8px ${categoryColor}`,
                     flexShrink: 0
                   }}
                 />
@@ -663,34 +697,53 @@ export const HangingSkillsBoard = () => {
                 <span
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: dimensions.isMobile ? '0.75rem' : dimensions.isTablet ? '0.78125rem' : '0.8125rem',
+                    fontSize: dimensions.isMobile ? '0.78125rem' : '0.84375rem',
                     fontWeight: 700,
-                    color: 'var(--text-primary)',
+                    color: '#F8FAFC',
                     letterSpacing: '-0.01em'
                   }}
                 >
                   {item.name}
                 </span>
+
+                {/* Micro Category Tag */}
+                {item.tag && (
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.625rem',
+                      color: 'var(--text-muted)',
+                      paddingLeft: '4px',
+                      borderLeft: '1px solid rgba(255, 255, 255, 0.1)'
+                    }}
+                  >
+                    {item.tag}
+                  </span>
+                )}
               </div>
             </div>
           );
         })}
 
-        {/* Subtle Watermark in Bottom Corner */}
+        {/* HUD Telemetry Watermark */}
         <div
           style={{
             position: 'absolute',
-            bottom: '12px',
-            right: '16px',
+            bottom: '14px',
+            right: '18px',
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.625rem',
-            color: 'var(--border-medium)',
-            letterSpacing: '0.08em',
+            fontSize: '0.6875rem',
+            color: 'rgba(0, 242, 254, 0.6)',
+            letterSpacing: '0.1em',
             pointerEvents: 'none',
-            zIndex: 2
+            zIndex: 2,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
           }}
         >
-          SPRING_PENDULUM // 24_SKILLS
+          <Zap size={11} />
+          QUANTUM_PENDULUM // 24_PHYSICS_NODES // 60_FPS
         </div>
       </div>
 
@@ -699,12 +752,12 @@ export const HangingSkillsBoard = () => {
           outline: none;
         }
         .hanging-skill-capsule:focus-visible > div {
-          border-color: var(--accent-copper) !important;
-          box-shadow: 0 0 0 3px var(--accent-tint) !important;
+          border-color: #00F2FE !important;
+          box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.3), 0 0 20px rgba(0, 242, 254, 0.5) !important;
         }
         .hanging-skill-capsule:hover > div {
-          border-color: var(--accent-copper) !important;
-          box-shadow: 0 8px 20px rgba(183, 110, 76, 0.16), 0 2px 4px rgba(36, 33, 30, 0.04) !important;
+          border-color: #00F2FE !important;
+          box-shadow: 0 10px 28px rgba(0, 242, 254, 0.28), 0 0 15px rgba(0, 242, 254, 0.4) !important;
         }
         .hanging-skill-capsule:active {
           cursor: grabbing !important;

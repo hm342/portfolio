@@ -1,85 +1,106 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { SectionHeading } from '../components/common/SectionHeading';
-import { Badge } from '../components/common/Badge';
+import { MagicCard } from '../components/ui/MagicCard';
+import { Code, Server, Cpu, Database, Smartphone } from 'lucide-react';
+import { SMOOTH_EASE } from '../utils/animations';
 
 export const About = () => {
-  const coreTech = [
-    'Laravel',
-    'PHP',
-    'React',
-    'React Native',
-    'JavaScript',
-    'MySQL',
-    'WordPress'
+  const capabilities = [
+    { icon: <Server size={18} />, title: 'Backend Systems', desc: 'Laravel, PHP MVC, RESTful APIs, Queue workers, and Microservices.' },
+    { icon: <Database size={18} />, title: 'Database Architecture', desc: 'Relational schema design, MySQL query optimization, indexing, and data pipelines.' },
+    { icon: <Code size={18} />, title: 'Modern Frontend', desc: 'React, modern ES6+, Three.js 3D WebGL interfaces, responsive layout engineering.' },
+    { icon: <Smartphone size={18} />, title: 'Cross-Platform Mobile', desc: 'React Native iOS & Android development with tactile gesture ergonomics.' }
   ];
 
   return (
-    <section id="about" className="section-padding">
+    <section id="about" className="section-padding" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="container">
         <SectionHeading
+          theme="dark"
           category="ABOUT"
           title="Engineering software with clarity and intent."
           subtitle="A product-oriented mindset grounded in solid software engineering practices."
         />
 
-        <div
-          style={{
-            maxWidth: '820px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '24px'
-          }}
-        >
-          {/* Large Editorial Statement */}
-          <blockquote
-            className="quote-statement"
+        <div style={{ maxWidth: '980px', marginInline: 'auto' }}>
+          <MagicCard
             style={{
-              paddingLeft: '24px',
-              borderLeft: '3px solid var(--accent-copper)',
-              margin: 0
+              padding: 'clamp(28px, 5vw, 48px)',
+              marginBottom: '32px'
             }}
           >
-            “I build web and mobile applications that turn real business requirements into usable software.”
-          </blockquote>
-
-          {/* Supporting Narrative with Copper Highlights */}
-          <p className="body-lead" style={{ color: 'var(--text-secondary)' }}>
-            My work centers around architecting reliable backend services in <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>Laravel</strong> and <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>PHP</strong>, modeling structured relational databases in <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>MySQL</strong>, and creating high-performance client interfaces using <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>React</strong>, <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>JavaScript</strong>, and <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>React Native</strong>.
-          </p>
-
-          <p className="body-regular">
-            Rather than accumulating superficial abstractions, I focus on building software that solves concrete operational challenges—from industrial product catalogs and international trade logistics to streamlined mobile workflows and tailored <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>WordPress</strong> corporate implementations.
-          </p>
-
-          {/* Core Technologies Badges */}
-          <div
-            style={{
-              paddingTop: '20px',
-              borderTop: '1px solid var(--border-subtle)',
-              marginTop: '8px'
-            }}
-          >
-            <span
+            {/* Editorial Statement */}
+            <blockquote
+              className="quote-statement"
               style={{
-                display: 'block',
-                fontSize: '0.75rem',
-                color: 'var(--text-muted)',
-                fontFamily: 'var(--font-mono)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: '12px'
+                paddingLeft: '24px',
+                borderLeft: '3px solid #00F2FE',
+                marginBottom: '28px',
+                color: '#F8FAFC'
               }}
             >
-              // Primary Technologies Mentioned:
-            </span>
+              “I build web and mobile applications that turn real business requirements into usable, high-performance software.”
+            </blockquote>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {coreTech.map((tech) => (
-                <Badge key={tech} variant="default">
-                  {tech}
-                </Badge>
-              ))}
+            {/* Narrative */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', color: 'var(--text-secondary)' }}>
+              <p className="body-lead" style={{ color: '#E2E8F0' }}>
+                My work centers around architecting reliable backend services in <strong style={{ color: '#00F2FE', fontWeight: 600 }}>Laravel</strong> and <strong style={{ color: '#00F2FE', fontWeight: 600 }}>PHP</strong>, modeling structured relational databases in <strong style={{ color: '#00F2FE', fontWeight: 600 }}>MySQL</strong>, and creating high-performance client interfaces using <strong style={{ color: '#38BDF8', fontWeight: 600 }}>React</strong>, <strong style={{ color: '#38BDF8', fontWeight: 600 }}>JavaScript</strong>, and <strong style={{ color: '#34D399', fontWeight: 600 }}>React Native</strong>.
+              </p>
+
+              <p className="body-regular">
+                Rather than accumulating superficial abstractions, I focus on building software that solves concrete operational challenges—from industrial product catalogs and international trade logistics to streamlined mobile workflows and tailored corporate implementations.
+              </p>
             </div>
+          </MagicCard>
+
+          {/* 4 Obsidian Glass Pillars */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '16px'
+            }}
+          >
+            {capabilities.map((cap, i) => (
+              <motion.div
+                key={cap.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease: SMOOTH_EASE }}
+                className="glass-card"
+                style={{
+                  padding: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px'
+                }}
+              >
+                <div
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '10px',
+                    backgroundColor: 'rgba(0, 242, 254, 0.1)',
+                    border: '1px solid rgba(0, 242, 254, 0.25)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#00F2FE'
+                  }}
+                >
+                  {cap.icon}
+                </div>
+                <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9375rem', fontWeight: 700, color: '#F8FAFC' }}>
+                  {cap.title}
+                </h4>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  {cap.desc}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
