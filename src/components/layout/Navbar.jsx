@@ -45,11 +45,11 @@ export const Navbar = ({ activeSection }) => {
           left: 0,
           width: '100%',
           zIndex: 50,
-          backgroundColor: isScrolled ? 'rgba(247, 243, 236, 0.95)' : 'rgba(247, 243, 236, 0.85)',
-          backdropFilter: 'blur(6px)',
-          WebkitBackdropFilter: 'blur(6px)',
+          backgroundColor: isScrolled ? 'rgba(247, 243, 236, 0.95)' : 'transparent',
+          backdropFilter: isScrolled ? 'blur(8px)' : 'none',
+          WebkitBackdropFilter: isScrolled ? 'blur(8px)' : 'none',
           borderBottom: isScrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
-          transition: 'border-color var(--transition-fast), background-color var(--transition-fast)',
+          transition: 'border-color var(--transition-fast), background-color var(--transition-fast), backdrop-filter var(--transition-fast)',
           height: '68px',
           display: 'flex',
           alignItems: 'center'
@@ -87,57 +87,99 @@ export const Navbar = ({ activeSection }) => {
             <span className="status-dot-copper" style={{ width: '5px', height: '5px' }} />
           </button>
 
-          {/* Desktop Right: About, Work, Experience, Skills, Contact */}
-          <nav
+          {/* Desktop Right Group: Navigation Links + "Let's talk →" CTA */}
+          <div
             style={{
               display: 'none',
               alignItems: 'center',
-              gap: '28px'
+              gap: '24px'
             }}
-            className="desktop-nav"
-            aria-label="Main Navigation"
+            className="desktop-nav-group"
           >
-            {navigationLinks.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => handleNavClick(item.id)}
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '0.875rem',
-                    fontWeight: isActive ? 700 : 500,
-                    color: isActive ? 'var(--accent-copper)' : 'var(--text-secondary)',
-                    transition: 'color var(--transition-fast)',
-                    padding: '6px 2px',
-                    position: 'relative',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) e.currentTarget.style.color = 'var(--text-primary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
-                  }}
-                >
-                  {isActive && (
-                    <span
-                      style={{
-                        width: '4px',
-                        height: '4px',
-                        borderRadius: '50%',
-                        backgroundColor: 'var(--accent-copper)'
-                      }}
-                    />
-                  )}
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </nav>
+            <nav
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '24px'
+              }}
+              aria-label="Main Navigation"
+            >
+              {navigationLinks.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleNavClick(item.id)}
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '0.84375rem',
+                      fontWeight: isActive ? 700 : 500,
+                      color: isActive ? 'var(--accent-copper)' : 'var(--text-secondary)',
+                      transition: 'color var(--transition-fast)',
+                      padding: '4px 2px',
+                      position: 'relative',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '5px'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) e.currentTarget.style.color = 'var(--text-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
+                  >
+                    {isActive && (
+                      <span
+                        style={{
+                          width: '4px',
+                          height: '4px',
+                          borderRadius: '50%',
+                          backgroundColor: 'var(--accent-copper)'
+                        }}
+                      />
+                    )}
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Small Editorial CTA: "Let's talk →" */}
+            <button
+              type="button"
+              onClick={() => handleNavClick('contact')}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 14px',
+                backgroundColor: 'transparent',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 'var(--radius-full)',
+                fontFamily: 'var(--font-heading)',
+                fontSize: '0.8125rem',
+                fontWeight: 600,
+                color: 'var(--text-primary)',
+                transition: 'all var(--transition-fast)',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent-copper)';
+                e.currentTarget.style.color = 'var(--accent-copper)';
+                e.currentTarget.style.backgroundColor = 'var(--accent-tint)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                e.currentTarget.style.color = 'var(--text-primary)';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
+              <span>Let's talk</span>
+              <span style={{ fontSize: '0.875rem' }}>→</span>
+            </button>
+          </div>
 
           {/* Mobile Hamburger Button */}
           <button
@@ -246,7 +288,7 @@ export const Navbar = ({ activeSection }) => {
 
       <style>{`
         @media (min-width: 768px) {
-          .desktop-nav {
+          .desktop-nav-group {
             display: flex !important;
           }
           .mobile-menu-btn {
