@@ -111,28 +111,23 @@ export const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Oversized Confident Editorial Display Heading */}
+        {/* Refined Editorial Display Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.2, ease: SMOOTH_EASE }}
           style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(2.15rem, 8.2vw, 6.2rem)',
-            fontWeight: 850,
-            lineHeight: 0.98,
-            letterSpacing: '-0.04em',
+            fontSize: 'clamp(1.75rem, 3.8vw, 3.15rem)',
+            fontWeight: 800,
+            lineHeight: 1.16,
+            letterSpacing: '-0.03em',
             color: 'var(--text-primary)',
-            textTransform: 'uppercase',
-            margin: '0 auto 20px auto',
-            maxWidth: '1000px'
+            margin: '0 auto 18px auto',
+            maxWidth: '820px'
           }}
         >
-          I BUILD
-          <br />
-          DIGITAL
-          <br />
-          PRODUCTS.
+          Turning complex code into seamless user experiences.
         </motion.h1>
 
         {/* Supporting Technology Line & Product Narrative */}
