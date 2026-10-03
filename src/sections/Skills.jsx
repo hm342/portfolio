@@ -1,125 +1,60 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Server, Monitor, Smartphone, Layout, Wrench } from 'lucide-react';
-import { skillCategories } from '../data/technologies';
 import { SectionHeading } from '../components/common/SectionHeading';
+import { HangingSkillsBoard } from '../components/ui/HangingSkillsBoard';
+import { skillCategories } from '../data/technologies';
 import { Badge } from '../components/common/Badge';
-import { SMOOTH_EASE } from '../utils/animations';
 
 export const Skills = () => {
-  const getCategoryIcon = (category) => {
-    switch (category) {
-      case 'BACKEND':
-        return <Server size={18} color="var(--accent-copper)" />;
-      case 'FRONTEND':
-        return <Monitor size={18} color="var(--accent-copper)" />;
-      case 'MOBILE':
-        return <Smartphone size={18} color="var(--accent-copper)" />;
-      case 'CMS':
-        return <Layout size={18} color="var(--accent-copper)" />;
-      case 'TOOLS':
-        return <Wrench size={18} color="var(--accent-copper)" />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <section id="skills" className="section-padding" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
+        {/* Section Heading */}
         <SectionHeading
           category="SKILLS & TECHNOLOGIES"
-          title="Grouped technology competencies."
-          subtitle="Direct technical proficiency organized by engineering discipline without arbitrary percentages."
+          title="Interactive skills installation."
+          subtitle="A physical hanging display of the languages, frameworks, and tools I use to build web and application experiences. Grab and swing any capsule."
         />
 
+        {/* Hanging Skills Interactive Physics Display */}
+        <div style={{ marginBottom: '48px' }}>
+          <HangingSkillsBoard />
+        </div>
+
+        {/* Grouped Category Index for Fast Reading */}
         <div
           style={{
+            paddingTop: '32px',
+            borderTop: '1px solid var(--border-subtle)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '20px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '24px'
           }}
         >
-          {skillCategories.map((group, idx) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: idx * 0.08, ease: SMOOTH_EASE }}
-              className="card-warm"
-              style={{
-                padding: '26px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '16px',
-                backgroundColor: 'var(--bg-warm-card)'
-              }}
-            >
-              {/* Category Header */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderBottom: '1px solid var(--border-subtle)',
-                  paddingBottom: '14px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div
-                    style={{
-                      width: '34px',
-                      height: '34px',
-                      borderRadius: 'var(--radius-xs)',
-                      backgroundColor: 'var(--bg-surface)',
-                      border: '1px solid var(--border-subtle)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    {getCategoryIcon(group.category)}
-                  </div>
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.875rem',
-                      fontWeight: 700,
-                      color: 'var(--text-primary)',
-                      letterSpacing: '0.04em'
-                    }}
-                  >
-                    {group.category}
-                  </h3>
-                </div>
-
+          {skillCategories.map((group) => (
+            <div key={group.category} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span className="status-dot-copper" style={{ width: '4px', height: '4px' }} />
                 <span
                   style={{
-                    fontSize: '0.6875rem',
                     fontFamily: 'var(--font-mono)',
-                    color: 'var(--text-muted)'
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: 'var(--accent-copper)',
+                    letterSpacing: '0.06em'
                   }}
                 >
-                  {group.skills.length} TECH
+                  {group.category}
                 </span>
               </div>
 
-              {group.description && (
-                <p className="body-small" style={{ color: 'var(--text-muted)', fontSize: '0.8125rem' }}>
-                  {group.description}
-                </p>
-              )}
-
-              {/* Interactive Skills Badges (shift and copper accent on hover) */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: 'auto' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                 {group.skills.map((skill) => (
-                  <Badge key={skill} variant="default">
+                  <Badge key={skill} variant="default" style={{ fontSize: '0.75rem', padding: '3px 8px' }}>
                     {skill}
                   </Badge>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
