@@ -10,10 +10,10 @@ export const Footer = () => {
   return (
     <footer
       style={{
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        borderTop: '1px solid rgba(243, 239, 230, 0.08)',
         paddingBlock: '44px',
-        backgroundColor: '#030407',
-        color: '#F8FAFC',
+        backgroundColor: '#171717',
+        color: '#F3EFE6',
         position: 'relative',
         zIndex: 10
       }}
@@ -36,26 +36,34 @@ export const Footer = () => {
                 fontFamily: 'var(--font-heading)',
                 fontSize: '0.9375rem',
                 fontWeight: 800,
-                color: '#F8FAFC',
+                color: '#F3EFE6',
                 letterSpacing: '-0.01em',
                 textTransform: 'uppercase'
               }}
             >
               Harshit Mishra
             </span>
-            <span className="status-beacon" style={{ width: '5px', height: '5px' }} />
+            <span
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: '#B7D63D',
+                boxShadow: '0 0 8px #B7D63D'
+              }}
+            />
           </div>
 
           <span
             style={{
               display: 'block',
               fontSize: '0.75rem',
-              color: '#00F2FE',
+              color: '#B7D63D',
               fontFamily: 'var(--font-mono)',
               marginTop: '4px'
             }}
           >
-            SOFTWARE DEVELOPER // 3D BLACK GLASS EDITION
+            SOFTWARE DEVELOPER // PORTFOLIO 3D
           </span>
         </div>
 
@@ -66,7 +74,7 @@ export const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontSize: '0.84375rem', color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#00F2FE')}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#B7D63D')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             GitHub
@@ -77,7 +85,7 @@ export const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontSize: '0.84375rem', color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#00F2FE')}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#B7D63D')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             LinkedIn
@@ -86,7 +94,7 @@ export const Footer = () => {
           <a
             href={personalInfo.socials.emailMailto}
             style={{ fontSize: '0.84375rem', color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#00F2FE')}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#B7D63D')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             Email

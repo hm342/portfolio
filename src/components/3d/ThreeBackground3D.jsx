@@ -8,9 +8,9 @@ export const ThreeBackground3D = () => {
     const container = mountRef.current;
     if (!container) return;
 
-    // Scene, Camera, Renderer
+    // Scene, Camera, Renderer in #171717
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x040508, 0.008);
+    scene.fog = new THREE.FogExp2(0x171717, 0.0075);
 
     const camera = new THREE.PerspectiveCamera(
       60,
@@ -28,28 +28,27 @@ export const ThreeBackground3D = () => {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x040508, 1);
+    renderer.setClearColor(0x171717, 1);
     container.appendChild(renderer.domElement);
 
     // Root Group
     const rootGroup = new THREE.Group();
     scene.add(rootGroup);
 
-    // 1. Interactive 3D Wave Particle Plane
-    const particleCount = 2400;
+    // 1. Interactive 3D Wave Particle Plane in #B7D63D & #F3EFE6
     const planeWidth = 240;
     const planeDepth = 240;
-    const cols = 50;
-    const rows = 48;
+    const cols = 52;
+    const rows = 50;
 
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(cols * rows * 3);
     const colors = new Float32Array(cols * rows * 3);
     const initialY = new Float32Array(cols * rows);
 
-    const colorCyan = new THREE.Color(0x00f2fe);
-    const colorPurple = new THREE.Color(0xa855f7);
-    const colorBlue = new THREE.Color(0x38bdf8);
+    const colorLime = new THREE.Color(0xb7d63d);
+    const colorIvory = new THREE.Color(0xf3efe6);
+    const colorMutedLime = new THREE.Color(0x8da728);
 
     let idx = 0;
     for (let i = 0; i < cols; i++) {
@@ -64,9 +63,9 @@ export const ThreeBackground3D = () => {
 
         initialY[idx] = y;
 
-        // Gradient color across 3D plane
+        // Gradient color across wave using the new palette
         const ratio = (i + j) / (cols + rows);
-        const col = colorCyan.clone().lerp(colorPurple, ratio).lerp(colorBlue, Math.sin(ratio * Math.PI));
+        const col = colorLime.clone().lerp(colorIvory, ratio * 0.6).lerp(colorMutedLime, Math.sin(ratio * Math.PI));
 
         colors[idx * 3] = col.r;
         colors[idx * 3 + 1] = col.g;
@@ -86,22 +85,21 @@ export const ThreeBackground3D = () => {
       canvas.height = 64;
       const ctx = canvas.getContext('2d');
       const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      grad.addColorStop(0.3, 'rgba(0, 242, 254, 0.8)');
-      grad.addColorStop(0.7, 'rgba(168, 85, 247, 0.25)');
+      grad.addColorStop(0, 'rgba(243, 239, 230, 1)');
+      grad.addColorStop(0.35, 'rgba(183, 214, 61, 0.85)');
+      grad.addColorStop(0.7, 'rgba(183, 214, 61, 0.2)');
       grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, 64, 64);
-      const texture = new THREE.CanvasTexture(canvas);
-      return texture;
+      return new THREE.CanvasTexture(canvas);
     };
 
     const particleMaterial = new THREE.PointsMaterial({
-      size: 2.2,
+      size: 2.3,
       map: createParticleTexture(),
       vertexColors: true,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.88,
       blending: THREE.AdditiveBlending,
       depthWrite: false
     });
@@ -109,13 +107,13 @@ export const ThreeBackground3D = () => {
     const waveParticles = new THREE.Points(geometry, particleMaterial);
     rootGroup.add(waveParticles);
 
-    // 2. Floating 3D Geometric Shards (Crystals, Polyhedra, Rings)
+    // 2. Floating 3D Geometric Shards (#B7D63D & #F3EFE6)
     const shardsGroup = new THREE.Group();
     rootGroup.add(shardsGroup);
 
     const shardMaterials = [
       new THREE.MeshStandardMaterial({
-        color: 0x00f2fe,
+        color: 0xb7d63d,
         wireframe: true,
         transparent: true,
         opacity: 0.45,
@@ -123,18 +121,18 @@ export const ThreeBackground3D = () => {
         metalness: 0.9
       }),
       new THREE.MeshStandardMaterial({
-        color: 0xa855f7,
+        color: 0xf3efe6,
         wireframe: true,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.35,
         roughness: 0.1,
         metalness: 0.9
       }),
       new THREE.MeshStandardMaterial({
-        color: 0x38bdf8,
+        color: 0xc6e44a,
         wireframe: true,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.38,
         roughness: 0.2,
         metalness: 0.8
       })
@@ -156,7 +154,6 @@ export const ThreeBackground3D = () => {
       const mat = shardMaterials[i % shardMaterials.length];
       const mesh = new THREE.Mesh(geo, mat);
 
-      // Disperse in 3D volume around user
       mesh.position.set(
         (Math.random() - 0.5) * 160,
         (Math.random() - 0.5) * 80 + 10,
@@ -183,7 +180,7 @@ export const ThreeBackground3D = () => {
       shards.push({ mesh, rotSpeed, floatSpeed, floatAmp, baseY, time: Math.random() * 100 });
     }
 
-    // 3. Dynamic Connecting 3D Constellation Nodes
+    // 3. Dynamic Connecting 3D Constellation Nodes in #B7D63D
     const constelCount = 70;
     const constelGeo = new THREE.BufferGeometry();
     const constelPos = new Float32Array(constelCount * 3);
@@ -204,7 +201,7 @@ export const ThreeBackground3D = () => {
     constelGeo.setAttribute('position', new THREE.BufferAttribute(constelPos, 3));
     const constelMat = new THREE.PointsMaterial({
       size: 3.5,
-      color: 0x00f2fe,
+      color: 0xb7d63d,
       transparent: true,
       opacity: 0.9,
       blending: THREE.AdditiveBlending,
@@ -214,16 +211,16 @@ export const ThreeBackground3D = () => {
     rootGroup.add(constelPoints);
 
     // 4. Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+    const ambientLight = new THREE.AmbientLight(0xf3efe6, 1.4);
     scene.add(ambientLight);
 
-    const lightCyan = new THREE.PointLight(0x00f2fe, 5, 200);
-    lightCyan.position.set(40, 30, 40);
-    scene.add(lightCyan);
+    const lightLime = new THREE.PointLight(0xb7d63d, 6, 220);
+    lightLime.position.set(40, 30, 40);
+    scene.add(lightLime);
 
-    const lightPurple = new THREE.PointLight(0xa855f7, 5, 200);
-    lightPurple.position.set(-40, -20, 30);
-    scene.add(lightPurple);
+    const lightIvory = new THREE.PointLight(0xf3efe6, 4, 200);
+    lightIvory.position.set(-40, -20, 30);
+    scene.add(lightIvory);
 
     // 5. Mouse Parallax & Scroll Reaction
     const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
@@ -267,10 +264,10 @@ export const ThreeBackground3D = () => {
       // Smooth scroll lerp
       scrollY += (targetScrollY - scrollY) * 0.06;
 
-      // Camera responds to mouse parallax and scroll position in 3D
+      // Camera responds in 3D
       camera.position.x = mouse.x * 14;
       camera.position.y = 15 + mouse.y * 10 - scrollY * 0.015;
-      camera.position.z = 85 - (scrollY * 0.01);
+      camera.position.z = 85 - scrollY * 0.01;
       camera.lookAt(0, -scrollY * 0.012, 0);
 
       // Animate 3D Wave Particles
@@ -283,7 +280,6 @@ export const ThreeBackground3D = () => {
           const u = i / cols;
           const v = j / rows;
 
-          // Multi-frequency 3D wave equation
           const wave1 = Math.sin(u * 8 + time * 1.5) * 5.5;
           const wave2 = Math.cos(v * 7 + time * 1.2) * 4.5;
           const wave3 = Math.sin((u + v) * 5 + time * 2) * 3;
@@ -317,7 +313,6 @@ export const ThreeBackground3D = () => {
       }
       constelPoints.geometry.attributes.position.needsUpdate = true;
 
-      // Rotate group gently
       rootGroup.rotation.y = time * 0.02 + mouse.x * 0.08;
 
       renderer.render(scene, camera);

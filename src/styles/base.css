@@ -1,4 +1,4 @@
-/* Base Resets & Global Layout - Black Glass Cyber Edition */
+/* Base Resets & Global Layout - Palette Edition (#171717, #F3EFE6, #B7D63D, #292929) */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -10,44 +10,44 @@ html {
   color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #040508;
-  color: var(--text-primary);
+  background-color: #171717;
+  color: #F3EFE6;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #040508;
-  color: var(--text-primary);
+  background-color: #171717;
+  color: #F3EFE6;
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
 }
 
-/* Custom scrollbar in dark glass tones with cyan hover */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #040508;
+  background: #171717;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(243, 239, 230, 0.18);
   border-radius: var(--radius-full);
-  border: 2px solid #040508;
+  border: 2px solid #171717;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-cyan);
+  background: #B7D63D;
 }
 
-/* Cyber Cyan text selection */
+/* Electric Lime text selection */
 ::selection {
-  background: rgba(0, 242, 254, 0.28);
-  color: #FFFFFF;
+  background: rgba(183, 214, 61, 0.32);
+  color: #F3EFE6;
 }
 
 /* Base interactive elements */
@@ -98,7 +98,7 @@ ul, ol {
 .section-divider {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08) 20%, rgba(0, 242, 254, 0.25) 50%, rgba(255, 255, 255, 0.08) 80%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(243, 239, 230, 0.08) 20%, rgba(183, 214, 61, 0.35) 50%, rgba(243, 239, 230, 0.08) 80%, transparent);
 }
 
 /* App root container: transparent to allow ThreeBackground3D to shine through */
@@ -117,12 +117,4 @@ main#main-content {
   position: relative;
   z-index: 2;
   background-color: transparent;
-}
-
-/* Cyber Grid Pattern Background utility */
-.cyber-grid {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }

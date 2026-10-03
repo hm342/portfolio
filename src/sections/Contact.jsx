@@ -24,7 +24,7 @@ export const Contact = () => {
         particleCount: 40,
         spread: 60,
         origin: { y: 0.8 },
-        colors: ['#00F2FE', '#A855F7', '#38BDF8']
+        colors: ['#B7D63D', '#F3EFE6', '#292929']
       });
       setTimeout(() => setCopied(false), 2000);
     }
@@ -38,7 +38,7 @@ export const Contact = () => {
       particleCount: 80,
       spread: 80,
       origin: { y: 0.7 },
-      colors: ['#00F2FE', '#A855F7', '#10B981']
+      colors: ['#B7D63D', '#F3EFE6', '#292929']
     });
 
     const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
@@ -53,7 +53,7 @@ export const Contact = () => {
       className="section-padding"
       style={{
         backgroundColor: 'transparent',
-        color: '#F8FAFC',
+        color: '#F3EFE6',
         position: 'relative'
       }}
     >
@@ -67,8 +67,16 @@ export const Contact = () => {
           style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <span className="status-beacon" />
-            <span className="label-overline">
+            <span
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: '#B7D63D',
+                boxShadow: '0 0 8px #B7D63D'
+              }}
+            />
+            <span className="label-overline" style={{ color: '#B7D63D' }}>
               LET'S WORK TOGETHER
             </span>
           </div>
@@ -77,7 +85,7 @@ export const Contact = () => {
             className="heading-section"
             style={{
               fontSize: 'clamp(2rem, 3.8vw, 3rem)',
-              color: '#F8FAFC',
+              color: '#F3EFE6',
               marginBottom: '16px'
             }}
           >
@@ -109,7 +117,7 @@ export const Contact = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Email Glass Card */}
             <MagicCard
-              spotlightColor="rgba(0, 242, 254, 0.15)"
+              spotlightColor="rgba(183, 214, 61, 0.15)"
               style={{
                 padding: '28px',
                 display: 'flex',
@@ -124,18 +132,18 @@ export const Contact = () => {
                       width: '38px',
                       height: '38px',
                       borderRadius: '10px',
-                      backgroundColor: 'rgba(0, 242, 254, 0.12)',
-                      border: '1px solid rgba(0, 242, 254, 0.3)',
+                      backgroundColor: 'rgba(183, 214, 61, 0.12)',
+                      border: '1px solid rgba(183, 214, 61, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#00F2FE'
+                      color: '#B7D63D'
                     }}
                   >
                     <Mail size={18} />
                   </div>
                   <div>
-                    <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#F8FAFC' }}>
+                    <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#F3EFE6' }}>
                       Email Transmission
                     </span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>
@@ -153,8 +161,8 @@ export const Contact = () => {
                 >
                   {copied ? (
                     <>
-                      <Check size={12} color="#00F2FE" />
-                      <span style={{ color: '#00F2FE' }}>Copied</span>
+                      <Check size={12} color="#B7D63D" />
+                      <span style={{ color: '#B7D63D' }}>Copied</span>
                     </>
                   ) : (
                     <>
@@ -169,12 +177,12 @@ export const Contact = () => {
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.9375rem',
-                  color: '#00F2FE',
+                  color: '#B7D63D',
                   fontWeight: 600,
                   wordBreak: 'break-all',
                   padding: '10px 14px',
-                  backgroundColor: 'rgba(0, 242, 254, 0.04)',
-                  border: '1px solid rgba(0, 242, 254, 0.2)',
+                  backgroundColor: 'rgba(183, 214, 61, 0.08)',
+                  border: '1px solid rgba(183, 214, 61, 0.25)',
                   borderRadius: 'var(--radius-sm)'
                 }}
               >
@@ -217,7 +225,9 @@ export const Contact = () => {
                   alignItems: 'center',
                   gap: '8px',
                   textAlign: 'center',
-                  color: '#F8FAFC'
+                  color: '#F3EFE6',
+                  backgroundColor: '#292929',
+                  border: '1px solid rgba(243, 239, 230, 0.1)'
                 }}
               >
                 <GithubIcon size={20} />
@@ -236,7 +246,9 @@ export const Contact = () => {
                   alignItems: 'center',
                   gap: '8px',
                   textAlign: 'center',
-                  color: '#F8FAFC'
+                  color: '#F3EFE6',
+                  backgroundColor: '#292929',
+                  border: '1px solid rgba(243, 239, 230, 0.1)'
                 }}
               >
                 <LinkedinIcon size={20} />
@@ -255,7 +267,9 @@ export const Contact = () => {
                   alignItems: 'center',
                   gap: '8px',
                   textAlign: 'center',
-                  color: '#F8FAFC'
+                  color: '#F3EFE6',
+                  backgroundColor: '#292929',
+                  border: '1px solid rgba(243, 239, 230, 0.1)'
                 }}
               >
                 <WhatsappIcon size={20} />
@@ -267,7 +281,7 @@ export const Contact = () => {
           {/* Right Column: Direct Transmission Form in Black Glass */}
           <div>
             <MagicCard
-              spotlightColor="rgba(168, 85, 247, 0.15)"
+              spotlightColor="rgba(183, 214, 61, 0.12)"
               style={{
                 padding: 'clamp(24px, 4vw, 36px)',
                 display: 'flex',
@@ -276,8 +290,8 @@ export const Contact = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Terminal size={18} color="#C084FC" />
-                <h3 style={{ fontSize: '1.1875rem', fontWeight: 700, color: '#F8FAFC' }}>
+                <Terminal size={18} color="#B7D63D" />
+                <h3 style={{ fontSize: '1.1875rem', fontWeight: 700, color: '#F3EFE6' }}>
                   Send a Direct Message
                 </h3>
               </div>
@@ -306,17 +320,17 @@ export const Contact = () => {
                     style={{
                       width: '100%',
                       padding: '12px 16px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: '#292929',
+                      border: '1px solid rgba(243, 239, 230, 0.12)',
                       borderRadius: 'var(--radius-sm)',
-                      color: '#F8FAFC',
+                      color: '#F3EFE6',
                       fontSize: '0.9375rem',
                       fontFamily: 'var(--font-sans)',
                       outline: 'none',
                       transition: 'border-color var(--transition-fast)'
                     }}
-                    onFocus={(e) => (e.target.style.borderColor = '#00F2FE')}
-                    onBlur={(e) => (e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
+                    onFocus={(e) => (e.target.style.borderColor = '#B7D63D')}
+                    onBlur={(e) => (e.target.style.borderColor = 'rgba(243, 239, 230, 0.12)')}
                   />
                 </div>
 
@@ -343,17 +357,17 @@ export const Contact = () => {
                     style={{
                       width: '100%',
                       padding: '12px 16px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: '#292929',
+                      border: '1px solid rgba(243, 239, 230, 0.12)',
                       borderRadius: 'var(--radius-sm)',
-                      color: '#F8FAFC',
+                      color: '#F3EFE6',
                       fontSize: '0.9375rem',
                       fontFamily: 'var(--font-sans)',
                       outline: 'none',
                       transition: 'border-color var(--transition-fast)'
                     }}
-                    onFocus={(e) => (e.target.style.borderColor = '#00F2FE')}
-                    onBlur={(e) => (e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
+                    onFocus={(e) => (e.target.style.borderColor = '#B7D63D')}
+                    onBlur={(e) => (e.target.style.borderColor = 'rgba(243, 239, 230, 0.12)')}
                   />
                 </div>
 
@@ -380,18 +394,18 @@ export const Contact = () => {
                     style={{
                       width: '100%',
                       padding: '12px 16px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: '#292929',
+                      border: '1px solid rgba(243, 239, 230, 0.12)',
                       borderRadius: 'var(--radius-sm)',
-                      color: '#F8FAFC',
+                      color: '#F3EFE6',
                       fontSize: '0.9375rem',
                       fontFamily: 'var(--font-sans)',
                       outline: 'none',
                       resize: 'vertical',
                       transition: 'border-color var(--transition-fast)'
                     }}
-                    onFocus={(e) => (e.target.style.borderColor = '#00F2FE')}
-                    onBlur={(e) => (e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)')}
+                    onFocus={(e) => (e.target.style.borderColor = '#B7D63D')}
+                    onBlur={(e) => (e.target.style.borderColor = 'rgba(243, 239, 230, 0.12)')}
                   />
                 </div>
 

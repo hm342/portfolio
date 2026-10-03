@@ -35,9 +35,9 @@ export const About = () => {
               className="quote-statement"
               style={{
                 paddingLeft: '24px',
-                borderLeft: '3px solid #00F2FE',
+                borderLeft: '3px solid #B7D63D',
                 marginBottom: '28px',
-                color: '#F8FAFC'
+                color: '#F3EFE6'
               }}
             >
               “I build web and mobile applications that turn real business requirements into usable, high-performance software.”
@@ -45,8 +45,8 @@ export const About = () => {
 
             {/* Narrative */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', color: 'var(--text-secondary)' }}>
-              <p className="body-lead" style={{ color: '#E2E8F0' }}>
-                My work centers around architecting reliable backend services in <strong style={{ color: '#00F2FE', fontWeight: 600 }}>Laravel</strong> and <strong style={{ color: '#00F2FE', fontWeight: 600 }}>PHP</strong>, modeling structured relational databases in <strong style={{ color: '#00F2FE', fontWeight: 600 }}>MySQL</strong>, and creating high-performance client interfaces using <strong style={{ color: '#38BDF8', fontWeight: 600 }}>React</strong>, <strong style={{ color: '#38BDF8', fontWeight: 600 }}>JavaScript</strong>, and <strong style={{ color: '#34D399', fontWeight: 600 }}>React Native</strong>.
+              <p className="body-lead" style={{ color: '#F3EFE6' }}>
+                My work centers around architecting reliable backend services in <strong style={{ color: '#B7D63D', fontWeight: 600 }}>Laravel</strong> and <strong style={{ color: '#B7D63D', fontWeight: 600 }}>PHP</strong>, modeling structured relational databases in <strong style={{ color: '#B7D63D', fontWeight: 600 }}>MySQL</strong>, and creating high-performance client interfaces using <strong style={{ color: '#F3EFE6', fontWeight: 600 }}>React</strong>, <strong style={{ color: '#F3EFE6', fontWeight: 600 }}>JavaScript</strong>, and <strong style={{ color: '#B7D63D', fontWeight: 600 }}>React Native</strong>.
               </p>
 
               <p className="body-regular">
@@ -83,17 +83,17 @@ export const About = () => {
                     width: '36px',
                     height: '36px',
                     borderRadius: '10px',
-                    backgroundColor: 'rgba(0, 242, 254, 0.1)',
-                    border: '1px solid rgba(0, 242, 254, 0.25)',
+                    backgroundColor: 'rgba(183, 214, 61, 0.12)',
+                    border: '1px solid rgba(183, 214, 61, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#00F2FE'
+                    color: '#B7D63D'
                   }}
                 >
                   {cap.icon}
                 </div>
-                <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9375rem', fontWeight: 700, color: '#F8FAFC' }}>
+                <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9375rem', fontWeight: 700, color: '#F3EFE6' }}>
                   {cap.title}
                 </h4>
                 <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>

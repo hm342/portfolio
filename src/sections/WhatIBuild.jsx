@@ -12,7 +12,7 @@ export const WhatIBuild = () => {
       title: 'Commercial Web Platforms & Portals',
       icon: <Briefcase size={20} />,
       tag: 'ENTERPRISE // B2B',
-      accent: '#00F2FE',
+      accent: '#B7D63D',
       description: 'Industrial manufacturing portals, client quotation pipelines (RFQ), dynamic technical product catalogs, and administrative dashboards designed for high operational throughput.',
       tech: ['PHP', 'Laravel', 'MySQL', 'JavaScript']
     },
@@ -21,7 +21,7 @@ export const WhatIBuild = () => {
       title: 'Full-Stack Web Applications',
       icon: <Globe size={20} />,
       tag: 'SCALABLE // REACTIVE',
-      accent: '#38BDF8',
+      accent: '#B7D63D',
       description: 'High-clarity web apps with structured relational backend schemas, RESTful APIs, optimized query performance, and reactive React user interfaces.',
       tech: ['React', 'REST APIs', 'Node.js', 'PostgreSQL']
     },
@@ -30,7 +30,7 @@ export const WhatIBuild = () => {
       title: 'Tactile Mobile Applications',
       icon: <Smartphone size={20} />,
       tag: 'CROSS-PLATFORM // ERGONOMIC',
-      accent: '#34D399',
+      accent: '#B7D63D',
       description: 'Smooth, cross-platform mobile apps for iOS and Android built with React Native. Prioritizing instant tactile feedback, local caching, and gesture ergonomics.',
       tech: ['React Native', 'Supabase', 'Mobile UX', 'State Sync']
     },
@@ -39,7 +39,7 @@ export const WhatIBuild = () => {
       title: 'Autonomous Robotics & Computer Vision',
       icon: <Terminal size={20} />,
       tag: 'HARDWARE // EMBEDDED AI',
-      accent: '#C084FC',
+      accent: '#B7D63D',
       description: 'Integration of physical microcontrollers, closed-loop telemetry, edge AI models for real-time plant pathology recognition, and live mobile operator dashboards.',
       tech: ['Edge AI', 'Computer Vision', 'Microcontrollers', 'Sensors']
     }
@@ -72,8 +72,8 @@ export const WhatIBuild = () => {
               transition={{ duration: 0.5, delay: idx * 0.1, ease: SMOOTH_EASE }}
             >
               <MagicCard
-                spotlightColor={`${item.accent}1F`}
-                borderColor={`${item.accent}4D`}
+                spotlightColor="rgba(183, 214, 61, 0.12)"
+                borderColor="rgba(183, 214, 61, 0.35)"
                 style={{
                   height: '100%',
                   padding: '32px 28px',
@@ -98,13 +98,13 @@ export const WhatIBuild = () => {
                         width: '42px',
                         height: '42px',
                         borderRadius: '12px',
-                        backgroundColor: `${item.accent}15`,
-                        border: `1px solid ${item.accent}40`,
+                        backgroundColor: 'rgba(183, 214, 61, 0.12)',
+                        border: '1px solid rgba(183, 214, 61, 0.35)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: item.accent,
-                        boxShadow: `0 0 16px -2px ${item.accent}33`
+                        color: '#B7D63D',
+                        boxShadow: '0 0 16px -2px rgba(183, 214, 61, 0.3)'
                       }}
                     >
                       {item.icon}
@@ -115,7 +115,7 @@ export const WhatIBuild = () => {
                         style={{
                           fontFamily: 'var(--font-mono)',
                           fontSize: '0.6875rem',
-                          color: item.accent,
+                          color: '#B7D63D',
                           letterSpacing: '0.08em'
                         }}
                       >
@@ -138,7 +138,7 @@ export const WhatIBuild = () => {
                   <h3
                     className="heading-card"
                     style={{
-                      color: '#F8FAFC',
+                      color: '#F3EFE6',
                       fontSize: '1.25rem',
                       marginBottom: '10px'
                     }}
@@ -164,7 +164,7 @@ export const WhatIBuild = () => {
                     flexWrap: 'wrap',
                     gap: '8px',
                     paddingTop: '16px',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+                    borderTop: '1px solid rgba(243, 239, 230, 0.08)'
                   }}
                 >
                   {item.tech.map((t) => (
@@ -173,11 +173,11 @@ export const WhatIBuild = () => {
                       style={{
                         fontFamily: 'var(--font-mono)',
                         fontSize: '0.6875rem',
-                        color: 'var(--text-secondary)',
-                        backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                        color: '#F3EFE6',
+                        backgroundColor: '#292929',
                         padding: '3px 8px',
                         borderRadius: '4px',
-                        border: '1px solid rgba(255, 255, 255, 0.08)'
+                        border: '1px solid rgba(243, 239, 230, 0.1)'
                       }}
                     >
                       {t}

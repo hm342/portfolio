@@ -18,23 +18,23 @@ export const HangingSkillsBoard = () => {
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
     : false;
 
-  // Category Color Map for Cyber Neon Aesthetics
+  // Category Color Map for Electric Lime Palette (#B7D63D)
   const getCategoryColor = (categoryId) => {
     switch (categoryId) {
       case 'ai':
-        return '#C084FC'; // Cosmic Purple
+        return '#D4E968';
       case 'backend':
-        return '#00F2FE'; // Cyber Cyan
+        return '#B7D63D';
       case 'frontend':
-        return '#38BDF8'; // Sky Blue
+        return '#E2ED94';
       case 'mobile':
-        return '#34D399'; // Emerald Neon
+        return '#B7D63D';
       case 'tools':
-        return '#818CF8'; // Indigo
+        return '#C6E44A';
       case 'database':
-        return '#F59E0B'; // Amber
+        return '#9EB832';
       default:
-        return '#00F2FE';
+        return '#B7D63D';
     }
   };
 
@@ -384,7 +384,7 @@ export const HangingSkillsBoard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* Category Tabs & Interactive Controls in Black Glass */}
+      {/* Category Tabs & Interactive Controls in #292929 */}
       <div
         style={{
           display: 'flex',
@@ -393,10 +393,10 @@ export const HangingSkillsBoard = () => {
           flexWrap: 'wrap',
           gap: '14px',
           padding: '12px 18px',
-          background: 'rgba(14, 18, 28, 0.65)',
+          background: 'rgba(41, 41, 41, 0.85)',
           backdropFilter: 'blur(16px)',
           borderRadius: 'var(--radius-lg)',
-          border: '1px solid rgba(255, 255, 255, 0.08)'
+          border: '1px solid rgba(243, 239, 230, 0.1)'
         }}
       >
         {/* Category Pills */}
@@ -423,10 +423,10 @@ export const HangingSkillsBoard = () => {
                   fontFamily: 'var(--font-heading)',
                   fontSize: '0.8125rem',
                   fontWeight: isActive ? 700 : 500,
-                  backgroundColor: isActive ? 'rgba(0, 242, 254, 0.18)' : 'rgba(255, 255, 255, 0.04)',
-                  color: isActive ? '#00F2FE' : 'var(--text-secondary)',
-                  border: `1px solid ${isActive ? 'rgba(0, 242, 254, 0.6)' : 'rgba(255, 255, 255, 0.08)'}`,
-                  boxShadow: isActive ? '0 0 16px -2px rgba(0, 242, 254, 0.35)' : 'none',
+                  backgroundColor: isActive ? 'rgba(183, 214, 61, 0.2)' : 'rgba(243, 239, 230, 0.04)',
+                  color: isActive ? '#B7D63D' : 'rgba(243, 239, 230, 0.72)',
+                  border: `1px solid ${isActive ? '#B7D63D' : 'rgba(243, 239, 230, 0.1)'}`,
+                  boxShadow: isActive ? '0 0 16px -2px rgba(183, 214, 61, 0.35)' : 'none',
                   transition: 'all var(--transition-fast)',
                   cursor: 'pointer'
                 }}
@@ -453,7 +453,7 @@ export const HangingSkillsBoard = () => {
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.75rem',
-              color: 'var(--accent-cyan)',
+              color: '#B7D63D',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px'
@@ -470,37 +470,37 @@ export const HangingSkillsBoard = () => {
             style={{
               padding: '7px 16px',
               fontSize: '0.78125rem',
-              borderColor: 'rgba(0, 242, 254, 0.3)',
-              background: 'rgba(0, 242, 254, 0.08)'
+              borderColor: 'rgba(183, 214, 61, 0.4)',
+              background: 'rgba(183, 214, 61, 0.1)'
             }}
             title="Swing all capsules"
             aria-label="Swing all capsules"
           >
-            <Sparkles size={13} style={{ color: '#00F2FE' }} />
+            <Sparkles size={13} style={{ color: '#B7D63D' }} />
             <span>Swing All</span>
           </button>
         </div>
       </div>
 
-      {/* Main Hanging Board Container in Obsidian Black Glass */}
+      {/* Main Hanging Board Container in #292929 */}
       <div
         ref={containerRef}
         style={{
           position: 'relative',
           width: '100%',
           height: `${dimensions.height}px`,
-          backgroundColor: 'rgba(10, 14, 22, 0.75)',
+          backgroundColor: '#292929',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(243, 239, 230, 0.12)',
           borderRadius: 'var(--radius-xl)',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(243, 239, 230, 0.1)',
           overflow: 'hidden',
           userSelect: 'none',
           WebkitUserSelect: 'none',
           touchAction: 'pan-y'
         }}
-        aria-label="Interactive black glass hanging skills display"
+        aria-label="Interactive hanging skills display"
         role="region"
       >
         {/* Subtle Cyber Grid in Background */}
@@ -509,7 +509,7 @@ export const HangingSkillsBoard = () => {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+              'linear-gradient(to right, rgba(243, 239, 230, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(243, 239, 230, 0.02) 1px, transparent 1px)',
             backgroundSize: '40px 40px',
             pointerEvents: 'none',
             zIndex: 1
@@ -523,14 +523,14 @@ export const HangingSkillsBoard = () => {
             top: 0,
             left: '15%',
             right: '15%',
-            height: '1px',
-            background: 'linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.8), rgba(168, 85, 247, 0.8), transparent)',
-            boxShadow: '0 0 20px rgba(0, 242, 254, 0.5)',
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent, rgba(183, 214, 61, 0.85), rgba(212, 233, 104, 0.85), transparent)',
+            boxShadow: '0 0 20px rgba(183, 214, 61, 0.5)',
             zIndex: 15
           }}
         />
 
-        {/* Architectural Brushed Titanium Top Beam */}
+        {/* Architectural Top Beam */}
         <div
           style={{
             position: 'absolute',
@@ -538,8 +538,8 @@ export const HangingSkillsBoard = () => {
             left: 0,
             right: 0,
             height: '12px',
-            background: 'linear-gradient(180deg, #1E293B 0%, #0F172A 100%)',
-            borderBottom: '1px solid rgba(0, 242, 254, 0.25)',
+            background: 'linear-gradient(180deg, #333333 0%, #1F1F1F 100%)',
+            borderBottom: '1px solid rgba(183, 214, 61, 0.35)',
             zIndex: 10
           }}
         />
@@ -656,12 +656,12 @@ export const HangingSkillsBoard = () => {
                   alignItems: 'center',
                   gap: '8px',
                   padding: dimensions.isMobile ? '6px 12px' : dimensions.isTablet ? '7px 14px' : '7px 16px',
-                  backgroundColor: 'rgba(18, 24, 38, 0.85)',
+                  backgroundColor: 'rgba(41, 41, 41, 0.92)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
-                  border: '1px solid rgba(255, 255, 255, 0.14)',
+                  border: '1px solid rgba(243, 239, 230, 0.14)',
                   borderRadius: 'var(--radius-full)',
-                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(243, 239, 230, 0.1)',
                   whiteSpace: 'nowrap'
                 }}
               >
@@ -675,7 +675,7 @@ export const HangingSkillsBoard = () => {
                     width: '7px',
                     height: '7px',
                     borderRadius: '50%',
-                    backgroundColor: '#0F172A',
+                    backgroundColor: '#171717',
                     border: `1.5px solid ${categoryColor}`,
                     boxShadow: `0 0 6px ${categoryColor}`
                   }}
@@ -699,7 +699,7 @@ export const HangingSkillsBoard = () => {
                     fontFamily: 'var(--font-heading)',
                     fontSize: dimensions.isMobile ? '0.78125rem' : '0.84375rem',
                     fontWeight: 700,
-                    color: '#F8FAFC',
+                    color: '#F3EFE6',
                     letterSpacing: '-0.01em'
                   }}
                 >
@@ -714,7 +714,7 @@ export const HangingSkillsBoard = () => {
                       fontSize: '0.625rem',
                       color: 'var(--text-muted)',
                       paddingLeft: '4px',
-                      borderLeft: '1px solid rgba(255, 255, 255, 0.1)'
+                      borderLeft: '1px solid rgba(243, 239, 230, 0.15)'
                     }}
                   >
                     {item.tag}
@@ -733,7 +733,7 @@ export const HangingSkillsBoard = () => {
             right: '18px',
             fontFamily: 'var(--font-mono)',
             fontSize: '0.6875rem',
-            color: 'rgba(0, 242, 254, 0.6)',
+            color: 'rgba(183, 214, 61, 0.8)',
             letterSpacing: '0.1em',
             pointerEvents: 'none',
             zIndex: 2,
@@ -752,12 +752,12 @@ export const HangingSkillsBoard = () => {
           outline: none;
         }
         .hanging-skill-capsule:focus-visible > div {
-          border-color: #00F2FE !important;
-          box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.3), 0 0 20px rgba(0, 242, 254, 0.5) !important;
+          border-color: #B7D63D !important;
+          box-shadow: 0 0 0 3px rgba(183, 214, 61, 0.3), 0 0 20px rgba(183, 214, 61, 0.5) !important;
         }
         .hanging-skill-capsule:hover > div {
-          border-color: #00F2FE !important;
-          box-shadow: 0 10px 28px rgba(0, 242, 254, 0.28), 0 0 15px rgba(0, 242, 254, 0.4) !important;
+          border-color: #B7D63D !important;
+          box-shadow: 0 10px 28px rgba(183, 214, 61, 0.28), 0 0 15px rgba(183, 214, 61, 0.4) !important;
         }
         .hanging-skill-capsule:active {
           cursor: grabbing !important;

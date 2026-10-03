@@ -4,8 +4,8 @@ export const BorderBeam = ({
   size = 200,
   duration = 12,
   delay = 0,
-  colorFrom = '#00F2FE',
-  colorTo = '#A855F7',
+  colorFrom = '#B7D63D',
+  colorTo = '#F3EFE6',
   borderWidth = 1.5
 }) => {
   return (

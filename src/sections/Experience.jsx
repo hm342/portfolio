@@ -37,8 +37,8 @@ export const Experience = () => {
               bottom: '16px',
               left: 'clamp(10px, 1.8vw, 16px)',
               width: '2px',
-              background: 'linear-gradient(180deg, #00F2FE 0%, #A855F7 60%, rgba(255, 255, 255, 0.1) 100%)',
-              boxShadow: '0 0 12px rgba(0, 242, 254, 0.4)'
+              background: 'linear-gradient(180deg, #B7D63D 0%, rgba(243, 239, 230, 0.6) 60%, rgba(243, 239, 230, 0.1) 100%)',
+              boxShadow: '0 0 12px rgba(183, 214, 61, 0.4)'
             }}
           />
 
@@ -58,9 +58,9 @@ export const Experience = () => {
                       width: '14px',
                       height: '14px',
                       borderRadius: '50%',
-                      backgroundColor: isCurrent ? '#00F2FE' : 'rgba(255, 255, 255, 0.4)',
-                      border: `2px solid ${isCurrent ? '#040812' : '#0F172A'}`,
-                      boxShadow: isCurrent ? '0 0 16px #00F2FE, 0 0 30px #00F2FE' : 'none',
+                      backgroundColor: isCurrent ? '#B7D63D' : 'rgba(243, 239, 230, 0.4)',
+                      border: '2px solid #171717',
+                      boxShadow: isCurrent ? '0 0 16px #B7D63D, 0 0 30px #B7D63D' : 'none',
                       zIndex: 2
                     }}
                   />
@@ -73,7 +73,7 @@ export const Experience = () => {
                     transition={{ duration: 0.5, delay: idx * 0.15, ease: SMOOTH_EASE }}
                   >
                     <MagicCard
-                      spotlightColor="rgba(0, 242, 254, 0.12)"
+                      spotlightColor="rgba(183, 214, 61, 0.12)"
                       style={{
                         padding: 'clamp(24px, 4vw, 36px)',
                         display: 'flex',
@@ -90,7 +90,7 @@ export const Experience = () => {
                           flexWrap: 'wrap',
                           gap: '12px',
                           paddingBottom: '16px',
-                          borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+                          borderBottom: '1px solid rgba(243, 239, 230, 0.08)'
                         }}
                       >
                         <div>
@@ -99,7 +99,7 @@ export const Experience = () => {
                               fontFamily: 'var(--font-mono)',
                               fontSize: '0.75rem',
                               fontWeight: 700,
-                              color: '#00F2FE',
+                              color: '#B7D63D',
                               letterSpacing: '0.08em',
                               textTransform: 'uppercase',
                               display: 'block',
@@ -108,7 +108,7 @@ export const Experience = () => {
                           >
                             {item.company}
                           </span>
-                          <h3 className="heading-sub" style={{ fontSize: '1.25rem', color: '#F8FAFC' }}>
+                          <h3 className="heading-sub" style={{ fontSize: '1.25rem', color: '#F3EFE6' }}>
                             {item.role}
                           </h3>
                         </div>
@@ -119,16 +119,16 @@ export const Experience = () => {
                             alignItems: 'center',
                             gap: '6px',
                             padding: '4px 12px',
-                            backgroundColor: isCurrent ? 'rgba(0, 242, 254, 0.12)' : 'rgba(255, 255, 255, 0.04)',
-                            border: `1px solid ${isCurrent ? 'rgba(0, 242, 254, 0.4)' : 'rgba(255, 255, 255, 0.1)'}`,
+                            backgroundColor: isCurrent ? 'rgba(183, 214, 61, 0.12)' : 'rgba(41, 41, 41, 0.6)',
+                            border: `1px solid ${isCurrent ? 'rgba(183, 214, 61, 0.4)' : 'rgba(243, 239, 230, 0.1)'}`,
                             borderRadius: 'var(--radius-full)',
                             fontFamily: 'var(--font-mono)',
                             fontSize: '0.75rem',
-                            color: isCurrent ? '#00F2FE' : 'var(--text-secondary)',
+                            color: isCurrent ? '#B7D63D' : 'var(--text-secondary)',
                             fontWeight: isCurrent ? 700 : 500
                           }}
                         >
-                          <Calendar size={13} color={isCurrent ? '#00F2FE' : 'var(--text-muted)'} />
+                          <Calendar size={13} color={isCurrent ? '#B7D63D' : 'var(--text-muted)'} />
                           <span>{item.period}</span>
                         </div>
                       </div>
@@ -154,7 +154,7 @@ export const Experience = () => {
                               lineHeight: 1.6
                             }}
                           >
-                            <Check size={14} color="#00F2FE" style={{ marginTop: '4px', flexShrink: 0 }} />
+                            <Check size={14} color="#B7D63D" style={{ marginTop: '4px', flexShrink: 0 }} />
                             <span>{resp}</span>
                           </li>
                         ))}
@@ -167,7 +167,7 @@ export const Experience = () => {
                           flexWrap: 'wrap',
                           gap: '6px',
                           paddingTop: '12px',
-                          borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+                          borderTop: '1px solid rgba(243, 239, 230, 0.08)'
                         }}
                       >
                         {item.technologies.map((t) => (
@@ -176,9 +176,9 @@ export const Experience = () => {
                             style={{
                               fontFamily: 'var(--font-mono)',
                               fontSize: '0.71875rem',
-                              color: '#F8FAFC',
-                              backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                              border: '1px solid rgba(255, 255, 255, 0.08)',
+                              color: '#F3EFE6',
+                              backgroundColor: '#292929',
+                              border: '1px solid rgba(243, 239, 230, 0.1)',
                               padding: '3px 9px',
                               borderRadius: '4px'
                             }}
@@ -202,7 +202,7 @@ export const Experience = () => {
               <span className="label-overline">
                 HACKATHONS & INNOVATION CHALLENGES
               </span>
-              <h3 className="heading-sub" style={{ fontSize: '1.25rem', marginTop: '6px', color: '#F8FAFC' }}>
+              <h3 className="heading-sub" style={{ fontSize: '1.25rem', marginTop: '6px', color: '#F3EFE6' }}>
                 Technical Prototyping & Sprint Competitions
               </h3>
             </div>
@@ -235,17 +235,17 @@ export const Experience = () => {
                         width: '30px',
                         height: '30px',
                         borderRadius: '8px',
-                        backgroundColor: 'rgba(192, 132, 252, 0.15)',
-                        border: '1px solid rgba(192, 132, 252, 0.35)',
+                        backgroundColor: 'rgba(183, 214, 61, 0.12)',
+                        border: '1px solid rgba(183, 214, 61, 0.35)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#C084FC'
+                        color: '#B7D63D'
                       }}
                     >
                       <Award size={16} />
                     </div>
-                    <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#F8FAFC' }}>
+                    <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#F3EFE6' }}>
                       {hack.title}
                     </span>
                   </div>
@@ -254,7 +254,7 @@ export const Experience = () => {
                     style={{
                       fontSize: '0.75rem',
                       fontFamily: 'var(--font-mono)',
-                      color: '#00F2FE',
+                      color: '#B7D63D',
                       fontWeight: 600
                     }}
                   >

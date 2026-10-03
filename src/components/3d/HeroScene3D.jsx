@@ -31,24 +31,24 @@ export const HeroScene3D = () => {
     const rootGroup = new THREE.Group();
     scene.add(rootGroup);
 
-    // 1. Outer Holographic Icosahedron Wireframe
+    // 1. Outer Holographic Icosahedron Wireframe in #B7D63D
     const icosaGeo = new THREE.IcosahedronGeometry(1.6, 1);
     const icosaMat = new THREE.MeshStandardMaterial({
-      color: 0x00f2fe,
+      color: 0xb7d63d,
       wireframe: true,
       transparent: true,
-      opacity: 0.45,
-      roughness: 0.2,
-      metalness: 0.9
+      opacity: 0.5,
+      roughness: 0.15,
+      metalness: 0.95
     });
     const icosaMesh = new THREE.Mesh(icosaGeo, icosaMat);
     rootGroup.add(icosaMesh);
 
-    // 2. Inner Glowing Torus Knot
+    // 2. Inner Glowing Torus Knot in #F3EFE6
     const knotGeo = new THREE.TorusKnotGeometry(0.85, 0.22, 100, 16, 2, 3);
     const knotMat = new THREE.MeshStandardMaterial({
-      color: 0xa855f7,
-      roughness: 0.15,
+      color: 0xf3efe6,
+      roughness: 0.2,
       metalness: 0.85,
       wireframe: false,
       transparent: true,
@@ -57,12 +57,12 @@ export const HeroScene3D = () => {
     const knotMesh = new THREE.Mesh(knotGeo, knotMat);
     rootGroup.add(knotMesh);
 
-    // 3. Orbiting Quantum Ring
+    // 3. Orbiting Quantum Rings in #B7D63D
     const ringGeo = new THREE.TorusGeometry(2.3, 0.02, 16, 100);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
+      color: 0xb7d63d,
       transparent: true,
-      opacity: 0.6
+      opacity: 0.7
     });
     const ringMesh = new THREE.Mesh(ringGeo, ringMat);
     ringMesh.rotation.x = Math.PI / 3;
@@ -70,9 +70,9 @@ export const HeroScene3D = () => {
 
     const ringGeo2 = new THREE.TorusGeometry(2.6, 0.015, 16, 100);
     const ringMat2 = new THREE.MeshBasicMaterial({
-      color: 0xc084fc,
+      color: 0xd4e968,
       transparent: true,
-      opacity: 0.45
+      opacity: 0.5
     });
     const ringMesh2 = new THREE.Mesh(ringGeo2, ringMat2);
     ringMesh2.rotation.y = Math.PI / 4;
@@ -85,8 +85,8 @@ export const HeroScene3D = () => {
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
 
-    const color1 = new THREE.Color(0x00f2fe);
-    const color2 = new THREE.Color(0xa855f7);
+    const color1 = new THREE.Color(0xb7d63d);
+    const color2 = new THREE.Color(0xf3efe6);
 
     for (let i = 0; i < particleCount; i++) {
       const radius = 1.4 + Math.random() * 1.8;
@@ -114,23 +114,23 @@ export const HeroScene3D = () => {
       size: 0.045,
       vertexColors: true,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.8,
       blending: THREE.AdditiveBlending
     });
     const particles = new THREE.Points(particleGeo, particleMat);
     rootGroup.add(particles);
 
     // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xf3efe6, 1.3);
     scene.add(ambientLight);
 
-    const pointLightCyan = new THREE.PointLight(0x00f2fe, 3.5, 12);
-    pointLightCyan.position.set(3, 3, 3);
-    scene.add(pointLightCyan);
+    const pointLightLime = new THREE.PointLight(0xb7d63d, 4.5, 14);
+    pointLightLime.position.set(3, 3, 3);
+    scene.add(pointLightLime);
 
-    const pointLightPurple = new THREE.PointLight(0xa855f7, 3.5, 12);
-    pointLightPurple.position.set(-3, -3, 2);
-    scene.add(pointLightPurple);
+    const pointLightIvory = new THREE.PointLight(0xf3efe6, 3, 12);
+    pointLightIvory.position.set(-3, -3, 2);
+    scene.add(pointLightIvory);
 
     // Mouse movement handler
     const handlePointerMove = (e) => {
@@ -155,7 +155,6 @@ export const HeroScene3D = () => {
     container.addEventListener('pointerenter', handlePointerEnter);
     container.addEventListener('pointerleave', handlePointerLeave);
 
-    // Resize Handler
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth;
@@ -167,7 +166,6 @@ export const HeroScene3D = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Animation Loop
     let animId;
     let clock = new THREE.Clock();
 
@@ -177,15 +175,12 @@ export const HeroScene3D = () => {
       const elapsedTime = clock.getElapsedTime();
       const speedMult = isHoveredRef.current ? 1.8 : 1.0;
 
-      // Inertial mouse lerp
       mousePos.current.x += (mousePos.current.targetX - mousePos.current.x) * 0.08;
       mousePos.current.y += (mousePos.current.targetY - mousePos.current.y) * 0.08;
 
-      // Group rotation
       rootGroup.rotation.y = elapsedTime * 0.3 * speedMult + mousePos.current.x * 0.7;
       rootGroup.rotation.x = elapsedTime * 0.15 * speedMult + -mousePos.current.y * 0.5;
 
-      // Internal items relative motion
       knotMesh.rotation.x = elapsedTime * 0.5 * speedMult;
       knotMesh.rotation.z = elapsedTime * 0.35 * speedMult;
 
@@ -209,7 +204,6 @@ export const HeroScene3D = () => {
       container.removeEventListener('pointerenter', handlePointerEnter);
       container.removeEventListener('pointerleave', handlePointerLeave);
 
-      // Clean up geometries & materials
       icosaGeo.dispose();
       icosaMat.dispose();
       knotGeo.dispose();
@@ -239,7 +233,7 @@ export const HeroScene3D = () => {
         cursor: 'grab',
         touchAction: 'none'
       }}
-      aria-label="Interactive 3D Holographic Core. Move cursor to rotate."
+      aria-label="Interactive 3D Holographic Core in Electric Lime and Ivory"
     />
   );
 };

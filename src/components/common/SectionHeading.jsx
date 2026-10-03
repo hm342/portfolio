@@ -21,8 +21,17 @@ export const SectionHeading = ({
     >
       {category && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', justifyContent: isCentered ? 'center' : 'flex-start' }}>
-          <span className="status-dot-copper" style={{ width: '5px', height: '5px' }} />
-          <span className="label-overline">
+          <span
+            style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              backgroundColor: '#B7D63D',
+              boxShadow: '0 0 8px #B7D63D',
+              flexShrink: 0
+            }}
+          />
+          <span className="label-overline" style={{ color: '#B7D63D' }}>
             {category}
           </span>
         </div>

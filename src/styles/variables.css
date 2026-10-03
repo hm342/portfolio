@@ -1,65 +1,70 @@
 :root {
   /* ==========================================================================
-     BLACK GLASS DESIGN SYSTEM (OBSIDIAN & NEON AESTHETICS)
+     EXACT PALETTE DESIGN SYSTEM:
+     #171717 — Background
+     #F3EFE6 — Text
+     #B7D63D — Accent (Electric Lime)
+     #292929 — Cards
      ========================================================================== */
 
-  /* Deep Cosmic Black Backgrounds */
-  --bg-primary: #040508;          /* Ultra-deep obsidian core */
-  --bg-secondary: #080A10;        /* Deep midnight layer */
-  --bg-surface: rgba(14, 18, 28, 0.72);    /* Frosted dark glass panel */
-  --bg-surface-elevated: rgba(22, 28, 44, 0.78); /* Elevated glass modal/card */
-  --bg-surface-hover: rgba(28, 36, 56, 0.85);
-  --bg-subtle: #0D111A;
-  --bg-warm-card: rgba(16, 21, 33, 0.68);
+  /* Backgrounds */
+  --bg-primary: #171717;          /* Matte Charcoal Black */
+  --bg-secondary: #1F1F1F;
+  --bg-surface: #292929;          /* Deep Card Surface */
+  --bg-surface-elevated: #323232;
+  --bg-surface-hover: #383838;
+  --bg-subtle: #212121;
+  --bg-warm-card: #292929;
+
+  /* Card Colors */
+  --card-bg: #292929;
+  --dark-bg: #171717;
+  --dark-surface: #292929;
+  --dark-surface-hover: #323232;
+
+  /* Text Colors */
+  --text-primary: #F3EFE6;        /* Warm Crisp Ivory */
+  --text-secondary: rgba(243, 239, 230, 0.72);
+  --text-muted: rgba(243, 239, 230, 0.48);
+  --text-dim: rgba(243, 239, 230, 0.28);
+  --dark-text: #F3EFE6;
+  --dark-text-secondary: rgba(243, 239, 230, 0.7);
+
+  /* Electric Lime Accent System (#B7D63D) */
+  --accent: #B7D63D;
+  --accent-lime: #B7D63D;
+  --accent-hover: #C6E44A;
+  --accent-glow: rgba(183, 214, 61, 0.45);
+  
+  --accent-cyan: #B7D63D;
+  --accent-cyan-light: #D4E968;
+  --accent-cyan-glow: rgba(183, 214, 61, 0.45);
+
+  --accent-copper: #B7D63D;
+  --accent-copper-hover: #C6E44A;
+  --accent-sand: #D4E968;
+  --accent-purple: #B7D63D;
+  --accent-tint: rgba(183, 214, 61, 0.12);
+  --accent-border: rgba(183, 214, 61, 0.4);
+
+  --accent-emerald: #B7D63D;
+  --accent-amber: #E4C854;
+
+  /* Borders */
+  --border-light: rgba(243, 239, 230, 0.06);
+  --border-subtle: rgba(243, 239, 230, 0.1);
+  --border-medium: rgba(243, 239, 230, 0.18);
+  --border-dark: rgba(243, 239, 230, 0.08);
+  --dark-border: rgba(243, 239, 230, 0.1);
+  --dark-border-hover: rgba(183, 214, 61, 0.5);
 
   /* Glassmorphism Specs */
   --glass-blur: blur(20px);
-  --glass-blur-lg: blur(32px);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-light: rgba(255, 255, 255, 0.14);
-  --glass-border-hover: rgba(0, 242, 254, 0.4);
-  --glass-border-purple: rgba(168, 85, 247, 0.4);
-  --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
-
-  /* High-Contrast Cyber Neon Accents */
-  --accent-cyan: #00F2FE;          /* Electric Cyber Cyan */
-  --accent-cyan-light: #38BDF8;
-  --accent-cyan-glow: rgba(0, 242, 254, 0.35);
-  
-  --accent-purple: #A855F7;        /* Ultraviolet / Cosmic Neon */
-  --accent-purple-light: #C084FC;
-  --accent-purple-glow: rgba(168, 85, 247, 0.35);
-
-  --accent-emerald: #10B981;       /* Operational Online Green */
-  --accent-amber: #F59E0B;         /* Golden Telemetry Accent */
-  
-  /* Legacy Accent Aliases (seamless integration with existing components) */
-  --accent-copper: #00F2FE;        /* Upgraded to Cyber Cyan */
-  --accent-copper-hover: #38BDF8;
-  --accent-sand: #A855F7;          /* Upgraded to Neon Purple */
-  --accent-tint: rgba(0, 242, 254, 0.1);
-  --accent-border: rgba(0, 242, 254, 0.3);
-
-  /* Text Colors */
-  --text-primary: #F8FAFC;        /* High-clarity crystalline white */
-  --text-secondary: #94A3B8;      /* Sleek futuristic slate */
-  --text-muted: #64748B;          /* Subtle tertiary metadata */
-  --text-dim: #334155;            /* Dark grid / muted borders */
-
-  /* Borders & Grids */
-  --border-light: rgba(255, 255, 255, 0.06);
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-medium: rgba(255, 255, 255, 0.18);
-  --border-dark: rgba(255, 255, 255, 0.04);
-
-  /* Contrast Dark Sections */
-  --dark-bg: #030407;
-  --dark-surface: rgba(14, 18, 28, 0.85);
-  --dark-surface-hover: rgba(22, 28, 44, 0.95);
-  --dark-text: #F8FAFC;
-  --dark-text-secondary: #94A3B8;
-  --dark-border: rgba(255, 255, 255, 0.08);
-  --dark-border-hover: rgba(0, 242, 254, 0.45);
+  --glass-blur-lg: blur(28px);
+  --glass-border: rgba(243, 239, 230, 0.1);
+  --glass-border-light: rgba(243, 239, 230, 0.14);
+  --glass-border-hover: rgba(183, 214, 61, 0.5);
+  --glass-shine: linear-gradient(135deg, rgba(243, 239, 230, 0.1) 0%, rgba(243, 239, 230, 0.01) 100%);
 
   /* Typography */
   --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -92,13 +97,13 @@
   --radius-xl: 28px;
   --radius-full: 9999px;
 
-  /* Glass Shadows & Neon Radiance */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --shadow-card-hover: 0 16px 40px -4px rgba(0, 242, 254, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  --shadow-dark-card: 0 20px 50px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  --shadow-neon-cyan: 0 0 24px -2px rgba(0, 242, 254, 0.45);
-  --shadow-neon-purple: 0 0 24px -2px rgba(168, 85, 247, 0.45);
+  /* Shadows & Glow */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(243, 239, 230, 0.08);
+  --shadow-card-hover: 0 16px 40px -4px rgba(183, 214, 61, 0.2), 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(243, 239, 230, 0.15);
+  --shadow-dark-card: 0 20px 50px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(243, 239, 230, 0.08);
+  --shadow-neon-cyan: 0 0 24px -2px rgba(183, 214, 61, 0.45);
+  --shadow-neon-lime: 0 0 24px -2px rgba(183, 214, 61, 0.45);
 
   /* Animation Easing */
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);

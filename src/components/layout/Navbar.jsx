@@ -55,14 +55,14 @@ export const Navbar = ({ activeSection }) => {
             width: '100%',
             maxWidth: '1160px',
             height: '62px',
-            backgroundColor: isScrolled ? 'rgba(10, 14, 24, 0.82)' : 'rgba(14, 18, 28, 0.65)',
+            backgroundColor: isScrolled ? 'rgba(41, 41, 41, 0.88)' : 'rgba(23, 23, 23, 0.75)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
+            border: '1px solid rgba(243, 239, 230, 0.12)',
             borderRadius: 'var(--radius-full)',
             boxShadow: isScrolled
-              ? '0 16px 40px -4px rgba(0, 0, 0, 0.8), 0 0 24px -6px rgba(0, 242, 254, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.15)'
-              : '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              ? '0 16px 40px -4px rgba(0, 0, 0, 0.8), 0 0 24px -6px rgba(183, 214, 61, 0.2), inset 0 1px 1px rgba(243, 239, 230, 0.12)'
+              : '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(243, 239, 230, 0.08)',
             transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
             display: 'flex',
             alignItems: 'center',
@@ -82,7 +82,7 @@ export const Navbar = ({ activeSection }) => {
               fontWeight: 800,
               fontSize: '0.9375rem',
               letterSpacing: '-0.02em',
-              color: '#FFFFFF',
+              color: '#F3EFE6',
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
@@ -95,12 +95,12 @@ export const Navbar = ({ activeSection }) => {
                 width: '32px',
                 height: '32px',
                 borderRadius: '10px',
-                background: 'linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)',
-                border: '1px solid rgba(0, 242, 254, 0.4)',
+                background: 'rgba(183, 214, 61, 0.14)',
+                border: '1px solid rgba(183, 214, 61, 0.4)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#00F2FE'
+                color: '#B7D63D'
               }}
             >
               <Terminal size={16} />
@@ -119,10 +119,10 @@ export const Navbar = ({ activeSection }) => {
               display: 'none',
               alignItems: 'center',
               gap: '4px',
-              backgroundColor: 'rgba(255, 255, 255, 0.03)',
+              backgroundColor: 'rgba(41, 41, 41, 0.6)',
               padding: '4px 6px',
               borderRadius: 'var(--radius-full)',
-              border: '1px solid rgba(255, 255, 255, 0.06)'
+              border: '1px solid rgba(243, 239, 230, 0.08)'
             }}
             className="desktop-nav-menu"
           >
@@ -140,10 +140,10 @@ export const Navbar = ({ activeSection }) => {
                     fontFamily: 'var(--font-heading)',
                     fontSize: '0.8125rem',
                     fontWeight: isActive ? 700 : 500,
-                    color: isActive ? '#00F2FE' : 'var(--text-secondary)',
-                    backgroundColor: isActive ? 'rgba(0, 242, 254, 0.12)' : 'transparent',
+                    color: isActive ? '#B7D63D' : 'var(--text-secondary)',
+                    backgroundColor: isActive ? 'rgba(183, 214, 61, 0.12)' : 'transparent',
                     borderRadius: 'var(--radius-full)',
-                    border: `1px solid ${isActive ? 'rgba(0, 242, 254, 0.35)' : 'transparent'}`,
+                    border: `1px solid ${isActive ? 'rgba(183, 214, 61, 0.35)' : 'transparent'}`,
                     transition: 'all var(--transition-fast)',
                     cursor: 'pointer'
                   }}
@@ -160,8 +160,8 @@ export const Navbar = ({ activeSection }) => {
                         width: '4px',
                         height: '4px',
                         borderRadius: '50%',
-                        backgroundColor: '#00F2FE',
-                        boxShadow: '0 0 6px #00F2FE'
+                        backgroundColor: '#B7D63D',
+                        boxShadow: '0 0 6px #B7D63D'
                       }}
                     />
                   )}
@@ -179,11 +179,11 @@ export const Navbar = ({ activeSection }) => {
                 gap: '8px',
                 padding: '6px 14px',
                 borderRadius: 'var(--radius-full)',
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
+                backgroundColor: 'rgba(183, 214, 61, 0.12)',
+                border: '1px solid rgba(183, 214, 61, 0.35)',
                 fontSize: '0.75rem',
                 fontFamily: 'var(--font-mono)',
-                color: '#34D399'
+                color: '#B7D63D'
               }}
               className="status-pill"
             >
@@ -192,8 +192,8 @@ export const Navbar = ({ activeSection }) => {
                   width: '6px',
                   height: '6px',
                   borderRadius: '50%',
-                  backgroundColor: '#10B981',
-                  boxShadow: '0 0 8px #10B981'
+                  backgroundColor: '#B7D63D',
+                  boxShadow: '0 0 8px #B7D63D'
                 }}
               />
               AVAILABLE
@@ -223,9 +223,9 @@ export const Navbar = ({ activeSection }) => {
                 width: '38px',
                 height: '38px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                color: '#FFFFFF',
+                backgroundColor: 'rgba(41, 41, 41, 0.7)',
+                border: '1px solid rgba(243, 239, 230, 0.12)',
+                color: '#F3EFE6',
                 cursor: 'pointer'
               }}
               className="mobile-toggle-btn"
@@ -244,7 +244,7 @@ export const Navbar = ({ activeSection }) => {
             position: 'fixed',
             inset: 0,
             zIndex: 90,
-            backgroundColor: 'rgba(3, 4, 7, 0.95)',
+            backgroundColor: 'rgba(23, 23, 23, 0.96)',
             backdropFilter: 'blur(28px)',
             WebkitBackdropFilter: 'blur(28px)',
             display: 'flex',
@@ -268,9 +268,9 @@ export const Navbar = ({ activeSection }) => {
                     fontWeight: 700,
                     padding: '12px 20px',
                     borderRadius: 'var(--radius-md)',
-                    color: isActive ? '#00F2FE' : '#F8FAFC',
-                    backgroundColor: isActive ? 'rgba(0, 242, 254, 0.12)' : 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid ${isActive ? 'rgba(0, 242, 254, 0.4)' : 'rgba(255, 255, 255, 0.08)'}`,
+                    color: isActive ? '#B7D63D' : '#F3EFE6',
+                    backgroundColor: isActive ? 'rgba(183, 214, 61, 0.12)' : 'rgba(41, 41, 41, 0.6)',
+                    border: `1px solid ${isActive ? 'rgba(183, 214, 61, 0.4)' : 'rgba(243, 239, 230, 0.1)'}`,
                     cursor: 'pointer'
                   }}
                 >
@@ -295,8 +295,8 @@ export const Navbar = ({ activeSection }) => {
           }
         }
         .nav-link-btn:hover {
-          color: #00F2FE !important;
-          background-color: rgba(0, 242, 254, 0.08) !important;
+          color: #B7D63D !important;
+          background-color: rgba(183, 214, 61, 0.08) !important;
         }
       `}</style>
     </>

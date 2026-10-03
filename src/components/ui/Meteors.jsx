@@ -24,8 +24,8 @@ export const Meteors = ({ number = 18 }) => {
             height: '2px',
             width: '2px',
             borderRadius: '9999px',
-            backgroundColor: '#00F2FE',
-            boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.15)',
+            backgroundColor: '#B7D63D',
+            boxShadow: '0 0 0 1px rgba(243, 239, 230, 0.15)',
             transform: 'rotate(215deg)',
             animationDelay: m.animationDelay,
             animationDuration: m.animationDuration
@@ -39,7 +39,7 @@ export const Meteors = ({ number = 18 }) => {
               transform: 'translateY(-50%)',
               width: '50px',
               height: '1px',
-              background: 'linear-gradient(90deg, #00F2FE, transparent)'
+              background: 'linear-gradient(90deg, #B7D63D, transparent)'
             }}
           />
         </span>

@@ -10,11 +10,11 @@ import { BorderBeam } from '../components/ui/BorderBeam';
 
 export const Hero = () => {
   const heroTechnologies = [
-    { name: 'Laravel & PHP', color: '#00F2FE' },
-    { name: 'React & Three.js', color: '#38BDF8' },
-    { name: 'React Native', color: '#34D399' },
-    { name: 'MySQL & Architecture', color: '#F59E0B' },
-    { name: 'AI & Edge Vision', color: '#C084FC' }
+    { name: 'Laravel & PHP', color: '#B7D63D' },
+    { name: 'React & Three.js', color: '#F3EFE6' },
+    { name: 'React Native', color: '#B7D63D' },
+    { name: 'MySQL & Architecture', color: '#F3EFE6' },
+    { name: 'AI & Edge Vision', color: '#B7D63D' }
   ];
 
   return (
@@ -44,7 +44,7 @@ export const Hero = () => {
           transform: 'translateX(-50%)',
           width: '700px',
           height: '400px',
-          background: 'radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 80%)',
+          background: 'radial-gradient(circle, rgba(183, 214, 61, 0.1) 0%, rgba(41, 41, 41, 0.05) 50%, transparent 80%)',
           filter: 'blur(70px)',
           pointerEvents: 'none',
           zIndex: 0
@@ -66,18 +66,26 @@ export const Hero = () => {
               gap: '10px',
               padding: '6px 16px',
               borderRadius: 'var(--radius-full)',
-              background: 'rgba(14, 18, 28, 0.75)',
+              background: '#292929',
               backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(0, 242, 254, 0.3)',
-              boxShadow: '0 0 20px -5px rgba(0, 242, 254, 0.3)'
+              border: '1px solid rgba(183, 214, 61, 0.35)',
+              boxShadow: '0 0 20px -5px rgba(183, 214, 61, 0.3)'
             }}
           >
-            <span className="status-beacon" />
+            <span
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: '#B7D63D',
+                boxShadow: '0 0 8px #B7D63D'
+              }}
+            />
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
-                color: 'var(--accent-cyan)',
+                color: '#B7D63D',
                 letterSpacing: '0.08em'
               }}
             >
@@ -95,13 +103,14 @@ export const Hero = () => {
             className="display-hero"
             style={{
               marginBottom: '20px',
-              letterSpacing: '-0.035em'
+              letterSpacing: '-0.035em',
+              color: '#F3EFE6'
             }}
           >
             Architecting{' '}
-            <span className="gradient-text-cyan">High-Performance</span>{' '}
+            <span style={{ color: '#B7D63D' }}>High-Performance</span>{' '}
             Web, Mobile &{' '}
-            <span className="gradient-text-purple">3D Systems</span>.
+            <span style={{ color: '#F3EFE6' }}>3D Systems</span>.
           </motion.h1>
 
           <motion.p
@@ -149,7 +158,7 @@ export const Hero = () => {
               className="btn-charcoal"
               style={{ padding: '14px 28px', fontSize: '0.9375rem' }}
             >
-              <Sparkles size={16} style={{ color: '#00F2FE' }} />
+              <Sparkles size={16} style={{ color: '#B7D63D' }} />
               <span>Interactive 3D Skills</span>
             </button>
           </motion.div>
@@ -180,7 +189,7 @@ export const Hero = () => {
             }}
           >
             {/* Animated Border Beam */}
-            <BorderBeam size={320} duration={14} colorFrom="#00F2FE" colorTo="#A855F7" />
+            <BorderBeam size={320} duration={14} colorFrom="#B7D63D" colorTo="#F3EFE6" />
 
             {/* Left Column: Interactive Three.js 3D WebGL Scene */}
             <div
@@ -190,8 +199,8 @@ export const Hero = () => {
                 height: '380px',
                 borderRadius: 'var(--radius-lg)',
                 overflow: 'hidden',
-                background: 'radial-gradient(circle at center, rgba(0, 242, 254, 0.08) 0%, rgba(3, 4, 8, 0.4) 70%)',
-                border: '1px solid rgba(255, 255, 255, 0.08)'
+                background: 'radial-gradient(circle at center, rgba(183, 214, 61, 0.08) 0%, rgba(23, 23, 23, 0.6) 70%)',
+                border: '1px solid rgba(243, 239, 230, 0.1)'
               }}
             >
               {/* Three.js Canvas */}
@@ -224,7 +233,7 @@ export const Hero = () => {
                   style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.75rem',
-                    color: 'var(--accent-cyan)',
+                    color: '#B7D63D',
                     letterSpacing: '0.08em',
                     display: 'block',
                     marginBottom: '8px'
@@ -234,7 +243,7 @@ export const Hero = () => {
                 </span>
                 <h3
                   className="heading-sub"
-                  style={{ color: '#F8FAFC', fontSize: '1.45rem', marginBottom: '10px' }}
+                  style={{ color: '#F3EFE6', fontSize: '1.45rem', marginBottom: '10px' }}
                 >
                   Production-Grade Full-Cycle Engineering
                 </h3>
@@ -250,7 +259,9 @@ export const Hero = () => {
                     key={t.name}
                     className="tech-badge"
                     style={{
-                      borderColor: 'rgba(255, 255, 255, 0.1)',
+                      borderColor: 'rgba(243, 239, 230, 0.12)',
+                      backgroundColor: '#292929',
+                      color: '#F3EFE6',
                       gap: '8px'
                     }}
                   >
@@ -275,7 +286,7 @@ export const Hero = () => {
                   gridTemplateColumns: 'repeat(3, 1fr)',
                   gap: '12px',
                   paddingTop: '16px',
-                  borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+                  borderTop: '1px solid rgba(243, 239, 230, 0.08)'
                 }}
               >
                 <div>
@@ -284,7 +295,7 @@ export const Hero = () => {
                       fontFamily: 'var(--font-mono)',
                       fontSize: '1.25rem',
                       fontWeight: 700,
-                      color: '#00F2FE'
+                      color: '#B7D63D'
                     }}
                   >
                     100%
@@ -300,7 +311,7 @@ export const Hero = () => {
                       fontFamily: 'var(--font-mono)',
                       fontSize: '1.25rem',
                       fontWeight: 700,
-                      color: '#C084FC'
+                      color: '#F3EFE6'
                     }}
                   >
                     4+
@@ -316,7 +327,7 @@ export const Hero = () => {
                       fontFamily: 'var(--font-mono)',
                       fontSize: '1.25rem',
                       fontWeight: 700,
-                      color: '#34D399'
+                      color: '#B7D63D'
                     }}
                   >
                     24+
