@@ -44,7 +44,7 @@ export const Hero = () => {
           transform: 'translateX(-50%)',
           width: '700px',
           height: '400px',
-          background: 'radial-gradient(circle, rgba(183, 214, 61, 0.1) 0%, rgba(41, 41, 41, 0.05) 50%, transparent 80%)',
+          background: 'radial-gradient(circle, rgba(183, 214, 61, 0.1) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 80%)',
           filter: 'blur(70px)',
           pointerEvents: 'none',
           zIndex: 0
@@ -66,7 +66,7 @@ export const Hero = () => {
               gap: '10px',
               padding: '6px 16px',
               borderRadius: 'var(--radius-full)',
-              background: '#292929',
+              background: 'rgba(0, 0, 0, 0.75)',
               backdropFilter: 'blur(16px)',
               border: '1px solid rgba(183, 214, 61, 0.35)',
               boxShadow: '0 0 20px -5px rgba(183, 214, 61, 0.3)'
@@ -199,7 +199,7 @@ export const Hero = () => {
                 height: '380px',
                 borderRadius: 'var(--radius-lg)',
                 overflow: 'hidden',
-                background: 'radial-gradient(circle at center, rgba(183, 214, 61, 0.08) 0%, rgba(23, 23, 23, 0.6) 70%)',
+                background: 'radial-gradient(circle at center, rgba(183, 214, 61, 0.08) 0%, rgba(0, 0, 0, 0.7) 70%)',
                 border: '1px solid rgba(243, 239, 230, 0.1)'
               }}
             >
@@ -241,7 +241,7 @@ export const Hero = () => {
                     className="tech-badge"
                     style={{
                       borderColor: 'rgba(243, 239, 230, 0.12)',
-                      backgroundColor: '#292929',
+                      backgroundColor: 'rgba(0, 0, 0, 0.65)',
                       color: '#F3EFE6',
                       gap: '8px'
                     }}

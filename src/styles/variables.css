@@ -1,26 +1,26 @@
 :root {
   /* ==========================================================================
      EXACT PALETTE DESIGN SYSTEM:
-     #171717 — Background
-     #F3EFE6 — Text
-     #B7D63D — Accent (Electric Lime)
-     #292929 — Cards
+     #000000 — Pure Pitch Black Background
+     #F3EFE6 — Crisp Warm Ivory Text
+     #B7D63D — Electric Lime Accent
+     rgba(0, 0, 0, 0.78) — Black Translucent Frosted Cards
      ========================================================================== */
 
   /* Backgrounds */
-  --bg-primary: #171717;          /* Matte Charcoal Black */
-  --bg-secondary: #1F1F1F;
-  --bg-surface: #292929;          /* Deep Card Surface */
-  --bg-surface-elevated: #323232;
-  --bg-surface-hover: #383838;
-  --bg-subtle: #212121;
-  --bg-warm-card: #292929;
+  --bg-primary: #000000;          /* Pure Pitch Black */
+  --bg-secondary: #080808;
+  --bg-surface: rgba(0, 0, 0, 0.78);  /* Black Translucent */
+  --bg-surface-elevated: rgba(0, 0, 0, 0.86);
+  --bg-surface-hover: rgba(15, 15, 15, 0.92);
+  --bg-subtle: #080808;
+  --bg-warm-card: rgba(0, 0, 0, 0.78);
 
   /* Card Colors */
-  --card-bg: #292929;
-  --dark-bg: #171717;
-  --dark-surface: #292929;
-  --dark-surface-hover: #323232;
+  --card-bg: rgba(0, 0, 0, 0.78);
+  --dark-bg: #000000;
+  --dark-surface: rgba(0, 0, 0, 0.78);
+  --dark-surface-hover: rgba(15, 15, 15, 0.92);
 
   /* Text Colors */
   --text-primary: #F3EFE6;        /* Warm Crisp Ivory */

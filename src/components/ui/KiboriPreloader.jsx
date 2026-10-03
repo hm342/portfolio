@@ -37,7 +37,7 @@ export const KiboriPreloader = ({ onComplete }) => {
         position: 'fixed',
         inset: 0,
         zIndex: 99999,
-        backgroundColor: '#171717',
+        backgroundColor: '#000000',
         overflow: 'hidden',
         cursor: 'pointer'
       }}

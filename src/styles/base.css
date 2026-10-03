@@ -10,13 +10,13 @@ html {
   color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #171717;
+  background-color: #000000;
   color: #F3EFE6;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #171717;
+  background-color: #000000;
   color: #F3EFE6;
   line-height: 1.6;
   overflow-x: hidden;
@@ -31,13 +31,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #171717;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(243, 239, 230, 0.18);
   border-radius: var(--radius-full);
-  border: 2px solid #171717;
+  border: 2px solid #000000;
 }
 
 ::-webkit-scrollbar-thumb:hover {

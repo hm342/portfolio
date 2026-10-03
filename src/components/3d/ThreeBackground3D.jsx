@@ -8,9 +8,9 @@ export const ThreeBackground3D = () => {
     const container = mountRef.current;
     if (!container) return;
 
-    // Scene, Camera, Renderer in #171717
+    // Scene, Camera, Renderer in pure black #000000
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x171717, 0.0075);
+    scene.fog = new THREE.FogExp2(0x000000, 0.0075);
 
     const camera = new THREE.PerspectiveCamera(
       60,
@@ -28,7 +28,7 @@ export const ThreeBackground3D = () => {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x171717, 1);
+    renderer.setClearColor(0x000000, 1);
     container.appendChild(renderer.domElement);
 
     // Root Group

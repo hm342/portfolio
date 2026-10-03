@@ -129,7 +129,7 @@ export const ProjectCard = ({ project, index = 0, isReversed = false }) => {
               className="tech-badge"
               style={{
                 borderColor: 'rgba(243, 239, 230, 0.12)',
-                backgroundColor: '#292929',
+                backgroundColor: 'rgba(0, 0, 0, 0.65)',
                 color: '#F3EFE6'
               }}
             >
@@ -166,11 +166,13 @@ export const ProjectCard = ({ project, index = 0, isReversed = false }) => {
             style={{
               borderRadius: 'var(--radius-lg)',
               overflow: 'hidden',
-              border: isHovered ? '1px solid rgba(183, 214, 61, 0.5)' : '1px solid rgba(243, 239, 230, 0.12)',
-              backgroundColor: '#292929',
+              border: isHovered ? '1px solid rgba(183, 214, 61, 0.5)' : '1px solid rgba(243, 239, 230, 0.1)',
+              backgroundColor: 'rgba(0, 0, 0, 0.78)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
               boxShadow: isHovered
                 ? '0 24px 50px -10px rgba(183, 214, 61, 0.22), 0 0 30px rgba(183, 214, 61, 0.12)'
-                : '0 16px 36px -6px rgba(0, 0, 0, 0.7)',
+                : '0 16px 36px -6px rgba(0, 0, 0, 0.85)',
               transition: 'all var(--transition-normal)'
             }}
           >
@@ -181,7 +183,7 @@ export const ProjectCard = ({ project, index = 0, isReversed = false }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '12px 18px',
-                backgroundColor: '#292929',
+                backgroundColor: 'rgba(0, 0, 0, 0.85)',
                 borderBottom: '1px solid rgba(243, 239, 230, 0.08)'
               }}
             >
@@ -227,7 +229,7 @@ export const ProjectCard = ({ project, index = 0, isReversed = false }) => {
                 width: '100%',
                 aspectRatio: '16/9',
                 overflow: 'hidden',
-                backgroundColor: '#171717'
+                backgroundColor: '#000000'
               }}
             >
               <img
@@ -249,7 +251,7 @@ export const ProjectCard = ({ project, index = 0, isReversed = false }) => {
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(180deg, transparent 60%, rgba(23, 23, 23, 0.8) 100%)',
+                  background: 'linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.85) 100%)',
                   pointerEvents: 'none'
                 }}
               />
@@ -262,9 +264,9 @@ export const ProjectCard = ({ project, index = 0, isReversed = false }) => {
                   left: '14px',
                   padding: '4px 10px',
                   borderRadius: 'var(--radius-full)',
-                  backgroundColor: 'rgba(41, 41, 41, 0.9)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.85)',
                   backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(243, 239, 230, 0.14)',
+                  border: '1px solid rgba(243, 239, 230, 0.12)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',

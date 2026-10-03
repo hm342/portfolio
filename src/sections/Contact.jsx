@@ -24,7 +24,7 @@ export const Contact = () => {
         particleCount: 40,
         spread: 60,
         origin: { y: 0.8 },
-        colors: ['#B7D63D', '#F3EFE6', '#292929']
+        colors: ['#B7D63D', '#F3EFE6', '#000000']
       });
       setTimeout(() => setCopied(false), 2000);
     }
@@ -38,7 +38,7 @@ export const Contact = () => {
       particleCount: 80,
       spread: 80,
       origin: { y: 0.7 },
-      colors: ['#B7D63D', '#F3EFE6', '#292929']
+      colors: ['#B7D63D', '#F3EFE6', '#000000']
     });
 
     const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
@@ -226,8 +226,10 @@ export const Contact = () => {
                   gap: '8px',
                   textAlign: 'center',
                   color: '#F3EFE6',
-                  backgroundColor: '#292929',
-                  border: '1px solid rgba(243, 239, 230, 0.1)'
+                  backgroundColor: 'rgba(0, 0, 0, 0.78)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(243, 239, 230, 0.08)'
                 }}
               >
                 <GithubIcon size={20} />
@@ -247,8 +249,10 @@ export const Contact = () => {
                   gap: '8px',
                   textAlign: 'center',
                   color: '#F3EFE6',
-                  backgroundColor: '#292929',
-                  border: '1px solid rgba(243, 239, 230, 0.1)'
+                  backgroundColor: 'rgba(0, 0, 0, 0.78)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(243, 239, 230, 0.08)'
                 }}
               >
                 <LinkedinIcon size={20} />
@@ -268,8 +272,10 @@ export const Contact = () => {
                   gap: '8px',
                   textAlign: 'center',
                   color: '#F3EFE6',
-                  backgroundColor: '#292929',
-                  border: '1px solid rgba(243, 239, 230, 0.1)'
+                  backgroundColor: 'rgba(0, 0, 0, 0.78)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(243, 239, 230, 0.08)'
                 }}
               >
                 <WhatsappIcon size={20} />
@@ -320,7 +326,7 @@ export const Contact = () => {
                     style={{
                       width: '100%',
                       padding: '12px 16px',
-                      backgroundColor: '#292929',
+                      backgroundColor: 'rgba(0, 0, 0, 0.65)',
                       border: '1px solid rgba(243, 239, 230, 0.12)',
                       borderRadius: 'var(--radius-sm)',
                       color: '#F3EFE6',
@@ -357,7 +363,7 @@ export const Contact = () => {
                     style={{
                       width: '100%',
                       padding: '12px 16px',
-                      backgroundColor: '#292929',
+                      backgroundColor: 'rgba(0, 0, 0, 0.65)',
                       border: '1px solid rgba(243, 239, 230, 0.12)',
                       borderRadius: 'var(--radius-sm)',
                       color: '#F3EFE6',
@@ -394,7 +400,7 @@ export const Contact = () => {
                     style={{
                       width: '100%',
                       padding: '12px 16px',
-                      backgroundColor: '#292929',
+                      backgroundColor: 'rgba(0, 0, 0, 0.65)',
                       border: '1px solid rgba(243, 239, 230, 0.12)',
                       borderRadius: 'var(--radius-sm)',
                       color: '#F3EFE6',

@@ -12,7 +12,7 @@ export const Footer = () => {
       style={{
         borderTop: '1px solid rgba(243, 239, 230, 0.08)',
         paddingBlock: '44px',
-        backgroundColor: '#171717',
+        backgroundColor: '#000000',
         color: '#F3EFE6',
         position: 'relative',
         zIndex: 10

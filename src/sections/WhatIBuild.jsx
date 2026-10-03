@@ -73,7 +73,9 @@ export const WhatIBuild = () => {
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   gap: '24px',
-                  backgroundColor: '#292929',
+                  backgroundColor: 'rgba(0, 0, 0, 0.78)',
+                  backdropFilter: 'blur(24px)',
+                  WebkitBackdropFilter: 'blur(24px)',
                   borderRadius: 'var(--radius-lg)'
                 }}
               >

@@ -55,14 +55,14 @@ export const Navbar = ({ activeSection }) => {
             width: '100%',
             maxWidth: '1160px',
             height: '62px',
-            backgroundColor: isScrolled ? 'rgba(41, 41, 41, 0.88)' : 'rgba(23, 23, 23, 0.75)',
+            backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.85)' : 'rgba(0, 0, 0, 0.65)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
-            border: '1px solid rgba(243, 239, 230, 0.12)',
+            border: '1px solid rgba(243, 239, 230, 0.1)',
             borderRadius: 'var(--radius-full)',
             boxShadow: isScrolled
-              ? '0 16px 40px -4px rgba(0, 0, 0, 0.8), 0 0 24px -6px rgba(183, 214, 61, 0.2), inset 0 1px 1px rgba(243, 239, 230, 0.12)'
-              : '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(243, 239, 230, 0.08)',
+              ? '0 16px 40px -4px rgba(0, 0, 0, 0.9), 0 0 24px -6px rgba(183, 214, 61, 0.2), inset 0 1px 1px rgba(243, 239, 230, 0.08)'
+              : '0 8px 32px 0 rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(243, 239, 230, 0.06)',
             transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
             display: 'flex',
             alignItems: 'center',
@@ -116,7 +116,7 @@ export const Navbar = ({ activeSection }) => {
               display: 'none',
               alignItems: 'center',
               gap: '4px',
-              backgroundColor: 'rgba(41, 41, 41, 0.6)',
+              backgroundColor: 'rgba(0, 0, 0, 0.55)',
               padding: '4px 6px',
               borderRadius: 'var(--radius-full)',
               border: '1px solid rgba(243, 239, 230, 0.08)'
@@ -220,7 +220,7 @@ export const Navbar = ({ activeSection }) => {
                 width: '38px',
                 height: '38px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(41, 41, 41, 0.7)',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
                 border: '1px solid rgba(243, 239, 230, 0.12)',
                 color: '#F3EFE6',
                 cursor: 'pointer'
@@ -241,7 +241,7 @@ export const Navbar = ({ activeSection }) => {
             position: 'fixed',
             inset: 0,
             zIndex: 90,
-            backgroundColor: 'rgba(23, 23, 23, 0.96)',
+            backgroundColor: 'rgba(0, 0, 0, 0.96)',
             backdropFilter: 'blur(28px)',
             WebkitBackdropFilter: 'blur(28px)',
             display: 'flex',
@@ -266,7 +266,7 @@ export const Navbar = ({ activeSection }) => {
                     padding: '12px 20px',
                     borderRadius: 'var(--radius-md)',
                     color: isActive ? '#B7D63D' : '#F3EFE6',
-                    backgroundColor: isActive ? 'rgba(183, 214, 61, 0.12)' : 'rgba(41, 41, 41, 0.6)',
+                    backgroundColor: isActive ? 'rgba(183, 214, 61, 0.12)' : 'rgba(0, 0, 0, 0.6)',
                     border: `1px solid ${isActive ? 'rgba(183, 214, 61, 0.4)' : 'rgba(243, 239, 230, 0.1)'}`,
                     cursor: 'pointer'
                   }}

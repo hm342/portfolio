@@ -384,7 +384,7 @@ export const HangingSkillsBoard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {/* Category Tabs & Interactive Controls in #292929 */}
+      {/* Category Tabs & Interactive Controls in Black Translucent */}
       <div
         style={{
           display: 'flex',
@@ -393,10 +393,10 @@ export const HangingSkillsBoard = () => {
           flexWrap: 'wrap',
           gap: '14px',
           padding: '12px 18px',
-          background: 'rgba(41, 41, 41, 0.85)',
-          backdropFilter: 'blur(16px)',
+          background: 'rgba(0, 0, 0, 0.85)',
+          backdropFilter: 'blur(20px)',
           borderRadius: 'var(--radius-lg)',
-          border: '1px solid rgba(243, 239, 230, 0.1)'
+          border: '1px solid rgba(243, 239, 230, 0.08)'
         }}
       >
         {/* Category Pills */}
@@ -482,19 +482,19 @@ export const HangingSkillsBoard = () => {
         </div>
       </div>
 
-      {/* Main Hanging Board Container in #292929 */}
+      {/* Main Hanging Board Container in Black Translucent */}
       <div
         ref={containerRef}
         style={{
           position: 'relative',
           width: '100%',
           height: `${dimensions.height}px`,
-          backgroundColor: '#292929',
+          backgroundColor: 'rgba(0, 0, 0, 0.78)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(243, 239, 230, 0.12)',
+          border: '1px solid rgba(243, 239, 230, 0.1)',
           borderRadius: 'var(--radius-xl)',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(243, 239, 230, 0.1)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(243, 239, 230, 0.08)',
           overflow: 'hidden',
           userSelect: 'none',
           WebkitUserSelect: 'none',
@@ -656,12 +656,12 @@ export const HangingSkillsBoard = () => {
                   alignItems: 'center',
                   gap: '8px',
                   padding: dimensions.isMobile ? '6px 12px' : dimensions.isTablet ? '7px 14px' : '7px 16px',
-                  backgroundColor: 'rgba(41, 41, 41, 0.92)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.86)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
-                  border: '1px solid rgba(243, 239, 230, 0.14)',
+                  border: '1px solid rgba(243, 239, 230, 0.12)',
                   borderRadius: 'var(--radius-full)',
-                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(243, 239, 230, 0.1)',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(243, 239, 230, 0.08)',
                   whiteSpace: 'nowrap'
                 }}
               >
@@ -675,7 +675,7 @@ export const HangingSkillsBoard = () => {
                     width: '7px',
                     height: '7px',
                     borderRadius: '50%',
-                    backgroundColor: '#171717',
+                    backgroundColor: '#000000',
                     border: `1.5px solid ${categoryColor}`,
                     boxShadow: `0 0 6px ${categoryColor}`
                   }}

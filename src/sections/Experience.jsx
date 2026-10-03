@@ -59,7 +59,7 @@ export const Experience = () => {
                       height: '14px',
                       borderRadius: '50%',
                       backgroundColor: isCurrent ? '#B7D63D' : 'rgba(243, 239, 230, 0.4)',
-                      border: '2px solid #171717',
+                      border: '2px solid #000000',
                       boxShadow: isCurrent ? '0 0 16px #B7D63D, 0 0 30px #B7D63D' : 'none',
                       zIndex: 2
                     }}
@@ -119,7 +119,7 @@ export const Experience = () => {
                             alignItems: 'center',
                             gap: '6px',
                             padding: '4px 12px',
-                            backgroundColor: isCurrent ? 'rgba(183, 214, 61, 0.12)' : 'rgba(41, 41, 41, 0.6)',
+                            backgroundColor: isCurrent ? 'rgba(183, 214, 61, 0.12)' : 'rgba(0, 0, 0, 0.65)',
                             border: `1px solid ${isCurrent ? 'rgba(183, 214, 61, 0.4)' : 'rgba(243, 239, 230, 0.1)'}`,
                             borderRadius: 'var(--radius-full)',
                             fontFamily: 'var(--font-mono)',
@@ -177,7 +177,7 @@ export const Experience = () => {
                               fontFamily: 'var(--font-mono)',
                               fontSize: '0.71875rem',
                               color: '#F3EFE6',
-                              backgroundColor: '#292929',
+                              backgroundColor: 'rgba(0, 0, 0, 0.65)',
                               border: '1px solid rgba(243, 239, 230, 0.1)',
                               padding: '3px 9px',
                               borderRadius: '4px'
