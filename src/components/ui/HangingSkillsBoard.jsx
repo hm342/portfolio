@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { hangingSkillsData, skillCategoriesMeta } from '../../data/hangingSkills';
-import { Sparkles, Move, Zap } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export const HangingSkillsBoard = () => {
   const containerRef = useRef(null);
@@ -266,6 +266,11 @@ export const HangingSkillsBoard = () => {
     observer.observe(el);
     return () => observer.disconnect();
   }, [nudgeAll, prefersReducedMotion]);
+
+  useEffect(() => {
+    // Keep DOM ropes and capsules in continuous sync
+    physicsDataRef.current.forEach((item) => updateDOM(item));
+  }, [layoutItems, updateDOM]);
 
   useEffect(() => {
     return () => {
@@ -597,14 +602,14 @@ export const HangingSkillsBoard = () => {
 
             return (
               <g key={`svg-${item.id}`} opacity={isMatch ? 1 : 0.18} style={{ transition: 'opacity var(--transition-normal)' }}>
-                {/* Glowing Laser Rope Path */}
+                {/* Glowing Laser Rope Path - Always physically present */}
                 <path
                   id={`rope-${item.id}`}
-                  d=""
+                  d={`M ${item.anchorX} ${item.anchorY} Q ${item.anchorX} ${item.anchorY + item.length / 2} ${item.anchorX} ${item.anchorY + item.length}`}
                   fill="none"
                   stroke={categoryColor}
-                  strokeWidth="1.7"
-                  strokeOpacity="0.75"
+                  strokeWidth="1.8"
+                  strokeOpacity="0.8"
                   strokeLinecap="round"
                   filter="url(#neon-glow)"
                 />
@@ -647,6 +652,7 @@ export const HangingSkillsBoard = () => {
                 position: 'absolute',
                 top: 0,
                 left: 0,
+                transform: `translate3d(${item.anchorX}px, ${item.anchorY + item.length}px, 0) translate(-50%, 0)`,
                 zIndex: 20,
                 cursor: 'grab',
                 touchAction: 'none',
@@ -730,27 +736,6 @@ export const HangingSkillsBoard = () => {
             </div>
           );
         })}
-
-        {/* HUD Telemetry Watermark */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '14px',
-            right: '18px',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.6875rem',
-            color: 'rgba(183, 214, 61, 0.8)',
-            letterSpacing: '0.1em',
-            pointerEvents: 'none',
-            zIndex: 2,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}
-        >
-          <Zap size={11} />
-          QUANTUM_PENDULUM // 24_PHYSICS_NODES // 60_FPS
-        </div>
       </div>
 
       <style>{`
