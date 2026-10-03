@@ -45,7 +45,7 @@ export const HangingSkillsBoard = () => {
     if (isMobile) {
       const tiers = 6;
       const perTier = Math.ceil(total / tiers);
-      const tierYOffsets = [28, 160, 295, 430, 565, 700];
+      const tierYOffsets = [24, 160, 295, 430, 565, 700];
 
       return hangingSkillsData.map((item, idx) => {
         const tier = Math.min(tiers - 1, Math.floor(idx / perTier));
@@ -76,7 +76,7 @@ export const HangingSkillsBoard = () => {
       if (isTablet) {
         const tiers = 3;
         const perTier = 8;
-        const tierYOffsets = [28, 200, 370];
+        const tierYOffsets = [24, 195, 365];
 
         return hangingSkillsData.map((item, idx) => {
           const tier = Math.min(tiers - 1, Math.floor(idx / perTier));
@@ -86,7 +86,7 @@ export const HangingSkillsBoard = () => {
           const padding = 42;
           const usableWidth = Math.max(440, width - padding * 2);
           const anchorX = padding + (indexInTier / Math.max(1, tierItems - 1)) * usableWidth;
-          const anchorY = tierYOffsets[tier] + (indexInTier % 2 === 0 ? 0 : 8);
+          const anchorY = tierYOffsets[tier];
 
           const length = Math.max(55, Math.min(125, item.desktopLength * 0.52));
 
@@ -103,13 +103,13 @@ export const HangingSkillsBoard = () => {
         });
       }
 
-      // Desktop: Architectural beam across the top
-      const padding = 48;
+      // Desktop: Full-width glowing green line across the top
+      const padding = 54;
       const usableWidth = Math.max(860, width - padding * 2);
 
       return hangingSkillsData.map((item, idx) => {
         const anchorX = padding + (idx / (total - 1)) * usableWidth;
-        const anchorY = 22 + (idx % 3) * 6;
+        const anchorY = 24; // Directly centered on the 3px green line at top: 23px
         const length = item.desktopLength;
 
         return {
@@ -482,20 +482,20 @@ export const HangingSkillsBoard = () => {
         </div>
       </div>
 
-      {/* Main Hanging Board Container in Black Translucent */}
+      {/* Main Hanging Board Container - Open display over background, no enclosing box */}
       <div
         ref={containerRef}
         style={{
           position: 'relative',
           width: '100%',
           height: `${dimensions.height}px`,
-          backgroundColor: 'rgba(0, 0, 0, 0.78)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(243, 239, 230, 0.1)',
-          borderRadius: 'var(--radius-xl)',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(243, 239, 230, 0.08)',
-          overflow: 'hidden',
+          backgroundColor: 'transparent',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
+          border: 'none',
+          borderRadius: 0,
+          boxShadow: 'none',
+          overflow: 'visible',
           userSelect: 'none',
           WebkitUserSelect: 'none',
           touchAction: 'pan-y'
@@ -503,63 +503,68 @@ export const HangingSkillsBoard = () => {
         aria-label="Interactive hanging skills display"
         role="region"
       >
-        {/* Subtle Cyber Grid in Background */}
+        {/* Full-Width Glowing Green Line */}
         <div
           style={{
             position: 'absolute',
-            inset: 0,
-            backgroundImage:
-              'linear-gradient(to right, rgba(243, 239, 230, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(243, 239, 230, 0.02) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-            pointerEvents: 'none',
-            zIndex: 1
-          }}
-        />
-
-        {/* Ambient Top Light Beam */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: '15%',
-            right: '15%',
-            height: '2px',
-            background: 'linear-gradient(90deg, transparent, rgba(183, 214, 61, 0.85), rgba(212, 233, 104, 0.85), transparent)',
-            boxShadow: '0 0 20px rgba(183, 214, 61, 0.5)',
-            zIndex: 15
-          }}
-        />
-
-        {/* Architectural Top Beam */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
+            top: '23px',
             left: 0,
             right: 0,
-            height: '12px',
-            background: 'linear-gradient(180deg, #333333 0%, #1F1F1F 100%)',
-            borderBottom: '1px solid rgba(183, 214, 61, 0.35)',
-            zIndex: 10
+            width: '100%',
+            height: '3px',
+            backgroundColor: '#B7D63D',
+            boxShadow: '0 0 16px #B7D63D, 0 0 32px rgba(183, 214, 61, 0.7), 0 0 60px rgba(183, 214, 61, 0.4)',
+            zIndex: 6,
+            borderRadius: '2px',
+            pointerEvents: 'none'
           }}
-        />
+        >
+          {/* Left glowing terminal node */}
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#B7D63D',
+              boxShadow: '0 0 12px #B7D63D, 0 0 24px #B7D63D'
+            }}
+          />
+          {/* Right glowing terminal node */}
+          <div
+            style={{
+              position: 'absolute',
+              right: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#B7D63D',
+              boxShadow: '0 0 12px #B7D63D, 0 0 24px #B7D63D'
+            }}
+          />
+        </div>
 
         {/* Mobile Tier Rails */}
         {dimensions.isMobile && (
           <>
-            <div style={{ position: 'absolute', top: '160px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
-            <div style={{ position: 'absolute', top: '295px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
-            <div style={{ position: 'absolute', top: '430px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
-            <div style={{ position: 'absolute', top: '565px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
-            <div style={{ position: 'absolute', top: '700px', left: '16px', right: '16px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '159px', left: 0, right: 0, height: '2px', backgroundColor: 'rgba(183, 214, 61, 0.45)', boxShadow: '0 0 10px rgba(183, 214, 61, 0.4)', zIndex: 4, pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '294px', left: 0, right: 0, height: '2px', backgroundColor: 'rgba(183, 214, 61, 0.45)', boxShadow: '0 0 10px rgba(183, 214, 61, 0.4)', zIndex: 4, pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '429px', left: 0, right: 0, height: '2px', backgroundColor: 'rgba(183, 214, 61, 0.45)', boxShadow: '0 0 10px rgba(183, 214, 61, 0.4)', zIndex: 4, pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '564px', left: 0, right: 0, height: '2px', backgroundColor: 'rgba(183, 214, 61, 0.45)', boxShadow: '0 0 10px rgba(183, 214, 61, 0.4)', zIndex: 4, pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '699px', left: 0, right: 0, height: '2px', backgroundColor: 'rgba(183, 214, 61, 0.45)', boxShadow: '0 0 10px rgba(183, 214, 61, 0.4)', zIndex: 4, pointerEvents: 'none' }} />
           </>
         )}
 
         {/* Tablet Tier Rails */}
         {dimensions.isTablet && (
           <>
-            <div style={{ position: 'absolute', top: '200px', left: '20px', right: '20px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
-            <div style={{ position: 'absolute', top: '370px', left: '20px', right: '20px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.06)', zIndex: 2 }} />
+            <div style={{ position: 'absolute', top: '194px', left: 0, right: 0, height: '2px', backgroundColor: 'rgba(183, 214, 61, 0.45)', boxShadow: '0 0 10px rgba(183, 214, 61, 0.4)', zIndex: 4, pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '364px', left: 0, right: 0, height: '2px', backgroundColor: 'rgba(183, 214, 61, 0.45)', boxShadow: '0 0 10px rgba(183, 214, 61, 0.4)', zIndex: 4, pointerEvents: 'none' }} />
           </>
         )}
 
@@ -607,10 +612,10 @@ export const HangingSkillsBoard = () => {
                 <circle
                   cx={item.anchorX}
                   cy={item.anchorY}
-                  r="4"
-                  fill={categoryColor}
-                  stroke="#040812"
-                  strokeWidth="1.5"
+                  r="4.5"
+                  fill="#B7D63D"
+                  stroke="#000000"
+                  strokeWidth="1.8"
                   id={`anchor-${item.id}`}
                 />
               </g>

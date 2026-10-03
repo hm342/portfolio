@@ -133,7 +133,10 @@ export const Navbar = ({ activeSection }) => {
                   onClick={() => handleNavClick(item.id)}
                   style={{
                     position: 'relative',
-                    padding: '7px 15px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: isActive ? '7px 14px 7px 11px' : '7px 14px',
                     fontFamily: 'var(--font-heading)',
                     fontSize: '0.8125rem',
                     fontWeight: isActive ? 700 : 500,
@@ -146,22 +149,19 @@ export const Navbar = ({ activeSection }) => {
                   }}
                   className="nav-link-btn"
                 >
-                  {item.label}
                   {isActive && (
                     <span
                       style={{
-                        position: 'absolute',
-                        bottom: '2px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '4px',
-                        height: '4px',
+                        width: '5px',
+                        height: '5px',
                         borderRadius: '50%',
                         backgroundColor: '#B7D63D',
-                        boxShadow: '0 0 6px #B7D63D'
+                        boxShadow: '0 0 8px #B7D63D',
+                        flexShrink: 0
                       }}
                     />
                   )}
+                  <span>{item.label}</span>
                 </button>
               );
             })}
@@ -265,13 +265,25 @@ export const Navbar = ({ activeSection }) => {
                     fontWeight: 700,
                     padding: '12px 20px',
                     borderRadius: 'var(--radius-md)',
-                    color: isActive ? '#B7D63D' : '#F3EFE6',
-                    backgroundColor: isActive ? 'rgba(183, 214, 61, 0.12)' : 'rgba(0, 0, 0, 0.6)',
-                    border: `1px solid ${isActive ? 'rgba(183, 214, 61, 0.4)' : 'rgba(243, 239, 230, 0.1)'}`,
-                    cursor: 'pointer'
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px'
                   }}
                 >
-                  {item.label}
+                  {isActive && (
+                    <span
+                      style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        backgroundColor: '#B7D63D',
+                        boxShadow: '0 0 8px #B7D63D',
+                        flexShrink: 0
+                      }}
+                    />
+                  )}
+                  <span>{item.label}</span>
                 </button>
               );
             })}
