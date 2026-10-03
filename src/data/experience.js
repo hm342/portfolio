@@ -1,53 +1,35 @@
 export const experienceData = [
   {
-    id: "application-developer",
-    role: "Application Developer",
+    id: "canstart-technologies",
     company: "Canstart Technologies",
-    period: "6 Months",
-    type: "Full-Time / Engineering",
-    location: "India",
-    summary:
-      "Engineering production-grade web and mobile applications, focusing on scalable UI component architecture, reactive state management, and reliable backend service integration.",
-    responsibilities: [
-      "Architecting and shipping responsive web and mobile application features using React, modern JavaScript, and RESTful service integrations.",
-      "Designing modular UI systems and tactile interaction states, ensuring fluid ergonomics and cross-device performance.",
-      "Collaborating closely with product stakeholders to scope feature requirements, optimize data pipelines, and improve application reliability.",
-      "Leading bug resolution, conducting code reviews, and maintaining production-ready software release cycles."
-    ],
-    technologies: ["React", "React Native", "JavaScript (ES6+)", "RESTful APIs", "PHP", "Git"]
-  },
-  {
-    id: "junior-software-developer",
     role: "Junior Software Developer",
-    company: "Canstart Technologies",
-    period: "1 Year",
-    type: "Full-Time / Engineering",
+    period: "2024 — Present",
+    type: "Full-Time",
     location: "India",
-    summary:
-      "Contributed to full-stack web application development, client platform maintenance, relational database management, and dynamic feature implementation.",
+    summary: "Engineering web and mobile applications, backend services, and client platforms.",
     responsibilities: [
-      "Developed and maintained dynamic web applications and platform features using PHP, JavaScript, and relational databases.",
-      "Engineered responsive user interfaces adhering to strict cross-browser standards and performance guidelines.",
-      "Translated business requirements into clean, testable, and maintainable software components.",
-      "Diagnosed and resolved production issues, refined database schemas in MySQL, and executed Git version control workflows."
+      "Built and maintained web and mobile applications.",
+      "Developed Laravel APIs, CRUD functionality, database workflows, and business logic.",
+      "Worked with React Native for application interfaces and cross-platform mobile experiences.",
+      "Integrated frontend interfaces with backend services and RESTful APIs.",
+      "Diagnosed and resolved production issues, refined database schemas in MySQL, and managed Git version control."
     ],
-    technologies: ["PHP", "JavaScript", "MySQL", "HTML5", "CSS3", "WordPress", "Git"]
+    technologies: ["Laravel", "React", "React Native", "PHP", "MySQL", "JavaScript", "Git"]
   },
   {
-    id: "sde-trainee",
-    role: "SDE Trainee",
-    company: "Canstart Technologies",
-    period: "6 Months",
-    type: "Engineering Trainee",
+    id: "acmegrade",
+    company: "Acmegrade",
+    role: "Web Development Intern",
+    period: "Internship",
+    type: "Internship",
     location: "India",
-    summary:
-      "Completed rigorous foundational software engineering training, mastering full-stack web fundamentals, algorithmic problem decomposition, and collaborative coding standards.",
+    summary: "Hands-on web engineering focused on foundational frontend development and backend integration.",
     responsibilities: [
-      "Engaged in intensive hands-on development covering core programming concepts, data structures, and object-oriented principles.",
-      "Built clean, semantic UI modules adhering to modern responsive design systems and web accessibility best practices.",
-      "Integrated API endpoints, handled asynchronous data requests, and implemented robust client-side validations.",
-      "Participated in daily agile standups, peer code reviews, and structured version control workflows on GitHub."
+      "Built clean, semantic UI modules adhering to modern responsive design and accessibility standards.",
+      "Integrated RESTful endpoints and handled asynchronous data requests across web pages.",
+      "Worked with database querying in MySQL, client-side form validations, and user session flows.",
+      "Collaborated using Git version control and participated in sprint reviews."
     ],
-    technologies: ["JavaScript", "PHP", "MySQL", "HTML5", "CSS3", "Git", "GitHub"]
+    technologies: ["JavaScript", "PHP", "MySQL", "HTML5", "CSS3", "Git"]
   }
 ];

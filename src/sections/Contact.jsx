@@ -1,400 +1,327 @@
 import React, { useState } from 'react';
-import { Copy, Check, ArrowUpRight, Mail } from 'lucide-react';
+import { Mail, Copy, Check, ArrowUpRight, Send } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, WhatsappIcon } from '../components/common/Icons';
 import { personalInfo } from '../data/personal';
 import { SectionHeading } from '../components/common/SectionHeading';
-import { Reveal } from '../components/common/Reveal';
-import { useCursor } from '../context/CursorContext';
 import { copyToClipboard } from '../utils/helpers';
 
 export const Contact = () => {
-  const { setCursor, resetCursor } = useCursor();
   const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
 
   const emailAddress = personalInfo.socials.email;
   const emailMailto = personalInfo.socials.emailMailto || `mailto:${emailAddress}?subject=Portfolio%20Inquiry`;
-  const whatsappUrl = personalInfo.socials.whatsapp;
 
   const handleCopyEmail = async () => {
     const success = await copyToClipboard(emailAddress);
     if (success) {
       setCopied(true);
-      setTimeout(() => setCopied(false), 2400);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
-  return (
-    <section id="contact" className="section-padding" style={{ position: 'relative', overflow: 'hidden' }}>
-      
-      {/* Background Decorative Ambient Glow */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '600px',
-          height: '400px',
-          background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 70%)',
-          pointerEvents: 'none',
-          zIndex: 1
-        }}
-      />
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
 
-      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-        
-        {/* Section Heading */}
+    // Direct mailto with prefilled details
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+    window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="contact" className="section-padding" style={{ backgroundColor: 'var(--bg-surface)' }}>
+      <div className="container">
         <SectionHeading
-          number="09"
-          category="DIRECT INITIATION"
-          title="Have an idea? Let's turn it into something real."
-          subtitle="Available for software engineering roles, full-stack product development, and technical collaboration."
+          category="CONTACT"
+          title="Let's work together."
+          subtitle="Have a project, opportunity, or idea? Get in touch directly."
         />
 
-        {/* Two Direct Contact Methods: Email & WhatsApp */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: 'clamp(24px, 3.5vw, 40px)',
-            marginBottom: '48px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: 'clamp(32px, 5vw, 48px)',
+            maxWidth: '1000px'
           }}
-          className="contact-cards-grid"
         >
-          {/* Channel 1: Email Direct */}
-          <Reveal delay={0.15}>
+          {/* Left: Contact Channels */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {/* Email Card */}
             <div
-              className="editorial-card contact-channel-card"
+              className="card-modern"
               style={{
-                height: '100%',
-                padding: 'clamp(28px, 4vw, 40px)',
-                background: 'linear-gradient(180deg, rgba(18, 19, 27, 0.95) 0%, rgba(13, 14, 20, 0.95) 100%)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: 'var(--radius-sm)',
+                padding: '24px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                position: 'relative',
-                overflow: 'hidden'
+                gap: '12px'
               }}
             >
-              <div>
-                {/* Channel Header */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div
-                      style={{
-                        width: '38px',
-                        height: '38px',
-                        borderRadius: 'var(--radius-xs)',
-                        background: 'rgba(212, 175, 55, 0.12)',
-                        border: '1px solid var(--gold-border)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--gold-primary)'
-                      }}
-                    >
-                      <Mail size={18} />
-                    </div>
-                    <div>
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                          fontSize: '0.6875rem',
-                          color: 'var(--gold-light)',
-                          letterSpacing: '0.1em',
-                          textTransform: 'uppercase'
-                        }}
-                      >
-                        // CHANNEL_01
-                      </span>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>PRIMARY INBOX</div>
-                    </div>
-                  </div>
-                  <div className="status-dot" title="Active channel" />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Mail size={18} color="var(--accent-primary)" />
+                  <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)' }}>
+                    Email
+                  </span>
                 </div>
-
-                {/* Channel Heading */}
-                <h3
-                  className="heading-sub"
-                  style={{
-                    fontSize: 'clamp(1.25rem, 2vw, 1.55rem)',
-                    color: 'var(--text-primary)',
-                    marginBottom: '12px'
-                  }}
-                >
-                  Email Communication
-                </h3>
-
-                <p className="body-regular" style={{ color: 'var(--text-secondary)', marginBottom: '28px', lineHeight: 1.6 }}>
-                  Direct communication for software engineering positions, architecture discussions, and project inquiries.
-                </p>
-
-                {/* Email Address Pill */}
-                <div
-                  style={{
-                    padding: '14px 18px',
-                    background: 'rgba(10, 10, 14, 0.75)',
-                    border: '1px solid var(--border-hairline)',
-                    borderRadius: 'var(--radius-xs)',
-                    marginBottom: '28px'
-                  }}
-                >
-                  <div style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: '0.625rem', color: 'var(--gold-primary)', letterSpacing: '0.08em', marginBottom: '4px' }}>
-                    EMAIL ADDRESS
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)",
-                      fontSize: '1.0625rem',
-                      fontWeight: 600,
-                      color: 'var(--text-primary)',
-                      wordBreak: 'break-all'
-                    }}
-                  >
-                    {emailAddress}
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <a
-                  href={emailMailto}
-                  onMouseEnter={() => setCursor('hover')}
-                  onMouseLeave={resetCursor}
-                  className="btn-luxury-primary"
-                  style={{ padding: '12px 22px', fontSize: '0.8125rem', flex: '1 1 auto', justifyContent: 'center' }}
-                >
-                  <span>Send Email</span>
-                  <ArrowUpRight size={15} />
-                </a>
-
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  onMouseEnter={() => setCursor('hover')}
-                  onMouseLeave={resetCursor}
-                  className="btn-luxury-secondary"
-                  style={{ padding: '12px 18px', fontSize: '0.8125rem' }}
+                  className="action-link"
+                  style={{ fontSize: '0.75rem', cursor: 'pointer' }}
                   aria-label="Copy email address"
                 >
                   {copied ? (
                     <>
-                      <Check size={15} style={{ color: 'var(--gold-primary)' }} />
-                      <span style={{ color: 'var(--gold-primary)' }}>Copied!</span>
+                      <Check size={13} color="var(--accent-primary)" />
+                      <span>Copied</span>
                     </>
                   ) : (
                     <>
-                      <Copy size={15} />
+                      <Copy size={13} />
                       <span>Copy</span>
                     </>
                   )}
                 </button>
               </div>
-            </div>
-          </Reveal>
 
-          {/* Channel 2: WhatsApp Direct */}
-          <Reveal delay={0.25}>
-            <div
-              className="editorial-card contact-channel-card"
-              style={{
-                height: '100%',
-                padding: 'clamp(28px, 4vw, 40px)',
-                background: 'linear-gradient(180deg, rgba(18, 19, 27, 0.95) 0%, rgba(13, 14, 20, 0.95) 100%)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: 'var(--radius-sm)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-            >
-              <div>
-                {/* Channel Header */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div
-                      style={{
-                        width: '38px',
-                        height: '38px',
-                        borderRadius: 'var(--radius-xs)',
-                        background: 'rgba(37, 211, 102, 0.12)',
-                        border: '1px solid rgba(37, 211, 102, 0.4)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#25D366'
-                      }}
-                    >
-                      <WhatsappIcon size={20} />
-                    </div>
-                    <div>
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                          fontSize: '0.6875rem',
-                          color: '#25D366',
-                          letterSpacing: '0.1em',
-                          textTransform: 'uppercase'
-                        }}
-                      >
-                        // CHANNEL_02
-                      </span>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>INSTANT MESSAGING</div>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      width: '8px',
-                      height: '8px',
-                      borderRadius: '50%',
-                      background: '#25D366',
-                      boxShadow: '0 0 10px #25D366'
-                    }}
-                    title="Active chat"
-                  />
-                </div>
-
-                {/* Channel Heading */}
-                <h3
-                  className="heading-sub"
-                  style={{
-                    fontSize: 'clamp(1.25rem, 2vw, 1.55rem)',
-                    color: 'var(--text-primary)',
-                    marginBottom: '12px'
-                  }}
-                >
-                  Direct WhatsApp Chat
-                </h3>
-
-                <p className="body-regular" style={{ color: 'var(--text-secondary)', marginBottom: '28px', lineHeight: 1.6 }}>
-                  Direct mobile chat for quick technical conversations, immediate responses, and agile project discussions.
-                </p>
-
-                {/* Pre-filled Message Display Pill */}
-                <div
-                  style={{
-                    padding: '14px 18px',
-                    background: 'rgba(10, 10, 14, 0.75)',
-                    border: '1px solid var(--border-hairline)',
-                    borderRadius: 'var(--radius-xs)',
-                    marginBottom: '28px'
-                  }}
-                >
-                  <div style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: '0.625rem', color: '#25D366', letterSpacing: '0.08em', marginBottom: '4px' }}>
-                    DIRECT CHAT TEMPLATE
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
-                      fontSize: '0.875rem',
-                      color: 'var(--text-primary)',
-                      fontStyle: 'italic',
-                      lineHeight: 1.5
-                    }}
-                  >
-                    “Hello Harshit, I found your portfolio and would like to discuss a project.”
-                  </div>
-                </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.9375rem',
+                  color: 'var(--text-primary)',
+                  fontWeight: 500,
+                  wordBreak: 'break-all'
+                }}
+              >
+                {emailAddress}
               </div>
 
-              {/* Action Button */}
-              <div>
+              <p className="body-small" style={{ color: 'var(--text-muted)' }}>
+                Preferred for job inquiries, project scopes, and engineering discussions.
+              </p>
+
+              <div style={{ marginTop: '4px' }}>
                 <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onMouseEnter={() => setCursor('hover')}
-                  onMouseLeave={resetCursor}
-                  className="btn-luxury-primary"
-                  style={{
-                    padding: '12px 24px',
-                    fontSize: '0.8125rem',
-                    width: '100%',
-                    justifyContent: 'center',
-                    background: 'linear-gradient(135deg, #25D366 0%, #1ea952 100%)',
-                    borderColor: '#25D366',
-                    color: '#0a0d0a'
-                  }}
+                  href={emailMailto}
+                  className="btn-primary"
+                  style={{ width: '100%', justifyContent: 'center' }}
                 >
-                  <WhatsappIcon size={17} />
-                  <span style={{ fontWeight: 600 }}>Chat on WhatsApp</span>
-                  <ArrowUpRight size={15} />
+                  <span>Send Email</span>
+                  <ArrowUpRight size={14} />
                 </a>
               </div>
             </div>
-          </Reveal>
-        </div>
 
-        {/* Secondary Professional Networks Strip */}
-        <Reveal delay={0.3}>
-          <div
-            style={{
-              padding: '20px 28px',
-              background: 'rgba(14, 15, 20, 0.6)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-sm)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '16px'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div className="status-dot" />
-              <span style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-                {personalInfo.status}
-              </span>
-            </div>
-
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <a
-                href={personalInfo.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={() => setCursor('hover')}
-                onMouseLeave={resetCursor}
-                className="btn-luxury-secondary"
-                style={{ padding: '8px 16px', fontSize: '0.78125rem' }}
-              >
-                <GithubIcon size={15} />
-                <span>GitHub</span>
-                <ArrowUpRight size={12} style={{ color: 'var(--gold-primary)' }} />
-              </a>
-
+            {/* Quick Links Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              {/* LinkedIn */}
               <a
                 href={personalInfo.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                onMouseEnter={() => setCursor('hover')}
-                onMouseLeave={resetCursor}
-                className="btn-luxury-secondary"
-                style={{ padding: '8px 16px', fontSize: '0.78125rem' }}
+                className="card-modern"
+                style={{
+                  padding: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  textDecoration: 'none'
+                }}
               >
-                <LinkedinIcon size={15} />
-                <span>LinkedIn</span>
-                <ArrowUpRight size={12} style={{ color: 'var(--gold-primary)' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <LinkedinIcon size={18} />
+                  <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                    LinkedIn
+                  </span>
+                </div>
+                <ArrowUpRight size={14} color="var(--text-muted)" />
+              </a>
+
+              {/* GitHub */}
+              <a
+                href={personalInfo.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-modern"
+                style={{
+                  padding: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  textDecoration: 'none'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <GithubIcon size={18} />
+                  <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                    GitHub
+                  </span>
+                </div>
+                <ArrowUpRight size={14} color="var(--text-muted)" />
               </a>
             </div>
+
+            {/* WhatsApp Direct Option */}
+            {personalInfo.socials.whatsapp && (
+              <a
+                href={personalInfo.socials.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-modern"
+                style={{
+                  padding: '14px 18px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  textDecoration: 'none'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <WhatsappIcon size={18} />
+                  <div>
+                    <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block' }}>
+                      Direct WhatsApp
+                    </span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                      Quick messaging and agile project discussions
+                    </span>
+                  </div>
+                </div>
+                <ArrowUpRight size={14} color="var(--text-muted)" />
+              </a>
+            )}
           </div>
-        </Reveal>
 
+          {/* Right: Clean Functional Message Form */}
+          <div
+            className="card-modern"
+            style={{
+              padding: 'clamp(24px, 4vw, 36px)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div>
+              <h3 className="heading-sub" style={{ fontSize: '1.125rem', marginBottom: '4px' }}>
+                Send a Message
+              </h3>
+              <p className="body-small" style={{ marginBottom: '20px' }}>
+                Fill out the details below to start a conversation.
+              </p>
+
+              {submitted ? (
+                <div
+                  style={{
+                    padding: '20px',
+                    backgroundColor: '#F0FDF4',
+                    border: '1px solid #BBF7D0',
+                    borderRadius: 'var(--radius-sm)',
+                    textAlign: 'center'
+                  }}
+                >
+                  <Check size={24} color="#16A34A" style={{ margin: '0 auto 8px' }} />
+                  <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#166534', marginBottom: '4px' }}>
+                    Email client initiated!
+                  </div>
+                  <p style={{ fontSize: '0.8125rem', color: '#15803D' }}>
+                    If your email client didn't open automatically, please send directly to <strong>{emailAddress}</strong>.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  <div>
+                    <label
+                      htmlFor="name"
+                      style={{
+                        display: 'block',
+                        fontSize: '0.78125rem',
+                        fontWeight: 600,
+                        color: 'var(--text-primary)',
+                        marginBottom: '6px'
+                      }}
+                    >
+                      Your Name
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      required
+                      placeholder="e.g. Alex Smith"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="input-modern"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="email"
+                      style={{
+                        display: 'block',
+                        fontSize: '0.78125rem',
+                        fontWeight: 600,
+                        color: 'var(--text-primary)',
+                        marginBottom: '6px'
+                      }}
+                    >
+                      Your Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      placeholder="e.g. alex@company.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="input-modern"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="message"
+                      style={{
+                        display: 'block',
+                        fontSize: '0.78125rem',
+                        fontWeight: 600,
+                        color: 'var(--text-primary)',
+                        marginBottom: '6px'
+                      }}
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      rows={4}
+                      required
+                      placeholder="Describe your project, question, or opportunity..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="input-modern"
+                      style={{ resize: 'vertical' }}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn-accent"
+                    style={{ marginTop: '8px', justifyContent: 'center' }}
+                  >
+                    <span>Send Message</span>
+                    <Send size={14} />
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-
-      <style>{`
-        .contact-channel-card:hover {
-          border-color: var(--gold-border) !important;
-          transform: translateY(-4px);
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.08);
-        }
-      `}</style>
     </section>
   );
 };

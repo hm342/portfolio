@@ -7,7 +7,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-primary);
@@ -24,10 +24,10 @@ body {
   min-height: 100vh;
 }
 
-/* Custom Scrollbar */
+/* Subtle, standard scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -35,18 +35,18 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 3px;
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gold-primary);
+  background: var(--text-muted);
 }
 
 /* Text Selection */
 ::selection {
-  background: rgba(212, 175, 55, 0.28);
-  color: var(--gold-light);
+  background: var(--accent-subtle);
+  color: var(--accent-primary);
 }
 
 /* Base interactive elements */
@@ -83,39 +83,31 @@ ul, ol {
 
 .container-narrow {
   width: 100%;
-  max-width: var(--container-narrow);
+  max-width: 840px;
   margin-inline: auto;
   padding-inline: var(--container-padding);
 }
 
 .section-padding {
-  padding-block: clamp(80px, 12vh, 160px);
+  padding-block: clamp(64px, 10vh, 104px);
   position: relative;
 }
 
 .section-divider {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--border-subtle) 25%, var(--border-subtle) 75%, transparent 100%);
+  background: var(--border-subtle);
 }
 
-.section-divider-gold {
+/* App root container */
+.portfolio-app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+main#main-content {
+  flex: 1;
   width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--gold-border-subtle) 30%, var(--gold-border) 50%, var(--gold-border-subtle) 70%, transparent 100%);
-}
-
-/* Fixed Left Navigation Rail Clearance for desktop and tablet */
-@media (min-width: 1024px) {
-  main#main-content,
-  footer {
-    padding-left: clamp(140px, 12vw, 190px);
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  main#main-content,
-  footer {
-    padding-left: 100px;
-  }
 }

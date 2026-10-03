@@ -1,33 +1,27 @@
 import React from 'react';
 import { selectedProjects } from '../data/projects';
 import { SectionHeading } from '../components/common/SectionHeading';
-import { ProjectShowcase } from '../components/ui/ProjectShowcase';
+import { ProjectCard } from '../components/ui/ProjectCard';
 
 export const SelectedWork = () => {
   return (
     <section id="work" className="section-padding">
       <div className="container">
-        
-        {/* Section Heading */}
         <SectionHeading
-          number="03"
           category="SELECTED WORK"
-          title="Case studies in commercial software & product design."
-          subtitle="Delivering production web platforms, business solutions, and tactile mobile products engineered for clarity and performance."
+          title="Featured software projects."
+          subtitle="Real-world web platforms, mobile applications, and hardware-software systems built for production."
         />
 
-        {/* Case Studies List */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {selectedProjects.map((project, idx) => (
-            <ProjectShowcase
+            <ProjectCard
               key={project.id}
               project={project}
-              index={idx}
               isReversed={idx % 2 !== 0}
             />
           ))}
         </div>
-
       </div>
     </section>
   );

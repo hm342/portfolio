@@ -1,44 +1,34 @@
 :root {
-  /* Color Palette — Luxury Editorial Noir & Warm Champagne Gold */
-  --bg-primary: #0a0a0d;
-  --bg-secondary: #0f1015;
-  --bg-elevated: #15161d;
-  --bg-card: #121319;
-  --bg-card-hover: #191a24;
-  --bg-glass: rgba(15, 16, 21, 0.72);
-  --bg-glass-heavy: rgba(10, 10, 13, 0.88);
+  /* Color Palette — Clean Modern Neutral + Single Accent (#2563EB) */
+  --bg-primary: #FAFAF9;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F4F4F5;
+  --bg-muted: #E4E4E7;
 
-  /* Gold Accents — Warm champagne & antique brushed gold */
-  --gold-primary: #d4af37;
-  --gold-light: #f4e5b8;
-  --gold-dim: #947726;
-  --gold-muted: rgba(212, 175, 55, 0.12);
-  --gold-subtle: rgba(212, 175, 55, 0.06);
-  --gold-border: rgba(212, 175, 55, 0.28);
-  --gold-border-subtle: rgba(212, 175, 55, 0.14);
-  --gold-glow: rgba(212, 175, 55, 0.2);
+  /* Accent Color */
+  --accent-primary: #2563EB;
+  --accent-hover: #1D4ED8;
+  --accent-subtle: #EFF6FF;
+  --accent-border: #DBEAFE;
 
   /* Typography Colors */
-  --text-primary: #f5f5f7;
-  --text-secondary: #c2c2cb;
-  --text-muted: #858595;
-  --text-dim: #545464;
-  --text-inverse: #0a0a0d;
+  --text-primary: #171717;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --text-dim: #9CA3AF;
+  --text-inverse: #FFFFFF;
 
   /* Borders & Dividers */
-  --border-hairline: rgba(255, 255, 255, 0.05);
-  --border-subtle: rgba(255, 255, 255, 0.09);
-  --border-medium: rgba(255, 255, 255, 0.15);
-  --border-strong: rgba(255, 255, 255, 0.25);
+  --border-light: #F3F4F6;
+  --border-subtle: #E5E7EB;
+  --border-medium: #D1D5DB;
+  --border-strong: #9CA3AF;
 
   /* Font Families */
-  --font-editorial: 'Syne', system-ui, -apple-system, sans-serif;
-  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Spacing Scale */
-  --space-3xs: 2px;
   --space-2xs: 4px;
   --space-xs: 8px;
   --space-sm: 12px;
@@ -49,42 +39,33 @@
   --space-3xl: 64px;
   --space-4xl: 96px;
   --space-5xl: 128px;
-  --space-6xl: 160px;
 
   /* Layout */
-  --container-max: 1320px;
-  --container-narrow: 1040px;
-  --container-padding: clamp(20px, 4vw, 48px);
-  --header-height: 80px;
+  --container-max: 1120px;
+  --container-padding: clamp(20px, 5vw, 40px);
+  --header-height: 68px;
 
-  /* Radii - Subtle & architectural, never bubbly */
-  --radius-xs: 2px;
-  --radius-sm: 4px;
+  /* Radii - Moderate, architectural, never bubbly */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.35);
-  --shadow-card: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
-  --shadow-card-hover: 0 24px 60px -12px rgba(0, 0, 0, 0.75);
-  --shadow-gold-sm: 0 0 16px rgba(212, 175, 55, 0.18);
-  --shadow-gold-lg: 0 0 32px rgba(212, 175, 55, 0.25);
+  /* Shadows - Minimal & natural */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
 
-  /* Transitions & Luxury Timing */
-  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --transition-fast: 200ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-medium: 380ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-slow: 650ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Z-Index Hierarchy */
-  --z-negative: -1;
-  --z-elevated: 1;
-  --z-sticky: 10;
+  --z-base: 1;
+  --z-sticky: 20;
   --z-header: 50;
-  --z-rail: 60;
-  --z-modal: 70;
-  --z-cursor: 9999;
+  --z-modal: 100;
 }

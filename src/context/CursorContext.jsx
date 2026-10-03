@@ -1,11 +1,5 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-
-const CursorContext = createContext({
-  cursorVariant: 'default',
-  cursorText: '',
-  setCursor: () => {},
-  resetCursor: () => {}
-});
+import React, { useState, useCallback } from 'react';
+import { CursorContext } from './CursorContextObject';
 
 export const CursorProvider = ({ children }) => {
   const [cursorVariant, setCursorVariant] = useState('default');
@@ -27,5 +21,3 @@ export const CursorProvider = ({ children }) => {
     </CursorContext.Provider>
   );
 };
-
-export const useCursor = () => useContext(CursorContext);

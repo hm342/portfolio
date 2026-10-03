@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../common/Icons';
-import { personalInfo } from '../../data/personal';
+import { Menu, X } from 'lucide-react';
 import { navigationLinks } from '../../data/navigation';
 import { useScrollProgress } from '../../hooks/useScrollProgress';
-import { useCursor } from '../../context/CursorContext';
 import { scrollToSection } from '../../utils/helpers';
-import { LUXURY_EASE } from '../../utils/animations';
 
 export const Navbar = ({ activeSection }) => {
   const { isScrolled } = useScrollProgress();
-  const { setCursor, resetCursor } = useCursor();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024 && mobileMenuOpen) {
+      if (window.innerWidth >= 768 && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
@@ -41,313 +35,201 @@ export const Navbar = ({ activeSection }) => {
     scrollToSection(id);
     setMobileMenuOpen(false);
   };
+
   return (
     <>
       <header
         style={{
-          position: 'fixed',
+          position: 'sticky',
           top: 0,
           left: 0,
           width: '100%',
-          zIndex: 80,
-          transition: 'background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, height 0.4s ease',
-          backgroundColor: isScrolled ? 'rgba(10, 10, 13, 0.88)' : 'rgba(10, 10, 13, 0.2)',
-          backdropFilter: isScrolled ? 'blur(16px)' : 'blur(4px)',
-          WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'blur(4px)',
+          zIndex: 50,
+          backgroundColor: isScrolled ? 'rgba(250, 250, 249, 0.95)' : 'rgba(250, 250, 249, 0.85)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
           borderBottom: isScrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
-          height: isScrolled ? '72px' : '84px',
+          transition: 'border-color 0.2s ease, background-color 0.2s ease',
+          height: '64px',
           display: 'flex',
           alignItems: 'center'
         }}
       >
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          
-          {/* Brand Identity / Logo */}
+        <div
+          className="container"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          {/* Left: Harshit Mishra */}
           <button
             type="button"
-            onClick={() => handleNavClick('hero')}
-            onMouseEnter={() => setCursor('hover')}
-            onMouseLeave={resetCursor}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              textDecoration: 'none',
-              textAlign: 'left'
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setMobileMenuOpen(false);
             }}
-            aria-label="Harshit Mishra - Return to top"
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontWeight: 700,
+              fontSize: '0.9375rem',
+              letterSpacing: '-0.01em',
+              color: 'var(--text-primary)',
+              textTransform: 'uppercase'
+            }}
+            aria-label="Harshit Mishra - Scroll to top"
           >
-            <div
-              style={{
-                width: '38px',
-                height: '38px',
-                border: '1px solid var(--gold-border)',
-                background: 'rgba(212, 175, 55, 0.08)',
-                borderRadius: 'var(--radius-xs)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--gold-light)',
-                fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                fontWeight: 600,
-                fontSize: '0.875rem',
-                letterSpacing: '0.05em'
-              }}
-            >
-              {personalInfo.monogram}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span
-                style={{
-                  fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)",
-                  fontWeight: 600,
-                  fontSize: '0.9375rem',
-                  letterSpacing: '-0.01em',
-                  color: 'var(--text-primary)'
-                }}
-              >
-                {personalInfo.name}
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                  fontSize: '0.6875rem',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase'
-                }}
-              >
-                {personalInfo.role}
-              </span>
-            </div>
+            Harshit Mishra
           </button>
 
-          {/* Desktop Right Actions (No section names) */}
-          <div
+          {/* Desktop Right: About, Work, Experience, Skills, Contact */}
+          <nav
             style={{
               display: 'none',
               alignItems: 'center',
-              gap: '16px'
+              gap: '24px'
             }}
-            className="desktop-nav-bar"
-            aria-label="Header Actions"
+            className="desktop-nav"
+            aria-label="Main Navigation"
           >
-            {/* Live Availability Status Indicator */}
-            <div
-              className="status-indicator"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '6px 14px',
-                fontSize: '0.71875rem'
-              }}
-            >
-              <span className="status-dot" />
-              <span>Available for Roles</span>
-            </div>
-
-            {/* GitHub & LinkedIn Profile Shortcuts */}
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <a
-                href={personalInfo.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={() => setCursor('hover')}
-                onMouseLeave={resetCursor}
-                className="btn-luxury-secondary"
-                style={{ padding: '8px 10px' }}
-                aria-label="GitHub Profile"
-              >
-                <GithubIcon size={14} />
-              </a>
-              <a
-                href={personalInfo.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={() => setCursor('hover')}
-                onMouseLeave={resetCursor}
-                className="btn-luxury-secondary"
-                style={{ padding: '8px 10px' }}
-                aria-label="LinkedIn Profile"
-              >
-                <LinkedinIcon size={14} />
-              </a>
-            </div>
-
-            {/* Quick Contact CTA */}
-            <button
-              type="button"
-              onClick={() => handleNavClick('contact')}
-              onMouseEnter={() => setCursor('hover')}
-              onMouseLeave={resetCursor}
-              className="btn-luxury-primary"
-              style={{
-                padding: '8px 18px',
-                fontSize: '0.78125rem'
-              }}
-            >
-              <span>Get in Touch</span>
-              <ArrowUpRight size={14} />
-            </button>
-          </div>
+            {navigationLinks.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleNavClick(item.id)}
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.875rem',
+                    fontWeight: isActive ? 600 : 500,
+                    color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                    transition: 'color var(--transition-fast)',
+                    padding: '6px 4px',
+                    position: 'relative'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) e.currentTarget.style.color = 'var(--text-primary)';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
+                  }}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: '4px',
+                        right: '4px',
+                        height: '2px',
+                        backgroundColor: 'var(--accent-primary)',
+                        borderRadius: '1px'
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
 
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="mobile-menu-trigger"
+            className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '42px',
-              height: '42px',
+              width: '38px',
+              height: '38px',
               border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-xs)',
-              background: 'rgba(255, 255, 255, 0.03)',
+              borderRadius: 'var(--radius-sm)',
+              backgroundColor: 'var(--bg-surface)',
               color: 'var(--text-primary)'
             }}
           >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Drawer Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: LUXURY_EASE }}
+      {/* Mobile Navigation Drawer */}
+      {mobileMenuOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '64px',
+            left: 0,
+            width: '100%',
+            height: 'calc(100vh - 64px)',
+            backgroundColor: 'var(--bg-surface)',
+            zIndex: 49,
+            padding: '24px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            borderTop: '1px solid var(--border-subtle)'
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {navigationLinks.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleNavClick(item.id)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '14px 12px',
+                    borderRadius: 'var(--radius-sm)',
+                    backgroundColor: isActive ? 'var(--accent-subtle)' : 'transparent',
+                    color: isActive ? 'var(--accent-primary)' : 'var(--text-primary)',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '1rem',
+                    fontWeight: isActive ? 600 : 500,
+                    textAlign: 'left',
+                    transition: 'background-color var(--transition-fast)'
+                  }}
+                >
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div
             style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100vh',
-              backgroundColor: 'rgba(10, 10, 13, 0.98)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              zIndex: 75,
-              paddingTop: '96px',
-              paddingBottom: '32px',
+              paddingTop: '20px',
+              borderTop: '1px solid var(--border-subtle)',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between',
-              overflowY: 'auto'
+              gap: '8px'
             }}
           >
-            <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-                  fontSize: '0.6875rem',
-                  letterSpacing: '0.14em',
-                  color: 'var(--gold-primary)',
-                  textTransform: 'uppercase',
-                  marginBottom: '12px'
-                }}
-              >
-                // Navigation Index
-              </div>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
+              Harshit Mishra · Software Developer
+            </span>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--accent-primary)', fontFamily: 'var(--font-mono)' }}>
+              hm9011822@gmail.com
+            </span>
+          </div>
+        </div>
+      )}
 
-              {navigationLinks.map((item, index) => {
-                const isActive = activeSection === item.id;
-                return (
-                  <motion.button
-                    key={item.id}
-                    type="button"
-                    onClick={() => handleNavClick(item.id)}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.04, duration: 0.35, ease: LUXURY_EASE }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '14px 0',
-                      borderBottom: '1px solid var(--border-hairline)',
-                      textAlign: 'left'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                      <span
-                        className="mono-num"
-                        style={{
-                          fontSize: '0.75rem',
-                          color: isActive ? 'var(--gold-primary)' : 'var(--text-dim)',
-                          fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)"
-                        }}
-                      >
-                        {String(index).padStart(2, '0')}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)",
-                          fontSize: '1.25rem',
-                          fontWeight: isActive ? 600 : 400,
-                          color: isActive ? 'var(--gold-light)' : 'var(--text-primary)',
-                          letterSpacing: '-0.01em'
-                        }}
-                      >
-                        {item.label}
-                      </span>
-                    </div>
-                    {isActive && (
-                      <span
-                        style={{
-                          width: '6px',
-                          height: '6px',
-                          borderRadius: '50%',
-                          backgroundColor: 'var(--gold-primary)',
-                          boxShadow: '0 0 8px var(--gold-primary)'
-                        }}
-                      />
-                    )}
-                  </motion.button>
-                );
-              })}
-            </div>
-
-            {/* Mobile Footer Area */}
-            <div className="container" style={{ marginTop: '32px' }}>
-              <div
-                style={{
-                  padding: '20px',
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 'var(--radius-sm)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '12px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <div className="status-dot" />
-                  <span style={{ fontSize: '0.75rem', color: 'var(--gold-light)', fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)" }}>
-                    {personalInfo.status}
-                  </span>
-                </div>
-                <div style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
-                  {personalInfo.socials.email}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Media query styling for responsive desktop navigation */}
       <style>{`
-        @media (min-width: 1024px) {
-          .desktop-nav-bar {
+        @media (min-width: 768px) {
+          .desktop-nav {
             display: flex !important;
           }
-          .mobile-menu-trigger {
+          .mobile-menu-btn {
             display: none !important;
           }
         }
