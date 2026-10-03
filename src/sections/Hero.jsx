@@ -262,6 +262,28 @@ export const Hero = () => {
           />
 
           {/* Top Architectural Metallic Rivet / Header Notch */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '14px',
+              left: '50%',
+              transform: 'translateX(-50%) translateZ(8px)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '2px 10px',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-full)',
+              fontSize: '0.625rem',
+              fontFamily: 'var(--font-mono)',
+              color: 'var(--text-muted)',
+              letterSpacing: '0.06em'
+            }}
+          >
+          </div>
+
+
 
           {/* Composition Interior: Floating Tactile Chips Orbiting the Central Core */}
           <div
