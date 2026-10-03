@@ -13,9 +13,10 @@ import { Contact } from './sections/Contact';
 import { navigationLinks } from './data/navigation';
 import { useActiveSection } from './hooks/useActiveSection';
 
+const NAV_SECTION_IDS = navigationLinks.map((item) => item.id);
+
 export default function App() {
-  const navSectionIds = navigationLinks.map((item) => item.id);
-  const activeSection = useActiveSection(navSectionIds);
+  const activeSection = useActiveSection(NAV_SECTION_IDS);
 
   return (
     <div className="portfolio-app-root">
