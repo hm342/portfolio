@@ -205,25 +205,6 @@ export const Hero = () => {
             >
               {/* Three.js Canvas */}
               <HeroScene3D />
-
-              {/* Overlay 3D Hint */}
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '12px',
-                  left: '16px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.6875rem',
-                  color: 'rgba(255, 255, 255, 0.6)',
-                  pointerEvents: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}
-              >
-                <span className="status-beacon" />
-                THREE_UI // 3D_INTERACTIVE_CORE (DRAG / HOVER)
-              </div>
             </div>
 
             {/* Right Column: High-Tech Telemetry HUD & Tech Badges */}

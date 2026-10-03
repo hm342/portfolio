@@ -105,11 +105,8 @@ export const Navbar = ({ activeSection }) => {
             >
               <Terminal size={16} />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-              <span style={{ lineHeight: 1.1 }}>HARSHIT MISHRA</span>
-              <span style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
-                DEV // 3D_PORTFOLIO
-              </span>
+            <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left' }}>
+              <span style={{ lineHeight: 1.1, fontSize: '0.9375rem', fontWeight: 800 }}>HARSHIT MISHRA</span>
             </div>
           </button>
 
