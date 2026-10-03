@@ -1,34 +1,36 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Server, Monitor, Smartphone, Layout, Wrench } from 'lucide-react';
 import { skillCategories } from '../data/technologies';
 import { SectionHeading } from '../components/common/SectionHeading';
 import { Badge } from '../components/common/Badge';
+import { SMOOTH_EASE } from '../utils/animations';
 
 export const Skills = () => {
   const getCategoryIcon = (category) => {
     switch (category) {
       case 'BACKEND':
-        return <Server size={18} color="var(--accent-primary)" />;
+        return <Server size={18} color="var(--accent-copper)" />;
       case 'FRONTEND':
-        return <Monitor size={18} color="var(--accent-primary)" />;
+        return <Monitor size={18} color="var(--accent-copper)" />;
       case 'MOBILE':
-        return <Smartphone size={18} color="var(--accent-primary)" />;
+        return <Smartphone size={18} color="var(--accent-copper)" />;
       case 'CMS':
-        return <Layout size={18} color="var(--accent-primary)" />;
+        return <Layout size={18} color="var(--accent-copper)" />;
       case 'TOOLS':
-        return <Wrench size={18} color="var(--accent-primary)" />;
+        return <Wrench size={18} color="var(--accent-copper)" />;
       default:
         return null;
     }
   };
 
   return (
-    <section id="skills" className="section-padding">
+    <section id="skills" className="section-padding" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
         <SectionHeading
           category="SKILLS & TECHNOLOGIES"
-          title="Technologies & tools."
-          subtitle="Grouped by engineering discipline without arbitrary percentage bars."
+          title="Grouped technology competencies."
+          subtitle="Direct technical proficiency organized by engineering discipline without arbitrary percentages."
         />
 
         <div
@@ -38,26 +40,40 @@ export const Skills = () => {
             gap: '20px'
           }}
         >
-          {skillCategories.map((group) => (
-            <div
+          {skillCategories.map((group, idx) => (
+            <motion.div
               key={group.category}
-              className="card-modern"
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: idx * 0.08, ease: SMOOTH_EASE }}
+              className="card-warm"
               style={{
-                padding: '24px',
+                padding: '26px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '16px'
+                gap: '16px',
+                backgroundColor: 'var(--bg-warm-card)'
               }}
             >
               {/* Category Header */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  borderBottom: '1px solid var(--border-subtle)',
+                  paddingBottom: '14px'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div
                     style={{
-                      width: '32px',
-                      height: '32px',
+                      width: '34px',
+                      height: '34px',
                       borderRadius: 'var(--radius-xs)',
-                      backgroundColor: 'var(--accent-subtle)',
+                      backgroundColor: 'var(--bg-surface)',
+                      border: '1px solid var(--border-subtle)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'
@@ -69,7 +85,7 @@ export const Skills = () => {
                     style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.875rem',
-                      fontWeight: 600,
+                      fontWeight: 700,
                       color: 'var(--text-primary)',
                       letterSpacing: '0.04em'
                     }}
@@ -78,18 +94,24 @@ export const Skills = () => {
                   </h3>
                 </div>
 
-                <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)' }}>
-                  {group.skills.length} TECHNOLOGIES
+                <span
+                  style={{
+                    fontSize: '0.6875rem',
+                    fontFamily: 'var(--font-mono)',
+                    color: 'var(--text-muted)'
+                  }}
+                >
+                  {group.skills.length} TECH
                 </span>
               </div>
 
               {group.description && (
-                <p className="body-small" style={{ color: 'var(--text-muted)' }}>
+                <p className="body-small" style={{ color: 'var(--text-muted)', fontSize: '0.8125rem' }}>
                   {group.description}
                 </p>
               )}
 
-              {/* Skills List */}
+              {/* Interactive Skills Badges (shift and copper accent on hover) */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: 'auto' }}>
                 {group.skills.map((skill) => (
                   <Badge key={skill} variant="default">
@@ -97,7 +119,7 @@ export const Skills = () => {
                   </Badge>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

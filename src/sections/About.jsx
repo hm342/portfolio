@@ -18,34 +18,43 @@ export const About = () => {
       <div className="container">
         <SectionHeading
           category="ABOUT"
-          title="Engineering software with clarity and purpose."
-          subtitle="A practical approach to web and mobile product development."
+          title="Engineering software with clarity and intent."
+          subtitle="A product-oriented mindset grounded in solid software engineering practices."
         />
 
         <div
           style={{
-            maxWidth: '760px',
+            maxWidth: '820px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '20px'
+            gap: '24px'
           }}
         >
-          <p className="body-lead" style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
-            I am a software developer focused on web and mobile application development. I build software that helps businesses operate efficiently, automate workflows, and deliver dependable user experiences.
+          {/* Large Editorial Statement */}
+          <blockquote
+            className="quote-statement"
+            style={{
+              paddingLeft: '24px',
+              borderLeft: '3px solid var(--accent-copper)',
+              margin: 0
+            }}
+          >
+            “I build web and mobile applications that turn real business requirements into usable software.”
+          </blockquote>
+
+          {/* Supporting Narrative with Copper Highlights */}
+          <p className="body-lead" style={{ color: 'var(--text-secondary)' }}>
+            My work centers around architecting reliable backend services in <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>Laravel</strong> and <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>PHP</strong>, modeling structured relational databases in <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>MySQL</strong>, and creating high-performance client interfaces using <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>React</strong>, <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>JavaScript</strong>, and <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>React Native</strong>.
           </p>
 
           <p className="body-regular">
-            My work primarily centers around <strong style={{ color: 'var(--text-primary)' }}>Laravel</strong> and <strong style={{ color: 'var(--text-primary)' }}>PHP</strong> on the backend, designing relational schemas in <strong style={{ color: 'var(--text-primary)' }}>MySQL</strong> and architecting clean REST APIs. On the client side, I engineer responsive web interfaces with <strong style={{ color: 'var(--text-primary)' }}>React</strong> and <strong style={{ color: 'var(--text-primary)' }}>JavaScript</strong>, and develop cross-platform mobile apps using <strong style={{ color: 'var(--text-primary)' }}>React Native</strong>. I also create tailored content and corporate solutions on <strong style={{ color: 'var(--text-primary)' }}>WordPress</strong>.
-          </p>
-
-          <p className="body-regular">
-            Rather than chasing unnecessary complexity, I value straightforward architecture, maintainable code, and reliable systems that solve real problems for real users.
+            Rather than accumulating superficial abstractions, I focus on building software that solves concrete operational challenges—from industrial product catalogs and international trade logistics to streamlined mobile workflows and tailored <strong style={{ color: 'var(--accent-copper)', fontWeight: 600 }}>WordPress</strong> corporate implementations.
           </p>
 
           {/* Core Technologies Badges */}
           <div
             style={{
-              paddingTop: '16px',
+              paddingTop: '20px',
               borderTop: '1px solid var(--border-subtle)',
               marginTop: '8px'
             }}
@@ -57,11 +66,11 @@ export const About = () => {
                 color: 'var(--text-muted)',
                 fontFamily: 'var(--font-mono)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                marginBottom: '10px'
+                letterSpacing: '0.08em',
+                marginBottom: '12px'
               }}
             >
-              Core Technologies Mentioned:
+              // Primary Technologies Mentioned:
             </span>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>

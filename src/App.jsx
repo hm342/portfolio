@@ -22,20 +22,17 @@ export default function App() {
       {/* Sticky Minimal Navigation */}
       <Navbar activeSection={activeSection} />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections with Light → Dark → Light → Dark Visual Rhythm */}
       <main id="main-content" role="main">
         <Hero />
         <div className="section-divider" />
         <About />
         <div className="section-divider" />
         <WhatIBuild />
-        <div className="section-divider" />
         <SelectedWork />
-        <div className="section-divider" />
         <Experience />
         <div className="section-divider" />
         <Skills />
-        <div className="section-divider" />
         <Contact />
       </main>
 

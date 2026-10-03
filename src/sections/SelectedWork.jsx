@@ -5,11 +5,19 @@ import { ProjectCard } from '../components/ui/ProjectCard';
 
 export const SelectedWork = () => {
   return (
-    <section id="work" className="section-padding">
+    <section
+      id="work"
+      className="section-padding"
+      style={{
+        backgroundColor: 'var(--dark-bg)',
+        color: 'var(--dark-text)'
+      }}
+    >
       <div className="container">
         <SectionHeading
+          theme="dark"
           category="SELECTED WORK"
-          title="Featured software projects."
+          title="Things I've built."
           subtitle="Real-world web platforms, mobile applications, and hardware-software systems built for production."
         />
 
@@ -18,6 +26,7 @@ export const SelectedWork = () => {
             <ProjectCard
               key={project.id}
               project={project}
+              index={idx}
               isReversed={idx % 2 !== 0}
             />
           ))}

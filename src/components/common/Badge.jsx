@@ -6,11 +6,20 @@ export const Badge = ({
   icon = null,
   className = ''
 }) => {
-  const isAccent = variant === 'accent';
+  const getClassName = () => {
+    switch (variant) {
+      case 'dark':
+        return 'tech-badge-dark';
+      case 'copper':
+        return 'status-pill-warm';
+      default:
+        return 'tech-badge';
+    }
+  };
 
   return (
     <span
-      className={`tech-badge ${isAccent ? 'tech-badge-accent' : ''} ${className}`}
+      className={`${getClassName()} ${className}`}
       style={{
         display: 'inline-flex',
         alignItems: 'center',

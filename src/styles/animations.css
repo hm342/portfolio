@@ -1,8 +1,7 @@
-/* Purposeful, subtle animations & accessibility */
+/* Smooth Easing and Animation Primitives */
 
-/* Smooth focus rings */
 *:focus-visible {
-  outline: 2px solid var(--accent-primary);
+  outline: 2px solid var(--accent-copper);
   outline-offset: 2px;
 }
 

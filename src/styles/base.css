@@ -24,10 +24,10 @@ body {
   min-height: 100vh;
 }
 
-/* Subtle, standard scrollbar */
+/* Custom scrollbar in warm neutral tones */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -35,7 +35,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
+  background: var(--border-subtle);
   border-radius: var(--radius-full);
 }
 
@@ -43,10 +43,10 @@ body {
   background: var(--text-muted);
 }
 
-/* Text Selection */
+/* Warm copper text selection */
 ::selection {
-  background: var(--accent-subtle);
-  color: var(--accent-primary);
+  background: var(--accent-tint);
+  color: var(--accent-copper);
 }
 
 /* Base interactive elements */
@@ -83,13 +83,13 @@ ul, ol {
 
 .container-narrow {
   width: 100%;
-  max-width: 840px;
+  max-width: 860px;
   margin-inline: auto;
   padding-inline: var(--container-padding);
 }
 
 .section-padding {
-  padding-block: clamp(64px, 10vh, 104px);
+  padding-block: clamp(72px, 12vh, 120px);
   position: relative;
 }
 

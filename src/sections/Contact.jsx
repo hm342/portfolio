@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Mail, Copy, Check, ArrowUpRight, Send } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Copy, Check, ArrowUpRight, Send, ArrowRight } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, WhatsappIcon } from '../components/common/Icons';
 import { personalInfo } from '../data/personal';
-import { SectionHeading } from '../components/common/SectionHeading';
 import { copyToClipboard } from '../utils/helpers';
+import { SMOOTH_EASE } from '../utils/animations';
 
 export const Contact = () => {
   const [copied, setCopied] = useState(false);
@@ -25,7 +26,6 @@ export const Contact = () => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
-    // Direct mailto with prefilled details
     const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
     window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
@@ -33,56 +33,114 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding" style={{ backgroundColor: 'var(--bg-surface)' }}>
+    <section
+      id="contact"
+      className="section-padding"
+      style={{
+        backgroundColor: 'var(--dark-bg)',
+        color: 'var(--dark-text)',
+        position: 'relative'
+      }}
+    >
       <div className="container">
-        <SectionHeading
-          category="CONTACT"
-          title="Let's work together."
-          subtitle="Have a project, opportunity, or idea? Get in touch directly."
-        />
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: SMOOTH_EASE }}
+          style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+            <span className="status-dot-copper" style={{ width: '5px', height: '5px' }} />
+            <span className="label-overline">
+              LET'S WORK TOGETHER
+            </span>
+          </div>
 
+          <h2
+            className="heading-section"
+            style={{
+              fontSize: 'clamp(2rem, 3.8vw, 3rem)',
+              color: 'var(--dark-text)',
+              marginBottom: '16px'
+            }}
+          >
+            LET'S BUILD SOMETHING USEFUL.
+          </h2>
+
+          <p
+            className="body-lead"
+            style={{
+              maxWidth: '640px',
+              color: 'var(--dark-text-secondary)'
+            }}
+          >
+            Have a project, engineering opportunity, or technical question? Reach out through any channel below or submit a direct message.
+          </p>
+        </motion.div>
+
+        {/* Content Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: 'clamp(32px, 5vw, 48px)',
-            maxWidth: '1000px'
+            maxWidth: '1040px'
           }}
         >
-          {/* Left: Contact Channels */}
+          {/* Left Column: Direct Channels */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Email Card */}
             <div
-              className="card-modern"
+              className="card-dark"
               style={{
-                padding: '24px',
+                padding: '28px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '12px'
+                gap: '14px'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Mail size={18} color="var(--accent-primary)" />
-                  <span style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)' }}>
-                    Email
-                  </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '6px',
+                      backgroundColor: 'rgba(183, 110, 76, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <Mail size={18} color="var(--accent-sand)" />
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: 'var(--dark-text)' }}>
+                      Email Inbox
+                    </span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--dark-text-secondary)', display: 'block' }}>
+                      Primary Channel
+                    </span>
+                  </div>
                 </div>
+
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="action-link"
-                  style={{ fontSize: '0.75rem', cursor: 'pointer' }}
+                  className="btn-dark-outline"
+                  style={{ padding: '6px 12px', fontSize: '0.75rem' }}
                   aria-label="Copy email address"
                 >
                   {copied ? (
                     <>
-                      <Check size={13} color="var(--accent-primary)" />
-                      <span>Copied</span>
+                      <Check size={12} color="var(--accent-sand)" />
+                      <span style={{ color: 'var(--accent-sand)' }}>Copied</span>
                     </>
                   ) : (
                     <>
-                      <Copy size={13} />
+                      <Copy size={12} />
                       <span>Copy</span>
                     </>
                   )}
@@ -92,89 +150,44 @@ export const Contact = () => {
               <div
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.9375rem',
-                  color: 'var(--text-primary)',
-                  fontWeight: 500,
-                  wordBreak: 'break-all'
+                  fontSize: '1rem',
+                  color: 'var(--dark-text)',
+                  fontWeight: 600,
+                  wordBreak: 'break-all',
+                  padding: '10px 14px',
+                  backgroundColor: 'rgba(247, 243, 236, 0.04)',
+                  border: '1px solid var(--dark-border)',
+                  borderRadius: 'var(--radius-xs)'
                 }}
               >
                 {emailAddress}
               </div>
 
-              <p className="body-small" style={{ color: 'var(--text-muted)' }}>
-                Preferred for job inquiries, project scopes, and engineering discussions.
+              <p className="body-small" style={{ color: 'var(--dark-text-secondary)' }}>
+                Preferred for full-stack software positions, technical inquiries, and project scopes.
               </p>
 
-              <div style={{ marginTop: '4px' }}>
+              <div style={{ marginTop: '6px' }}>
                 <a
                   href={emailMailto}
-                  className="btn-primary"
+                  className="btn-copper"
                   style={{ width: '100%', justifyContent: 'center' }}
                 >
-                  <span>Send Email</span>
-                  <ArrowUpRight size={14} />
+                  <span>Send Direct Email</span>
+                  <ArrowRight size={14} className="btn-arrow" />
                 </a>
               </div>
             </div>
 
-            {/* Quick Links Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              {/* LinkedIn */}
+            {/* Quick Professional Links */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
               <a
                 href={personalInfo.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card-modern"
+                className="card-dark"
                 style={{
-                  padding: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  textDecoration: 'none'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <LinkedinIcon size={18} />
-                  <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                    LinkedIn
-                  </span>
-                </div>
-                <ArrowUpRight size={14} color="var(--text-muted)" />
-              </a>
-
-              {/* GitHub */}
-              <a
-                href={personalInfo.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-modern"
-                style={{
-                  padding: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  textDecoration: 'none'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <GithubIcon size={18} />
-                  <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                    GitHub
-                  </span>
-                </div>
-                <ArrowUpRight size={14} color="var(--text-muted)" />
-              </a>
-            </div>
-
-            {/* WhatsApp Direct Option */}
-            {personalInfo.socials.whatsapp && (
-              <a
-                href={personalInfo.socials.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-modern"
-                style={{
-                  padding: '14px 18px',
+                  padding: '18px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
@@ -182,139 +195,195 @@ export const Contact = () => {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <WhatsappIcon size={18} />
+                  <LinkedinIcon size={18} />
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--dark-text)' }}>
+                    LinkedIn
+                  </span>
+                </div>
+                <ArrowUpRight size={14} color="var(--accent-sand)" />
+              </a>
+
+              <a
+                href={personalInfo.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-dark"
+                style={{
+                  padding: '18px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  textDecoration: 'none'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <GithubIcon size={18} />
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--dark-text)' }}>
+                    GitHub
+                  </span>
+                </div>
+                <ArrowUpRight size={14} color="var(--accent-sand)" />
+              </a>
+            </div>
+
+            {/* Direct WhatsApp Option */}
+            {personalInfo.socials.whatsapp && (
+              <a
+                href={personalInfo.socials.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-dark"
+                style={{
+                  padding: '16px 20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  textDecoration: 'none'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <WhatsappIcon size={20} />
                   <div>
-                    <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block' }}>
+                    <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--dark-text)', display: 'block' }}>
                       Direct WhatsApp
                     </span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                      Quick messaging and agile project discussions
+                    <span style={{ fontSize: '0.75rem', color: 'var(--dark-text-secondary)' }}>
+                      Quick questions and agile project messaging
                     </span>
                   </div>
                 </div>
-                <ArrowUpRight size={14} color="var(--text-muted)" />
+                <ArrowUpRight size={14} color="var(--accent-sand)" />
               </a>
             )}
           </div>
 
-          {/* Right: Clean Functional Message Form */}
+          {/* Right Column: Functional Dark Message Form */}
           <div
-            className="card-modern"
+            className="card-dark"
             style={{
-              padding: 'clamp(24px, 4vw, 36px)',
+              padding: 'clamp(28px, 4vw, 36px)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between'
             }}
           >
             <div>
-              <h3 className="heading-sub" style={{ fontSize: '1.125rem', marginBottom: '4px' }}>
+              <h3 className="heading-sub" style={{ fontSize: '1.25rem', color: 'var(--dark-text)', marginBottom: '4px' }}>
                 Send a Message
               </h3>
-              <p className="body-small" style={{ marginBottom: '20px' }}>
-                Fill out the details below to start a conversation.
+              <p className="body-small" style={{ color: 'var(--dark-text-secondary)', marginBottom: '22px' }}>
+                Fill out the form below to initiate a discussion.
               </p>
 
               {submitted ? (
                 <div
                   style={{
-                    padding: '20px',
-                    backgroundColor: '#F0FDF4',
-                    border: '1px solid #BBF7D0',
+                    padding: '24px',
+                    backgroundColor: 'rgba(183, 110, 76, 0.1)',
+                    border: '1px solid var(--accent-copper)',
                     borderRadius: 'var(--radius-sm)',
                     textAlign: 'center'
                   }}
                 >
-                  <Check size={24} color="#16A34A" style={{ margin: '0 auto 8px' }} />
-                  <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#166534', marginBottom: '4px' }}>
+                  <Check size={26} color="var(--accent-sand)" style={{ margin: '0 auto 10px' }} />
+                  <div style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--dark-text)', marginBottom: '4px' }}>
                     Email client initiated!
                   </div>
-                  <p style={{ fontSize: '0.8125rem', color: '#15803D' }}>
+                  <p style={{ fontSize: '0.84375rem', color: 'var(--dark-text-secondary)', lineHeight: 1.5 }}>
                     If your email client didn't open automatically, please send directly to <strong>{emailAddress}</strong>.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <div>
                     <label
-                      htmlFor="name"
+                      htmlFor="contact-name"
                       style={{
                         display: 'block',
-                        fontSize: '0.78125rem',
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--font-mono)',
                         fontWeight: 600,
-                        color: 'var(--text-primary)',
+                        color: 'var(--dark-text-secondary)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
                         marginBottom: '6px'
                       }}
                     >
                       Your Name
                     </label>
                     <input
-                      id="name"
+                      id="contact-name"
                       type="text"
                       required
                       placeholder="e.g. Alex Smith"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="input-modern"
+                      className="input-dark"
                     />
                   </div>
 
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="contact-email"
                       style={{
                         display: 'block',
-                        fontSize: '0.78125rem',
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--font-mono)',
                         fontWeight: 600,
-                        color: 'var(--text-primary)',
+                        color: 'var(--dark-text-secondary)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
                         marginBottom: '6px'
                       }}
                     >
                       Your Email
                     </label>
                     <input
-                      id="email"
+                      id="contact-email"
                       type="email"
                       required
                       placeholder="e.g. alex@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="input-modern"
+                      className="input-dark"
                     />
                   </div>
 
                   <div>
                     <label
-                      htmlFor="message"
+                      htmlFor="contact-message"
                       style={{
                         display: 'block',
-                        fontSize: '0.78125rem',
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--font-mono)',
                         fontWeight: 600,
-                        color: 'var(--text-primary)',
+                        color: 'var(--dark-text-secondary)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
                         marginBottom: '6px'
                       }}
                     >
                       Message
                     </label>
                     <textarea
-                      id="message"
+                      id="contact-message"
                       rows={4}
                       required
-                      placeholder="Describe your project, question, or opportunity..."
+                      placeholder="Briefly describe your project, opportunity, or idea..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="input-modern"
+                      className="input-dark"
                       style={{ resize: 'vertical' }}
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="btn-accent"
+                    className="btn-copper"
                     style={{ marginTop: '8px', justifyContent: 'center' }}
                   >
                     <span>Send Message</span>
-                    <Send size={14} />
+                    <Send size={14} className="btn-arrow" />
                   </button>
                 </form>
               )}

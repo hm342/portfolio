@@ -45,12 +45,12 @@ export const Navbar = ({ activeSection }) => {
           left: 0,
           width: '100%',
           zIndex: 50,
-          backgroundColor: isScrolled ? 'rgba(250, 250, 249, 0.95)' : 'rgba(250, 250, 249, 0.85)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
+          backgroundColor: isScrolled ? 'rgba(247, 243, 236, 0.95)' : 'rgba(247, 243, 236, 0.85)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
           borderBottom: isScrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
-          transition: 'border-color 0.2s ease, background-color 0.2s ease',
-          height: '64px',
+          transition: 'border-color var(--transition-fast), background-color var(--transition-fast)',
+          height: '68px',
           display: 'flex',
           alignItems: 'center'
         }}
@@ -63,7 +63,7 @@ export const Navbar = ({ activeSection }) => {
             justifyContent: 'space-between'
           }}
         >
-          {/* Left: Harshit Mishra */}
+          {/* Left: HARSHIT MISHRA */}
           <button
             type="button"
             onClick={() => {
@@ -71,16 +71,20 @@ export const Navbar = ({ activeSection }) => {
               setMobileMenuOpen(false);
             }}
             style={{
-              fontFamily: 'var(--font-sans)',
-              fontWeight: 700,
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 800,
               fontSize: '0.9375rem',
-              letterSpacing: '-0.01em',
+              letterSpacing: '-0.02em',
               color: 'var(--text-primary)',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
             }}
             aria-label="Harshit Mishra - Scroll to top"
           >
-            Harshit Mishra
+            <span>Harshit Mishra</span>
+            <span className="status-dot-copper" style={{ width: '5px', height: '5px' }} />
           </button>
 
           {/* Desktop Right: About, Work, Experience, Skills, Contact */}
@@ -88,7 +92,7 @@ export const Navbar = ({ activeSection }) => {
             style={{
               display: 'none',
               alignItems: 'center',
-              gap: '24px'
+              gap: '28px'
             }}
             className="desktop-nav"
             aria-label="Main Navigation"
@@ -101,13 +105,16 @@ export const Navbar = ({ activeSection }) => {
                   type="button"
                   onClick={() => handleNavClick(item.id)}
                   style={{
-                    fontFamily: 'var(--font-sans)',
+                    fontFamily: 'var(--font-heading)',
                     fontSize: '0.875rem',
-                    fontWeight: isActive ? 600 : 500,
-                    color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? 'var(--accent-copper)' : 'var(--text-secondary)',
                     transition: 'color var(--transition-fast)',
-                    padding: '6px 4px',
-                    position: 'relative'
+                    padding: '6px 2px',
+                    position: 'relative',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px'
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) e.currentTarget.style.color = 'var(--text-primary)';
@@ -116,20 +123,17 @@ export const Navbar = ({ activeSection }) => {
                     if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
                   }}
                 >
-                  {item.label}
                   {isActive && (
                     <span
                       style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: '4px',
-                        right: '4px',
-                        height: '2px',
-                        backgroundColor: 'var(--accent-primary)',
-                        borderRadius: '1px'
+                        width: '4px',
+                        height: '4px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--accent-copper)'
                       }}
                     />
                   )}
+                  <span>{item.label}</span>
                 </button>
               );
             })}
@@ -145,8 +149,8 @@ export const Navbar = ({ activeSection }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '38px',
-              height: '38px',
+              width: '40px',
+              height: '40px',
               border: '1px solid var(--border-subtle)',
               borderRadius: 'var(--radius-sm)',
               backgroundColor: 'var(--bg-surface)',
@@ -163,11 +167,11 @@ export const Navbar = ({ activeSection }) => {
         <div
           style={{
             position: 'fixed',
-            top: '64px',
+            top: '68px',
             left: 0,
             width: '100%',
-            height: 'calc(100vh - 64px)',
-            backgroundColor: 'var(--bg-surface)',
+            height: 'calc(100vh - 68px)',
+            backgroundColor: 'var(--bg-primary)',
             zIndex: 49,
             padding: '24px',
             display: 'flex',
@@ -177,6 +181,18 @@ export const Navbar = ({ activeSection }) => {
           }}
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.6875rem',
+                color: 'var(--accent-copper)',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                marginBottom: '8px'
+              }}
+            >
+              // NAVIGATION
+            </span>
             {navigationLinks.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -188,18 +204,22 @@ export const Navbar = ({ activeSection }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '14px 12px',
+                    padding: '14px 16px',
                     borderRadius: 'var(--radius-sm)',
-                    backgroundColor: isActive ? 'var(--accent-subtle)' : 'transparent',
-                    color: isActive ? 'var(--accent-primary)' : 'var(--text-primary)',
-                    fontFamily: 'var(--font-sans)',
+                    backgroundColor: isActive ? 'var(--accent-tint)' : 'var(--bg-surface)',
+                    border: `1px solid ${isActive ? 'var(--accent-border)' : 'var(--border-subtle)'}`,
+                    color: isActive ? 'var(--accent-copper)' : 'var(--text-primary)',
+                    fontFamily: 'var(--font-heading)',
                     fontSize: '1rem',
-                    fontWeight: isActive ? 600 : 500,
+                    fontWeight: isActive ? 700 : 600,
                     textAlign: 'left',
-                    transition: 'background-color var(--transition-fast)'
+                    transition: 'all var(--transition-fast)'
                   }}
                 >
                   <span>{item.label}</span>
+                  {isActive && (
+                    <span className="status-dot-copper" style={{ width: '6px', height: '6px' }} />
+                  )}
                 </button>
               );
             })}
@@ -211,13 +231,13 @@ export const Navbar = ({ activeSection }) => {
               borderTop: '1px solid var(--border-subtle)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '8px'
+              gap: '6px'
             }}
           >
             <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
               Harshit Mishra · Software Developer
             </span>
-            <span style={{ fontSize: '0.8125rem', color: 'var(--accent-primary)', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--accent-copper)', fontFamily: 'var(--font-mono)' }}>
               hm9011822@gmail.com
             </span>
           </div>

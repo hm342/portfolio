@@ -1,18 +1,23 @@
-import React from 'react';
-import { ArrowUpRight, Globe, Smartphone, Cpu, Check } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Globe, Smartphone, Cpu, Check } from 'lucide-react';
 import { Badge } from '../common/Badge';
 
-export const ProjectCard = ({ project, isReversed = false }) => {
+export const ProjectCard = ({ project, index = 0, isReversed = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const projectNumber = String(index + 1).padStart(2, '0');
+
   return (
     <article
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className="project-row"
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: 'clamp(32px, 5vw, 56px)',
+        gap: 'clamp(36px, 6vw, 64px)',
         alignItems: 'center',
-        paddingBlock: 'clamp(40px, 6vw, 64px)',
-        borderBottom: '1px solid var(--border-subtle)'
+        paddingBlock: 'clamp(44px, 7vw, 72px)',
+        borderBottom: '1px solid var(--dark-border)'
       }}
     >
       {/* Information Column */}
@@ -24,48 +29,73 @@ export const ProjectCard = ({ project, isReversed = false }) => {
           order: isReversed ? 2 : 1
         }}
       >
-        {/* Category & Year */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span className="label-overline">
-            {project.category}
+        {/* Project Number & Category */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '1.25rem',
+              fontWeight: 700,
+              color: 'var(--accent-copper)',
+              letterSpacing: '0.04em'
+            }}
+          >
+            {projectNumber}
           </span>
-          <span style={{ color: 'var(--border-strong)', fontSize: '0.75rem' }}>•</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            {project.year}
+          <span style={{ color: 'var(--dark-border)', fontSize: '0.75rem' }}>/</span>
+          <span
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.75rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              color: 'var(--accent-sand)'
+            }}
+          >
+            {project.category}
           </span>
         </div>
 
-        {/* Title */}
-        <h3 className="heading-sub" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>
+        {/* Project Title with subtle shift on hover */}
+        <h3
+          className="heading-sub"
+          style={{
+            fontSize: 'clamp(1.4rem, 2.2vw, 1.85rem)',
+            color: 'var(--dark-text)',
+            transform: isHovered ? 'translateX(4px)' : 'none',
+            transition: 'transform var(--transition-fast), color var(--transition-fast)'
+          }}
+        >
           {project.title}
         </h3>
 
-        {/* Descriptions */}
-        <p className="body-lead" style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>
+        {/* Short Description */}
+        <p
+          className="body-lead"
+          style={{
+            fontSize: '1rem',
+            color: 'var(--dark-text-secondary)',
+            lineHeight: 1.65
+          }}
+        >
           {project.summary}
         </p>
 
-        {project.details && (
-          <p className="body-small" style={{ color: 'var(--text-muted)' }}>
-            {project.details}
-          </p>
-        )}
-
-        {/* Key Features */}
+        {/* Deliverables / Features */}
         {project.features && (
           <ul style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBlock: '4px' }}>
-            {project.features.map((feat, idx) => (
+            {project.features.map((feat, fIdx) => (
               <li
-                key={idx}
+                key={fIdx}
                 style={{
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '8px',
                   fontSize: '0.84375rem',
-                  color: 'var(--text-secondary)'
+                  color: 'var(--dark-text-secondary)'
                 }}
               >
-                <Check size={14} color="var(--accent-primary)" style={{ marginTop: '3px', flexShrink: 0 }} />
+                <Check size={14} color="var(--accent-copper)" style={{ marginTop: '3px', flexShrink: 0 }} />
                 <span>{feat}</span>
               </li>
             ))}
@@ -73,121 +103,133 @@ export const ProjectCard = ({ project, isReversed = false }) => {
         )}
 
         {/* Technologies Badges */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '4px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
           {project.technologies.map((tech) => (
-            <Badge key={tech} variant="default">
+            <Badge key={tech} variant="dark">
               {tech}
             </Badge>
           ))}
         </div>
 
-        {/* Action Button */}
+        {/* Interactive Action Link (Arrow moves 5-8px on hover) */}
         {project.link && (
-          <div style={{ paddingTop: '8px' }}>
+          <div style={{ paddingTop: '10px' }}>
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary"
+              className="btn-copper"
               style={{ width: 'fit-content' }}
             >
               <span>{project.linkText || 'View Project'}</span>
-              <ArrowUpRight size={14} />
+              <ArrowRight
+                size={15}
+                className="btn-arrow"
+                style={{
+                  transform: isHovered ? 'translateX(6px)' : 'none',
+                  transition: 'transform var(--transition-fast)'
+                }}
+              />
             </a>
           </div>
         )}
       </div>
 
-      {/* Visual Product Mockup Column */}
+      {/* Visual Mockup Presentation Column */}
       <div
         style={{
           order: isReversed ? 1 : 2
         }}
       >
         <div
-          className="card-modern"
           style={{
+            borderRadius: '18px',
             overflow: 'hidden',
-            backgroundColor: 'var(--bg-surface)'
+            border: isHovered ? '1px solid rgba(183, 110, 76, 0.45)' : '1px solid var(--dark-border)',
+            backgroundColor: 'var(--dark-surface)',
+            boxShadow: 'var(--shadow-dark-card)',
+            transition: 'border-color var(--transition-normal)'
           }}
         >
-          {/* Mockup Window Bar */}
+          {/* Mockup Window Chrome */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '10px 14px',
-              backgroundColor: 'var(--bg-subtle)',
-              borderBottom: '1px solid var(--border-subtle)'
+              padding: '12px 16px',
+              backgroundColor: 'rgba(247, 243, 236, 0.03)',
+              borderBottom: '1px solid var(--dark-border)'
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#E5E7EB' }} />
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#E5E7EB' }} />
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#E5E7EB' }} />
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(247, 243, 236, 0.2)' }} />
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(247, 243, 236, 0.2)' }} />
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(247, 243, 236, 0.2)' }} />
             </div>
 
             <div
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.6875rem',
-                color: 'var(--text-muted)',
-                backgroundColor: 'var(--bg-surface)',
+                color: 'var(--accent-sand)',
+                backgroundColor: 'rgba(247, 243, 236, 0.06)',
                 padding: '2px 10px',
                 borderRadius: '4px',
-                border: '1px solid var(--border-subtle)'
+                border: '1px solid var(--dark-border)'
               }}
             >
               {project.displayUrl}
             </div>
 
-            <div style={{ fontSize: '0.6875rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+            <div style={{ fontSize: '0.6875rem', color: 'var(--dark-text-secondary)', fontFamily: 'var(--font-mono)' }}>
               {project.type}
             </div>
           </div>
 
-          {/* Product UI Content Simulation */}
+          {/* Product UI Canvas (Scales 1 -> 1.03 on hover) */}
           <div
             style={{
-              padding: '24px',
-              minHeight: '260px',
+              padding: '28px',
+              minHeight: '270px',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              transform: isHovered ? 'scale(1.03)' : 'scale(1)',
+              transition: 'transform 600ms cubic-bezier(0.22, 1, 0.36, 1)'
             }}
           >
             {/* MA Engineering */}
             {project.id === 'ma-engineering' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--dark-border)', paddingBottom: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Globe size={16} color="var(--accent-primary)" />
+                    <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: 'rgba(183, 110, 76, 0.15)', border: '1px solid rgba(183, 110, 76, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Globe size={16} color="var(--accent-sand)" />
                     </div>
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-primary)' }}>M.A. Engineering Industries</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Precision Industrial Manufacturing</div>
+                      <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--dark-text)' }}>M.A. Engineering Industries</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--dark-text-secondary)' }}>Precision Industrial Manufacturing</div>
                     </div>
                   </div>
-                  <span className="status-pill" style={{ fontSize: '0.6875rem' }}>
-                    <span className="status-dot" /> Live
+                  <span style={{ fontSize: '0.6875rem', color: 'var(--accent-sand)', fontFamily: 'var(--font-mono)', border: '1px solid rgba(183, 110, 76, 0.3)', padding: '2px 8px', borderRadius: '4px' }}>
+                    LIVE_SITE ↗
                   </span>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
-                  {['CNC Machining', 'Fabrication', 'Tooling Lines'].map((item, i) => (
-                    <div key={i} style={{ padding: '12px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}>
-                      <div style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)' }}>CATALOG 0{i+1}</div>
-                      <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--text-primary)', marginTop: '2px' }}>{item}</div>
-                      <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)', marginTop: '2px' }}>Spec Verified</div>
+                  {['CNC Machining', 'Fabrication Line', 'Tooling Assemblies'].map((item, i) => (
+                    <div key={i} style={{ padding: '12px', backgroundColor: 'rgba(247, 243, 236, 0.04)', border: '1px solid var(--dark-border)', borderRadius: '6px' }}>
+                      <div style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)' }}>SPEC 0{i+1}</div>
+                      <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--dark-text)', marginTop: '2px' }}>{item}</div>
+                      <div style={{ fontSize: '0.6875rem', color: 'var(--dark-text-secondary)', marginTop: '2px' }}>Verified Spec</div>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ padding: '10px 14px', backgroundColor: '#F8FAFC', border: '1px solid var(--border-subtle)', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.78125rem', color: 'var(--text-secondary)' }}>Dynamic RFQ & Technical Inquiry Pipeline</span>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-primary)' }}>PHP · MySQL</span>
+                <div style={{ padding: '10px 14px', backgroundColor: 'rgba(183, 110, 76, 0.08)', border: '1px solid rgba(183, 110, 76, 0.2)', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.78125rem', color: 'var(--accent-sand)' }}>Dynamic RFQ & Technical Inquiry System</span>
+                  <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--dark-text-secondary)' }}>PHP · MySQL</span>
                 </div>
               </div>
             )}
@@ -195,37 +237,37 @@ export const ProjectCard = ({ project, isReversed = false }) => {
             {/* Universal Exports */}
             {project.id === 'universal-exports' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--dark-border)', paddingBottom: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Globe size={16} color="var(--accent-primary)" />
+                    <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: 'rgba(183, 110, 76, 0.15)', border: '1px solid rgba(183, 110, 76, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Globe size={16} color="var(--accent-sand)" />
                     </div>
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-primary)' }}>Universal Exports</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>International Export & Logistics</div>
+                      <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--dark-text)' }}>Universal Exports</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--dark-text-secondary)' }}>International Trade & Logistics</div>
                     </div>
                   </div>
-                  <span className="status-pill" style={{ fontSize: '0.6875rem' }}>
-                    <span className="status-dot" /> Live
+                  <span style={{ fontSize: '0.6875rem', color: 'var(--accent-sand)', fontFamily: 'var(--font-mono)', border: '1px solid rgba(183, 110, 76, 0.3)', padding: '2px 8px', borderRadius: '4px' }}>
+                    LIVE_SITE ↗
                   </span>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-                  <div style={{ padding: '12px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}>
-                    <div style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)' }}>GLOBAL CATALOG</div>
-                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--text-primary)', marginTop: '2px' }}>Multi-Category Indices</div>
-                    <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>Cross-border compliance tracking</div>
+                  <div style={{ padding: '12px', backgroundColor: 'rgba(247, 243, 236, 0.04)', border: '1px solid var(--dark-border)', borderRadius: '6px' }}>
+                    <div style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)' }}>TRADE MATRIX</div>
+                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--dark-text)', marginTop: '2px' }}>Global Product Indices</div>
+                    <div style={{ fontSize: '0.6875rem', color: 'var(--dark-text-secondary)' }}>Compliance tracking</div>
                   </div>
-                  <div style={{ padding: '12px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}>
-                    <div style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)' }}>LARAVEL BACKEND</div>
-                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--text-primary)', marginTop: '2px' }}>Enterprise Pipeline</div>
-                    <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>International client inquiries</div>
+                  <div style={{ padding: '12px', backgroundColor: 'rgba(247, 243, 236, 0.04)', border: '1px solid var(--dark-border)', borderRadius: '6px' }}>
+                    <div style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)' }}>LARAVEL BACKEND</div>
+                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--dark-text)', marginTop: '2px' }}>Enterprise Pipeline</div>
+                    <div style={{ fontSize: '0.6875rem', color: 'var(--dark-text-secondary)' }}>International queries</div>
                   </div>
                 </div>
 
-                <div style={{ padding: '8px 12px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                <div style={{ padding: '8px 12px', backgroundColor: 'rgba(247, 243, 236, 0.03)', border: '1px solid var(--dark-border)', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--dark-text-secondary)' }}>
                   <span>Architecture: MVC Pattern</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-primary)' }}>Relational MySQL</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)' }}>Relational MySQL</span>
                 </div>
               </div>
             )}
@@ -233,28 +275,28 @@ export const ProjectCard = ({ project, isReversed = false }) => {
             {/* Simplifyte */}
             {project.id === 'simplifyte' && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '10px', padding: '16px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '8px' }}>
+                <div style={{ width: '100%', maxWidth: '320px', backgroundColor: 'rgba(247, 243, 236, 0.03)', border: '1px solid var(--dark-border)', borderRadius: '12px', padding: '16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '1px solid var(--dark-border)', paddingBottom: '8px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <Smartphone size={16} color="var(--accent-primary)" />
-                      <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-primary)' }}>Simplifyte Mobile</span>
+                      <Smartphone size={16} color="var(--accent-copper)" />
+                      <span style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--dark-text)' }}>Simplifyte Mobile</span>
                     </div>
-                    <span style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-primary)', backgroundColor: 'var(--accent-subtle)', padding: '2px 6px', borderRadius: '4px' }}>
+                    <span style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)', backgroundColor: 'rgba(183, 110, 76, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>
                       Supabase Sync
                     </span>
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    {['Daily Task Flow', 'Cloud State Sync', 'Lightweight Cache'].map((t, i) => (
-                      <div key={i} style={{ padding: '8px 12px', backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-primary)', fontWeight: 500 }}>{t}</span>
-                        <Check size={12} color="var(--accent-primary)" />
+                    {['Daily Task Ergonomics', 'Reactive Cloud State', 'Lightweight Local Cache'].map((t, i) => (
+                      <div key={i} style={{ padding: '8px 12px', backgroundColor: 'rgba(247, 243, 236, 0.05)', border: '1px solid var(--dark-border)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--dark-text)', fontWeight: 500 }}>{t}</span>
+                        <Check size={12} color="var(--accent-copper)" />
                       </div>
                     ))}
                   </div>
 
-                  <div style={{ marginTop: '12px', textAlign: 'center', fontSize: '0.6875rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                    React Native · Gesture Navigation
+                  <div style={{ marginTop: '12px', textAlign: 'center', fontSize: '0.6875rem', color: 'var(--dark-text-secondary)', fontFamily: 'var(--font-mono)' }}>
+                    React Native · Fluid Touch Ergonomics
                   </div>
                 </div>
               </div>
@@ -263,37 +305,37 @@ export const ProjectCard = ({ project, isReversed = false }) => {
             {/* TerraRover */}
             {project.id === 'terrarover' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--dark-border)', paddingBottom: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: 'var(--accent-subtle)', border: '1px solid var(--accent-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Cpu size={16} color="var(--accent-primary)" />
+                    <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: 'rgba(183, 110, 76, 0.15)', border: '1px solid rgba(183, 110, 76, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Cpu size={16} color="var(--accent-sand)" />
                     </div>
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-primary)' }}>TerraRover System</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Field Robotics & Computer Vision</div>
+                      <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--dark-text)' }}>TerraRover System</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--dark-text-secondary)' }}>Field Robotics & Computer Vision</div>
                     </div>
                   </div>
-                  <span className="status-pill" style={{ fontSize: '0.6875rem' }}>
-                    <span className="status-dot" /> Hardware / App
+                  <span style={{ fontSize: '0.6875rem', color: 'var(--accent-sand)', fontFamily: 'var(--font-mono)', border: '1px solid rgba(183, 110, 76, 0.3)', padding: '2px 8px', borderRadius: '4px' }}>
+                    HARDWARE / APP
                   </span>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-                  <div style={{ padding: '12px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}>
-                    <div style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)' }}>ON-DEVICE VISION</div>
-                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--text-primary)', marginTop: '2px' }}>Leaf Pathology Model</div>
-                    <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>Real-time disease detection</div>
+                  <div style={{ padding: '12px', backgroundColor: 'rgba(247, 243, 236, 0.04)', border: '1px solid var(--dark-border)', borderRadius: '6px' }}>
+                    <div style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)' }}>ON-DEVICE VISION</div>
+                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--dark-text)', marginTop: '2px' }}>Leaf Pathology Model</div>
+                    <div style={{ fontSize: '0.6875rem', color: 'var(--dark-text-secondary)' }}>Real-time disease detection</div>
                   </div>
-                  <div style={{ padding: '12px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '6px' }}>
-                    <div style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)' }}>OPERATOR APP</div>
-                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--text-primary)', marginTop: '2px' }}>React Native Telemetry</div>
-                    <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)' }}>GPS and status telemetry</div>
+                  <div style={{ padding: '12px', backgroundColor: 'rgba(247, 243, 236, 0.04)', border: '1px solid var(--dark-border)', borderRadius: '6px' }}>
+                    <div style={{ fontSize: '0.625rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)' }}>OPERATOR APP</div>
+                    <div style={{ fontWeight: 600, fontSize: '0.8125rem', color: 'var(--dark-text)', marginTop: '2px' }}>React Native Telemetry</div>
+                    <div style={{ fontSize: '0.6875rem', color: 'var(--dark-text-secondary)' }}>GPS & telemetry readouts</div>
                   </div>
                 </div>
 
-                <div style={{ padding: '8px 12px', backgroundColor: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  <span>Sensor Fusion & Motor Control</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-primary)' }}>Bidirectional Telemetry</span>
+                <div style={{ padding: '8px 12px', backgroundColor: 'rgba(247, 243, 236, 0.03)', border: '1px solid var(--dark-border)', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--dark-text-secondary)' }}>
+                  <span>Microcontroller & Sensor Fusion</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-sand)' }}>Wireless Telemetry</span>
                 </div>
               </div>
             )}
