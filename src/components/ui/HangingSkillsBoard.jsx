@@ -4,7 +4,7 @@ import { hangingSkillsData, skillCategoriesMeta } from '../../data/hangingSkills
 export const HangingSkillsBoard = () => {
   const containerRef = useRef(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [dimensions, setDimensions] = useState({ width: 1000, height: 480, isMobile: false });
+  const [dimensions, setDimensions] = useState({ width: 1000, height: 520, isMobile: false, isTablet: false });
 
   // Physics simulation data stored outside React state for 60 FPS performance
   const physicsDataRef = useRef([]);
@@ -22,10 +22,10 @@ export const HangingSkillsBoard = () => {
     const total = hangingSkillsData.length;
 
     if (isMobile) {
-      // Mobile: 4 staggered tiers of 4 capsules each
-      const tiers = 4;
+      // Mobile: 6 staggered tiers of 4 capsules each
+      const tiers = 6;
       const perTier = Math.ceil(total / tiers);
-      const tierYOffsets = [24, 155, 290, 425];
+      const tierYOffsets = [24, 155, 290, 425, 560, 695];
 
       return hangingSkillsData.map((item, idx) => {
         const tier = Math.min(tiers - 1, Math.floor(idx / perTier));
@@ -33,13 +33,13 @@ export const HangingSkillsBoard = () => {
         const tierItems = Math.min(perTier, total - tier * perTier);
 
         // Distribute horizontally in this tier
-        const padding = 36;
-        const usableWidth = Math.max(260, width - padding * 2);
+        const padding = 34;
+        const usableWidth = Math.max(250, width - padding * 2);
         const anchorX = padding + (indexInTier / Math.max(1, tierItems - 1)) * usableWidth;
         const anchorY = tierYOffsets[tier];
 
         // Slightly shorter rope for mobile
-        const length = Math.max(55, Math.min(95, item.desktopLength * 0.48));
+        const length = Math.max(48, Math.min(85, item.desktopLength * 0.36));
 
         return {
           ...item,
@@ -53,21 +53,52 @@ export const HangingSkillsBoard = () => {
         };
       });
     } else {
-      // Desktop / Tablet: anchors arranged along top area
-      const padding = 54;
-      const usableWidth = Math.max(500, width - padding * 2);
-      const isTablet = width < 860;
+      const isTablet = width < 900;
+
+      if (isTablet) {
+        // Tablet: 3 staggered tiers of 8 capsules each
+        const tiers = 3;
+        const perTier = 8;
+        const tierYOffsets = [24, 195, 365];
+
+        return hangingSkillsData.map((item, idx) => {
+          const tier = Math.min(tiers - 1, Math.floor(idx / perTier));
+          const indexInTier = idx % perTier;
+          const tierItems = Math.min(perTier, total - tier * perTier);
+
+          const padding = 42;
+          const usableWidth = Math.max(440, width - padding * 2);
+          const anchorX = padding + (indexInTier / Math.max(1, tierItems - 1)) * usableWidth;
+          const anchorY = tierYOffsets[tier] + (indexInTier % 2 === 0 ? 0 : 8);
+
+          const length = Math.max(55, Math.min(125, item.desktopLength * 0.52));
+
+          return {
+            ...item,
+            anchorX,
+            anchorY,
+            length,
+            angle: 0,
+            velocity: 0,
+            isHovered: false,
+            isDragging: false
+          };
+        });
+      }
+
+      // Desktop: Single top architectural mounting rail area
+      const padding = 46;
+      const usableWidth = Math.max(860, width - padding * 2);
 
       return hangingSkillsData.map((item, idx) => {
-        // Horizontal distribution
+        // Horizontal distribution across the top
         const anchorX = padding + (idx / (total - 1)) * usableWidth;
 
-        // Subtle alternating anchor height along the top mounting rail
-        const anchorY = idx % 2 === 0 ? 20 : 28;
+        // Subtle 3-point alternating anchor depth on the mounting rail
+        const anchorY = 18 + (idx % 3) * 6;
 
-        // Scaled rope length for tablet vs desktop
-        const scaleFactor = isTablet ? 0.72 : 1;
-        const length = item.desktopLength * scaleFactor;
+        // Controlled staggered length
+        const length = item.desktopLength;
 
         return {
           ...item,
@@ -177,7 +208,7 @@ export const HangingSkillsBoard = () => {
       setTimeout(() => {
         item.velocity = (i % 2 === 0 ? 0.22 : -0.22);
         wakePhysics();
-      }, i * 45);
+      }, i * 35);
     });
   }, [wakePhysics]);
 
@@ -190,9 +221,10 @@ export const HangingSkillsBoard = () => {
       for (const entry of entries) {
         const width = entry.contentRect.width;
         const isMobile = width < 560;
-        const height = isMobile ? 570 : width < 860 ? 460 : 480;
+        const isTablet = width >= 560 && width < 900;
+        const height = isMobile ? 820 : isTablet ? 560 : 520;
 
-        setDimensions({ width, height, isMobile });
+        setDimensions({ width, height, isMobile, isTablet });
 
         // Recompute anchors
         const newPhysics = computeAnchors(width, isMobile);
@@ -387,9 +419,9 @@ export const HangingSkillsBoard = () => {
                   setSelectedCategory(cat.id);
                   // Highlight nudge matching capsules
                   physicsDataRef.current.forEach((p, idx) => {
-                    const match = cat.id === 'all' || p.category.toLowerCase() === cat.id;
+                    const match = cat.id === 'all' || p.categoryId === cat.id || p.category.toLowerCase() === cat.id;
                     if (match) {
-                      setTimeout(() => nudgeCapsule(p.id, (idx % 2 === 0 ? 0.16 : -0.16)), idx * 30);
+                      setTimeout(() => nudgeCapsule(p.id, (idx % 2 === 0 ? 0.16 : -0.16)), idx * 25);
                     }
                   });
                 }}
@@ -491,6 +523,16 @@ export const HangingSkillsBoard = () => {
             <div style={{ position: 'absolute', top: '155px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
             <div style={{ position: 'absolute', top: '290px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
             <div style={{ position: 'absolute', top: '425px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', top: '560px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', top: '695px', left: '16px', right: '16px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
+          </>
+        )}
+
+        {/* Tablet Tier Rails */}
+        {dimensions.isTablet && (
+          <>
+            <div style={{ position: 'absolute', top: '195px', left: '20px', right: '20px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', top: '365px', left: '20px', right: '20px', height: '1.5px', backgroundColor: 'var(--border-subtle)', zIndex: 1 }} />
           </>
         )}
 
@@ -507,7 +549,7 @@ export const HangingSkillsBoard = () => {
           }}
         >
           {layoutItems.map((item) => {
-            const isMatch = selectedCategory === 'all' || item.category.toLowerCase() === selectedCategory;
+            const isMatch = selectedCategory === 'all' || item.categoryId === selectedCategory || item.category.toLowerCase() === selectedCategory;
 
             return (
               <g key={`svg-${item.id}`} opacity={isMatch ? 1 : 0.28} style={{ transition: 'opacity var(--transition-normal)' }}>
@@ -538,7 +580,7 @@ export const HangingSkillsBoard = () => {
 
         {/* Hanging Capsules Layer */}
         {layoutItems.map((item) => {
-          const isMatch = selectedCategory === 'all' || item.category.toLowerCase() === selectedCategory;
+          const isMatch = selectedCategory === 'all' || item.categoryId === selectedCategory || item.category.toLowerCase() === selectedCategory;
 
           return (
             <div
@@ -571,8 +613,8 @@ export const HangingSkillsBoard = () => {
                   position: 'relative',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '7px',
-                  padding: dimensions.isMobile ? '6px 12px' : '7px 16px',
+                  gap: '6px',
+                  padding: dimensions.isMobile ? '5px 10px' : dimensions.isTablet ? '6px 12px' : '6px 14px',
                   backgroundColor: '#FFFFFF',
                   border: '1px solid var(--border-subtle)',
                   borderRadius: 'var(--radius-full)',
@@ -602,13 +644,17 @@ export const HangingSkillsBoard = () => {
                     height: '6px',
                     borderRadius: '50%',
                     backgroundColor:
-                      item.category === 'Backend'
+                      item.categoryId === 'ai'
+                        ? '#8A67B2'
+                        : item.categoryId === 'backend'
                         ? 'var(--accent-copper)'
-                        : item.category === 'Frontend'
+                        : item.categoryId === 'frontend'
                         ? 'var(--accent-sand)'
-                        : item.category === 'Mobile'
-                        ? '#7B9E87'
-                        : '#9E8B7B',
+                        : item.categoryId === 'mobile'
+                        ? '#6B9E82'
+                        : item.categoryId === 'tools'
+                        ? '#5E8299'
+                        : '#A68A78',
                     flexShrink: 0
                   }}
                 />
@@ -617,7 +663,7 @@ export const HangingSkillsBoard = () => {
                 <span
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: dimensions.isMobile ? '0.78125rem' : '0.84375rem',
+                    fontSize: dimensions.isMobile ? '0.75rem' : dimensions.isTablet ? '0.78125rem' : '0.8125rem',
                     fontWeight: 700,
                     color: 'var(--text-primary)',
                     letterSpacing: '-0.01em'
@@ -644,7 +690,7 @@ export const HangingSkillsBoard = () => {
             zIndex: 2
           }}
         >
-          SPRING_PENDULUM // 16_SKILLS
+          SPRING_PENDULUM // 24_SKILLS
         </div>
       </div>
 

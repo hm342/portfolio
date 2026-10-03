@@ -1,8 +1,13 @@
 export const skillCategories = [
   {
+    category: "AI & WORKFLOWS",
+    description: "Modern agentic systems, prompt optimization, and automated LLM workflows.",
+    skills: ["Prompt Engineering", "Multi-Agent Workflows", "Loop Prompting", "Token Optimization"]
+  },
+  {
     category: "BACKEND",
     description: "Server architecture, relational data management, and structured APIs.",
-    skills: ["Laravel", "PHP", "REST APIs", "MySQL"]
+    skills: ["Laravel", "Node.js", "PHP", "REST APIs", "MySQL"]
   },
   {
     category: "FRONTEND",
@@ -15,13 +20,13 @@ export const skillCategories = [
     skills: ["React Native", "Expo", "Swift"]
   },
   {
+    category: "TOOLS & ENVIRONMENT",
+    description: "Development environments, agentic CLIs, version control, and tooling.",
+    skills: ["VS Code", "Claude Code", "CLI Tools", "Git", "GitHub", "XAMPP"]
+  },
+  {
     category: "CMS",
     description: "Custom themes, tailored templates, and client content management.",
     skills: ["WordPress"]
-  },
-  {
-    category: "TOOLS",
-    description: "Version control, local development environments, and collaborative workflows.",
-    skills: ["Git", "GitHub", "XAMPP"]
   }
 ];
