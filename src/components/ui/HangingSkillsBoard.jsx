@@ -104,12 +104,12 @@ export const HangingSkillsBoard = () => {
       }
 
       // Desktop: Full-width glowing green line across the top
-      const padding = 54;
-      const usableWidth = Math.max(860, width - padding * 2);
+      const padding = 28;
+      const usableWidth = Math.max(900, width - padding * 2);
 
       return hangingSkillsData.map((item, idx) => {
         const anchorX = padding + (idx / (total - 1)) * usableWidth;
-        const anchorY = 24; // Directly centered on the 3px green line at top: 23px
+        const anchorY = 24.5; // Directly centered on the 5px green line at top: 22px
         const length = item.desktopLength;
 
         return {
@@ -227,7 +227,7 @@ export const HangingSkillsBoard = () => {
         const width = entry.contentRect.width;
         const isMobile = width < 560;
         const isTablet = width >= 560 && width < 900;
-        const height = isMobile ? 840 : isTablet ? 580 : 540;
+        const height = isMobile ? 860 : isTablet ? 600 : 590;
 
         setDimensions({ width, height, isMobile, isTablet });
 
@@ -503,19 +503,20 @@ export const HangingSkillsBoard = () => {
         aria-label="Interactive hanging skills display"
         role="region"
       >
-        {/* Full-Width Glowing Green Line */}
+        {/* Full-Width Glowing Green Line - Thicker 5px Neon Power Rail */}
         <div
           style={{
             position: 'absolute',
-            top: '23px',
+            top: '22px',
             left: 0,
             right: 0,
             width: '100%',
-            height: '3px',
+            height: '5px',
             backgroundColor: '#B7D63D',
-            boxShadow: '0 0 16px #B7D63D, 0 0 32px rgba(183, 214, 61, 0.7), 0 0 60px rgba(183, 214, 61, 0.4)',
+            boxShadow:
+              '0 0 16px #B7D63D, 0 0 32px rgba(183, 214, 61, 0.8), 0 0 60px rgba(183, 214, 61, 0.5), 0 0 90px rgba(183, 214, 61, 0.25)',
             zIndex: 6,
-            borderRadius: '2px',
+            borderRadius: '4px',
             pointerEvents: 'none'
           }}
         >
@@ -523,28 +524,28 @@ export const HangingSkillsBoard = () => {
           <div
             style={{
               position: 'absolute',
-              left: 0,
+              left: '-3px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '8px',
-              height: '8px',
+              width: '12px',
+              height: '12px',
               borderRadius: '50%',
               backgroundColor: '#B7D63D',
-              boxShadow: '0 0 12px #B7D63D, 0 0 24px #B7D63D'
+              boxShadow: '0 0 14px #B7D63D, 0 0 24px #B7D63D'
             }}
           />
           {/* Right glowing terminal node */}
           <div
             style={{
               position: 'absolute',
-              right: 0,
+              right: '-3px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '8px',
-              height: '8px',
+              width: '12px',
+              height: '12px',
               borderRadius: '50%',
               backgroundColor: '#B7D63D',
-              boxShadow: '0 0 12px #B7D63D, 0 0 24px #B7D63D'
+              boxShadow: '0 0 14px #B7D63D, 0 0 24px #B7D63D'
             }}
           />
         </div>
@@ -608,14 +609,14 @@ export const HangingSkillsBoard = () => {
                   filter="url(#neon-glow)"
                 />
 
-                {/* Glowing Metallic Rivet Anchor */}
+                {/* Glowing Metallic Rivet Anchor on the 5px Green Power Rail */}
                 <circle
                   cx={item.anchorX}
                   cy={item.anchorY}
-                  r="4.5"
+                  r="5.5"
                   fill="#B7D63D"
                   stroke="#000000"
-                  strokeWidth="1.8"
+                  strokeWidth="2.2"
                   id={`anchor-${item.id}`}
                 />
               </g>
@@ -659,14 +660,14 @@ export const HangingSkillsBoard = () => {
                   position: 'relative',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  padding: dimensions.isMobile ? '6px 12px' : dimensions.isTablet ? '7px 14px' : '7px 16px',
-                  backgroundColor: 'rgba(0, 0, 0, 0.86)',
+                  gap: '6px',
+                  padding: dimensions.isMobile ? '5px 10px' : dimensions.isTablet ? '5px 12px' : '5px 13px',
+                  backgroundColor: 'rgba(0, 0, 0, 0.88)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
                   border: '1px solid rgba(243, 239, 230, 0.12)',
                   borderRadius: 'var(--radius-full)',
-                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(243, 239, 230, 0.08)',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(243, 239, 230, 0.08)',
                   whiteSpace: 'nowrap'
                 }}
               >

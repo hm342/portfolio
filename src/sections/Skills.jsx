@@ -13,8 +13,18 @@ export const Skills = () => {
           title="Interactive 3D physics installation."
           subtitle="A tactile black glass suspension display of languages, frameworks, AI workflows, and developer tools. Grab, drag, fling, or filter any capsule."
         />
+      </div>
 
-        {/* Hanging Skills Interactive Physics Display */}
+      {/* Hanging Skills Interactive Physics Display - Wide Rail Breakout */}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1680px',
+          marginInline: 'auto',
+          paddingInline: 'clamp(16px, 3.5vw, 48px)',
+          boxSizing: 'border-box'
+        }}
+      >
         <HangingSkillsBoard />
       </div>
     </section>

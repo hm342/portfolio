@@ -1,19 +1,19 @@
-// Factual and expanded skills with controlled, intentional rope lengths
+// Factual and expanded skills with controlled, intentional rope lengths and spacious vertical stagger
 export const hangingSkillsData = [
   {
     id: 'react',
     name: 'React',
     category: 'Frontend',
     categoryId: 'frontend',
-    desktopLength: 90,
-    tag: 'Core UI'
+    desktopLength: 80,
+    tag: 'UI'
   },
   {
     id: 'laravel',
     name: 'Laravel',
     category: 'Backend',
     categoryId: 'backend',
-    desktopLength: 290,
+    desktopLength: 240,
     tag: 'PHP MVC'
   },
   {
@@ -21,23 +21,23 @@ export const hangingSkillsData = [
     name: 'Node.js',
     category: 'Backend',
     categoryId: 'backend',
-    desktopLength: 150,
-    tag: 'Async Runtime'
+    desktopLength: 135,
+    tag: 'Runtime'
   },
   {
     id: 'prompt-eng',
     name: 'Prompt Engineering',
     category: 'AI & Workflows',
     categoryId: 'ai',
-    desktopLength: 220,
-    tag: 'LLM Systems'
+    desktopLength: 320,
+    tag: 'LLMs'
   },
   {
     id: 'javascript',
     name: 'JavaScript',
     category: 'Frontend',
     categoryId: 'frontend',
-    desktopLength: 85,
+    desktopLength: 180,
     tag: 'ES6+'
   },
   {
@@ -45,152 +45,152 @@ export const hangingSkillsData = [
     name: 'Multi-Agent Workflows',
     category: 'AI & Workflows',
     categoryId: 'ai',
-    desktopLength: 300,
-    tag: 'Autonomous Teams'
+    desktopLength: 410,
+    tag: 'Agents'
   },
   {
     id: 'react-native',
     name: 'React Native',
     category: 'Mobile',
     categoryId: 'mobile',
-    desktopLength: 140,
-    tag: 'iOS & Android'
+    desktopLength: 85,
+    tag: 'iOS/Android'
   },
   {
     id: 'claude-code',
     name: 'Claude Code',
     category: 'Tools',
     categoryId: 'tools',
-    desktopLength: 235,
-    tag: 'Agentic CLI'
+    desktopLength: 245,
+    tag: 'CLI'
   },
   {
     id: 'mysql',
     name: 'MySQL',
     category: 'Backend',
     categoryId: 'backend',
-    desktopLength: 95,
-    tag: 'Relational DB'
+    desktopLength: 140,
+    tag: 'SQL DB'
   },
   {
     id: 'loop-prompting',
     name: 'Loop Prompting',
     category: 'AI & Workflows',
     categoryId: 'ai',
-    desktopLength: 280,
-    tag: 'Self-Correction'
+    desktopLength: 325,
+    tag: 'Loops'
   },
   {
     id: 'tailwind',
     name: 'Tailwind CSS',
     category: 'Frontend',
     categoryId: 'frontend',
-    desktopLength: 160,
-    tag: 'Utility CSS'
+    desktopLength: 185,
+    tag: 'CSS'
   },
   {
     id: 'vscode',
     name: 'VS Code',
     category: 'Tools',
     categoryId: 'tools',
-    desktopLength: 225,
-    tag: 'Primary Editor'
+    desktopLength: 415,
+    tag: 'Editor'
   },
   {
     id: 'rest-api',
     name: 'REST APIs',
     category: 'Backend',
     categoryId: 'backend',
-    desktopLength: 85,
-    tag: 'API Architecture'
+    desktopLength: 80,
+    tag: 'APIs'
   },
   {
     id: 'token-optimization',
     name: 'Token Optimization',
     category: 'AI & Workflows',
     categoryId: 'ai',
-    desktopLength: 305,
-    tag: 'Context Efficiency'
+    desktopLength: 250,
+    tag: 'Tokens'
   },
   {
     id: 'html5',
     name: 'HTML5',
     category: 'Frontend',
     categoryId: 'frontend',
-    desktopLength: 145,
-    tag: 'Semantics'
+    desktopLength: 135,
+    tag: 'DOM'
   },
   {
     id: 'cli-tools',
     name: 'CLI Tools',
     category: 'Tools',
     categoryId: 'tools',
-    desktopLength: 240,
-    tag: 'Terminal Utilities'
+    desktopLength: 330,
+    tag: 'Terminal'
   },
   {
     id: 'php',
     name: 'PHP',
     category: 'Backend',
     categoryId: 'backend',
-    desktopLength: 100,
-    tag: 'Server Core'
+    desktopLength: 190,
+    tag: 'Server'
   },
   {
     id: 'git',
     name: 'Git',
     category: 'Tools',
     categoryId: 'tools',
-    desktopLength: 290,
-    tag: 'Version Control'
+    desktopLength: 405,
+    tag: 'VCS'
   },
   {
     id: 'css3',
     name: 'CSS3',
     category: 'Frontend',
     categoryId: 'frontend',
-    desktopLength: 155,
-    tag: 'Modern Layout'
+    desktopLength: 85,
+    tag: 'Styles'
   },
   {
     id: 'github',
     name: 'GitHub',
     category: 'Tools',
     categoryId: 'tools',
-    desktopLength: 215,
-    tag: 'Collaboration'
+    desktopLength: 255,
+    tag: 'DevOps'
   },
   {
     id: 'swift',
     name: 'Swift',
     category: 'Mobile',
     categoryId: 'mobile',
-    desktopLength: 90,
-    tag: 'Native iOS'
+    desktopLength: 140,
+    tag: 'iOS'
   },
   {
     id: 'wordpress',
     name: 'WordPress',
     category: 'CMS',
     categoryId: 'cms',
-    desktopLength: 275,
-    tag: 'Custom Themes'
+    desktopLength: 335,
+    tag: 'CMS'
   },
   {
     id: 'expo',
     name: 'Expo',
     category: 'Mobile',
     categoryId: 'mobile',
-    desktopLength: 165,
-    tag: 'Mobile Tooling'
+    desktopLength: 195,
+    tag: 'Mobile'
   },
   {
     id: 'xampp',
     name: 'XAMPP',
     category: 'Tools',
     categoryId: 'tools',
-    desktopLength: 230,
-    tag: 'Local Stack'
+    desktopLength: 420,
+    tag: 'Server'
   }
 ];
 
