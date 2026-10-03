@@ -4,7 +4,7 @@ import { HangingSkillsBoard } from '../components/ui/HangingSkillsBoard';
 
 export const Skills = () => {
   return (
-    <section id="skills" className="section-padding" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section id="skills" className="section-padding" style={{ backgroundColor: 'transparent' }}>
       <div className="container">
         {/* Section Heading */}
         <SectionHeading

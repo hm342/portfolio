@@ -14,7 +14,7 @@ export const About = () => {
   ];
 
   return (
-    <section id="about" className="section-padding" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section id="about" className="section-padding" style={{ backgroundColor: 'transparent' }}>
       <div className="container">
         <SectionHeading
           theme="dark"

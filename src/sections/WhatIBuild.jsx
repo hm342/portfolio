@@ -46,7 +46,7 @@ export const WhatIBuild = () => {
   ];
 
   return (
-    <section id="what-i-build" className="section-padding" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section id="what-i-build" className="section-padding" style={{ backgroundColor: 'transparent' }}>
       <div className="container">
         <SectionHeading
           theme="dark"

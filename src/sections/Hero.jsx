@@ -22,7 +22,7 @@ export const Hero = () => {
       id="hero"
       style={{
         position: 'relative',
-        backgroundColor: 'var(--bg-primary)',
+        backgroundColor: 'transparent',
         overflow: 'hidden',
         minHeight: '100vh',
         display: 'flex',

@@ -9,7 +9,7 @@ export const SelectedWork = () => {
       id="work"
       className="section-padding"
       style={{
-        backgroundColor: 'var(--dark-bg)',
+        backgroundColor: 'transparent',
         color: 'var(--dark-text)'
       }}
     >

@@ -52,7 +52,7 @@ export const Contact = () => {
       id="contact"
       className="section-padding"
       style={{
-        backgroundColor: 'var(--bg-primary)',
+        backgroundColor: 'transparent',
         color: '#F8FAFC',
         position: 'relative'
       }}

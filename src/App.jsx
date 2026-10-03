@@ -6,11 +6,12 @@ import { Hero } from './sections/Hero';
 import { About } from './sections/About';
 import { WhatIBuild } from './sections/WhatIBuild';
 import { SelectedWork } from './sections/SelectedWork';
+import { KiboriSceneSection } from './sections/KiboriSceneSection';
 import { Experience } from './sections/Experience';
 import { Skills } from './sections/Skills';
 import { Contact } from './sections/Contact';
 
-import { StarfieldParticles } from './components/3d/StarfieldParticles';
+import { ThreeBackground3D } from './components/3d/ThreeBackground3D';
 import { navigationLinks } from './data/navigation';
 import { useActiveSection } from './hooks/useActiveSection';
 
@@ -21,14 +22,14 @@ export default function App() {
 
   return (
     <div className="portfolio-app-root">
-      {/* 3D Cosmic Background Particle System */}
-      <StarfieldParticles />
+      {/* Real Full-Bleed 3D WebGL Three.js Background with Wave, Floating Shards, & Parallax */}
+      <ThreeBackground3D />
 
       {/* Floating Black Glass HUD Navigation */}
       <Navbar activeSection={activeSection} />
 
       {/* Main Content Sections in Black Glass Aesthetics */}
-      <main id="main-content" role="main">
+      <main id="main-content" role="main" style={{ position: 'relative', zIndex: 2 }}>
         <Hero />
         <div className="section-divider" />
         <About />
@@ -36,6 +37,8 @@ export default function App() {
         <WhatIBuild />
         <div className="section-divider" />
         <SelectedWork />
+        <div className="section-divider" />
+        <KiboriSceneSection />
         <div className="section-divider" />
         <Experience />
         <div className="section-divider" />

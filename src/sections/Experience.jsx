@@ -9,7 +9,7 @@ import { SMOOTH_EASE } from '../utils/animations';
 
 export const Experience = () => {
   return (
-    <section id="experience" className="section-padding" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section id="experience" className="section-padding" style={{ backgroundColor: 'transparent' }}>
       <div className="container">
         <SectionHeading
           theme="dark"
